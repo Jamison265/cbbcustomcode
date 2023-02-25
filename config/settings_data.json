@@ -1,21 +1,22 @@
 {
   "current": {
-    "logo_width": 140,
+    "logo": "shopify:\/\/shop_images\/CBB-logo-horiztonal-rgb.png",
+    "logo_width": 260,
     "colors_solid_button_labels": "#ffffff",
-    "colors_accent_1": "#4770db",
+    "colors_accent_1": "#3ba9e2",
     "gradient_accent_1": "",
-    "colors_accent_2": "#0e1b4d",
+    "colors_accent_2": "#0090da",
     "gradient_accent_2": "",
-    "colors_text": "#0e1b4d",
-    "colors_outline_button_labels": "#0e1b4d",
+    "colors_text": "#121212",
+    "colors_outline_button_labels": "#0090da",
     "colors_background_1": "#eff0f5",
     "gradient_background_1": "",
     "colors_background_2": "#FFFFFF",
     "gradient_background_2": "",
-    "type_header_font": "archivo_n7",
-    "heading_scale": 110,
-    "type_body_font": "questrial_n4",
-    "body_scale": 105,
+    "type_header_font": "serif",
+    "heading_scale": 125,
+    "type_body_font": "poppins_n4",
+    "body_scale": 100,
     "page_width": 1200,
     "spacing_sections": 0,
     "spacing_grid_horizontal": 28,
@@ -109,14 +110,14 @@
     "brand_headline": "",
     "brand_description": "<p><\/p>",
     "brand_image_width": 100,
-    "social_twitter_link": "",
     "social_facebook_link": "",
-    "social_pinterest_link": "",
-    "social_snapchat_link": "",
     "social_instagram_link": "",
-    "social_tiktok_link": "",
-    "social_tumblr_link": "",
     "social_youtube_link": "",
+    "social_tiktok_link": "",
+    "social_twitter_link": "",
+    "social_snapchat_link": "",
+    "social_pinterest_link": "",
+    "social_tumblr_link": "",
     "social_vimeo_link": "",
     "predictive_search_enabled": true,
     "predictive_search_show_vendor": false,
@@ -139,7 +140,10 @@
           "color_scheme": "inverse"
         }
       }
-    }
+    },
+    "content_for_index": [
+
+    ]
   },
   "presets": {
     "Default": {

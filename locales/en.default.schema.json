@@ -409,6 +409,7 @@
           "label": "Inverse"
         },
         "label": "Color scheme",
+        "main_menu_label": "Color scheme for navigation",
         "has_cards_info": "To change the card color scheme, update your theme settings."
       },
       "heading_size": {
@@ -1019,10 +1020,10 @@
             "label": "Middle left"
           },
           "options__2": {
-            "label": "Top left"
+            "label": "Left"
           },
           "options__3": {
-            "label": "Top center"
+            "label": "Center"
           },
           "options__4": {
             "label": "Middle center"
