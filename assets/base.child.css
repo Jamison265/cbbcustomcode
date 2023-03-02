@@ -1,3 +1,25 @@
+:root {
+    --page-wide-width: 180rem;
+}
+
+.texture,
+.button {
+  background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(0)" opacity="0.2" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g  fill="%23250E17"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>');
+  background-size: 10px, 100%;
+}
+
+.button {
+    border: 0.4rem solid rgba(var(--color-foreground), 1);
+    text-transform: uppercase;
+    --color-shadow: var(--color-base-background-1);
+    --color-button: var(--color-base-accent-1);
+}
+
+.button--secondary {
+    --color-shadow: var(--color-base-background-2);
+    --color-button: var(--color-base-accent-2);
+}
+
 .announcement-bar__message {
     letter-spacing: 0.15rem;
 }
@@ -72,4 +94,11 @@
 
 .searchBar .field__input:focus {
     box-shadow: 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgba(var(--color-base-accent-1));
+}
+
+@media screen and (min-width: 990px) {
+    .page-wide-desktop {
+        width: min(95%, var(--page-wide-width));
+        margin-inline: auto;
+    }
 }

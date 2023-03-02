@@ -1,0 +1,19 @@
+@media screen and (min-width: 990px) {
+    .slider--with-state {
+        justify-content: space-around;
+    }
+}
+
+@media screen and (min-width: 1260px) {
+    .slider--with-state {
+        justify-content: flex-start;
+    }
+
+    .slider--with-state .slider__slide:not(.slider__slide--active) > div {
+        transform: scale(0.85);
+    }
+}
+
+slider-component.slider-component--with-state {
+    --desktop-margin-left-first-item: 0px;
+}
