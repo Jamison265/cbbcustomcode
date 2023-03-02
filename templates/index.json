@@ -1,73 +1,43 @@
 {
   "sections": {
-    "slideshow": {
-      "type": "slideshow",
-      "blocks": {
-        "slide-0": {
-          "type": "slide",
-          "settings": {
-            "heading": "Slideshow",
-            "heading_size": "h1",
-            "subheading": "Introduce a product or collection you'd like to highlight.",
-            "button_label": "Shop now",
-            "link": "",
-            "button_style_secondary": false,
-            "box_align": "middle-left",
-            "show_text_box": true,
-            "text_alignment": "left",
-            "image_overlay_opacity": 10,
-            "color_scheme": "background-2",
-            "text_alignment_mobile": "left"
-          }
-        },
-        "slide-1": {
-          "type": "slide",
-          "settings": {
-            "heading": "Slideshow",
-            "heading_size": "h1",
-            "subheading": "Introduce a product or collection you'd like to highlight.",
-            "button_label": "Shop now",
-            "link": "",
-            "button_style_secondary": false,
-            "box_align": "middle-right",
-            "show_text_box": true,
-            "text_alignment": "left",
-            "image_overlay_opacity": 10,
-            "color_scheme": "background-2",
-            "text_alignment_mobile": "left"
-          }
-        },
-        "slide-2": {
-          "type": "slide",
-          "settings": {
-            "heading": "Slideshow",
-            "heading_size": "h1",
-            "subheading": "Introduce a product or collection you'd like to highlight.",
-            "button_label": "Shop now",
-            "link": "",
-            "button_style_secondary": false,
-            "box_align": "middle-center",
-            "show_text_box": true,
-            "text_alignment": "center",
-            "image_overlay_opacity": 10,
-            "color_scheme": "background-2",
-            "text_alignment_mobile": "left"
-          }
-        }
-      },
-      "block_order": [
-        "slide-0",
-        "slide-1",
-        "slide-2"
-      ],
+    "d2543e03-de3f-44ac-9b18-349e4b4e3117": {
+      "type": "spc-featured-collection",
       "settings": {
-        "layout": "full_bleed",
-        "slide_height": "adapt_image",
-        "slider_visual": "counter",
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "show_text_below": true,
-        "accessibility_info": "Slideshow about our brand"
+        "title": "Find Your Favorite Comic Book... Bid or buy now!",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "test",
+        "products_to_show": 5,
+        "columns_desktop": 5,
+        "section_width": "wide_width",
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "background-1",
+        "image_ratio": "square",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "9ef8a114-dfa1-420c-9dfc-c4428112162c": {
+      "type": "home-slider",
+      "disabled": true,
+      "settings": {
+        "product_list": [
+          "fantastic-four-49",
+          "batman-1940-2011-1",
+          "captain-america-comics-1",
+          "fantastic-four-1961-96-2003-12-5",
+          "superman-1939-86-2006-11-1"
+        ]
       }
     },
     "featured-collection-0": {
@@ -85,7 +55,7 @@
         "show_view_all": false,
         "view_all_style": "solid",
         "enable_desktop_slider": false,
-        "color_scheme": "background-1",
+        "color_scheme": "background-2",
         "image_ratio": "portrait",
         "show_secondary_image": false,
         "show_vendor": false,
@@ -153,7 +123,7 @@
         "background_style": "none",
         "button_label": "",
         "button_link": "",
-        "color_scheme": "background-1",
+        "color_scheme": "background-2",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
         "padding_top": 32,
@@ -347,7 +317,7 @@
         "show_view_all": false,
         "view_all_style": "solid",
         "enable_desktop_slider": false,
-        "color_scheme": "background-1",
+        "color_scheme": "background-2",
         "image_ratio": "portrait",
         "show_secondary_image": false,
         "show_vendor": false,
@@ -460,7 +430,7 @@
         "blog": "news",
         "post_limit": 3,
         "columns_desktop": 3,
-        "color_scheme": "background-1",
+        "color_scheme": "background-2",
         "show_image": true,
         "show_date": true,
         "show_author": false,
@@ -505,7 +475,8 @@
     }
   },
   "order": [
-    "slideshow",
+    "d2543e03-de3f-44ac-9b18-349e4b4e3117",
+    "9ef8a114-dfa1-420c-9dfc-c4428112162c",
     "featured-collection-0",
     "multicolumn-0",
     "image-with-text-0",
