@@ -1,0 +1,31 @@
+.box-content {
+    padding: 0.3rem 2rem;
+    font-family: var(--font-heading-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.32rem;
+    background: var(--gradient-base-background-2);
+    background-size: 12px, 100%;
+    border: 0.6rem solid #000;
+    position: relative;
+    text-align: center;
+    max-width: 60rem;
+}
+
+@media screen and (min-width: 990px) {
+    .box-content {
+        margin-block: 3rem;
+    }
+}
+
+.box-content::after {
+    content: " ";
+    position: absolute;
+    left: -1.6rem;
+    bottom: -1.4rem;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(35)" opacity="1" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="%23250E17"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>'), rgb(var(--color-base-text));
+    background-size: 12px, 100%;
+    border: 0.6rem solid #000;
+    z-index: -5;
+}
