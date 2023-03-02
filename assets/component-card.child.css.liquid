@@ -1,0 +1,41 @@
+.card--secondary {
+    border-radious: 0.3rem;
+    border: 0.6rem solid rgb(var(--color-base-text));
+    position: relative;
+}
+
+.card--card::before {
+    content: " ";
+    position: absolute;
+    left: -1.6rem;
+    bottom: -1.6rem;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(35)" opacity="1" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="%23250E17"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>');
+    background-color: rgba(var(--color-base-accent-1), 0.8);
+    background-size: 12px,100%;
+    border: .6rem solid #000;
+    z-index: -5;
+}
+
+.card--secondary::before {
+    background-color: transparent;
+}
+
+.card--secondary .price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8rem;
+    height: 8rem;
+    background-image: url({{ 'comic-badge.png' | asset_img_url: '100x' }});
+    background-size: cover;
+    background-position: center center;
+    z-index: 2;
+    font-family: var(--font-heading-family);
+    font-size: 1.8rem;
+}
+
+.card--secondary .card-information>.price {
+    color: rgb(var(--color-base-accent-1));
+}
