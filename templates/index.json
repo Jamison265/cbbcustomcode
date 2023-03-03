@@ -1,9 +1,53 @@
 {
   "sections": {
+    "30a3a7aa-f45d-4e61-b497-979ba929ed24": {
+      "type": "spc-image-with-text",
+      "blocks": {
+        "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Preview our auction event #1",
+            "heading_size": "h1"
+          }
+        },
+        "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Auction start at MARCH 1st until March 17th<\/p>",
+            "text_style": "h2"
+          }
+        },
+        "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "Prreview the auction",
+            "button_link": "shopify:\/\/collections\/test"
+          }
+        }
+      },
+      "block_order": [
+        "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-0",
+        "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-1",
+        "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/auction.jpg",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "background-2",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "d2543e03-de3f-44ac-9b18-349e4b4e3117": {
       "type": "spc-featured-collection",
       "settings": {
-        "title": "Find Your Favorite Comic Book... Bid or buy now!",
+        "title": "The Hottest Items",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
@@ -21,23 +65,10 @@
         "show_vendor": false,
         "show_rating": false,
         "enable_quick_add": true,
-        "columns_mobile": "2",
+        "columns_mobile": "1",
         "swipe_on_mobile": true,
         "padding_top": 36,
         "padding_bottom": 36
-      }
-    },
-    "9ef8a114-dfa1-420c-9dfc-c4428112162c": {
-      "type": "home-slider",
-      "disabled": true,
-      "settings": {
-        "product_list": [
-          "fantastic-four-49",
-          "batman-1940-2011-1",
-          "captain-america-comics-1",
-          "fantastic-four-1961-96-2003-12-5",
-          "superman-1939-86-2006-11-1"
-        ]
       }
     },
     "featured-collection-0": {
@@ -128,49 +159,6 @@
         "swipe_on_mobile": true,
         "padding_top": 32,
         "padding_bottom": 92
-      }
-    },
-    "image-with-text-0": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image with text",
-            "heading_size": "h0"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Introduce one of your collections. Describe some of its benefits to encourage your customers to explore more. <\/p>",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Shop now",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
-      "settings": {
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
-        "color_scheme": "background-2",
-        "mobile_content_alignment": "left",
-        "padding_top": 0,
-        "padding_bottom": 60
       }
     },
     "image-with-text-1": {
@@ -475,11 +463,10 @@
     }
   },
   "order": [
+    "30a3a7aa-f45d-4e61-b497-979ba929ed24",
     "d2543e03-de3f-44ac-9b18-349e4b4e3117",
-    "9ef8a114-dfa1-420c-9dfc-c4428112162c",
     "featured-collection-0",
     "multicolumn-0",
-    "image-with-text-0",
     "image-with-text-1",
     "image-with-text-2",
     "image-with-text-3",
