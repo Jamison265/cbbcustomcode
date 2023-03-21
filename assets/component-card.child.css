@@ -1,9 +1,3 @@
-.card--secondary {
-    border-radious: 0.3rem;
-    border: 0.6rem solid rgb(var(--color-base-text));
-    position: relative;
-}
-
 .card--card::before {
     content: " ";
     position: absolute;
@@ -20,22 +14,4 @@
 
 .card--secondary::before {
     background-color: transparent;
-}
-
-.card--secondary .price {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 8rem;
-    height: 8rem;
-    background-image: url({{ 'comic-badge.png' | asset_img_url: '100x' }});
-    background-size: cover;
-    background-position: center center;
-    z-index: 2;
-    font-family: var(--font-heading-family);
-    font-size: 1.8rem;
-}
-
-.card--secondary .card-information>.price {
-    color: rgb(var(--color-base-accent-1));
 }
