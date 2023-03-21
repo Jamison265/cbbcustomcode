@@ -44,6 +44,37 @@
         "padding_bottom": 36
       }
     },
+    "rich-text": {
+      "type": "rich-text",
+      "disabled": true,
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Get Ready To Fly Into The World Of Awesome Comics!<\/p>"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>We don't just sell comics<\/p><p> we create an unforgettable experience!<\/p>",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "text",
+        "heading"
+      ],
+      "settings": {
+        "desktop_content_position": "right",
+        "content_alignment": "right",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
     "d2543e03-de3f-44ac-9b18-349e4b4e3117": {
       "type": "spc-featured-collection",
       "settings": {
@@ -74,16 +105,16 @@
     "featured-collection-0": {
       "type": "featured-collection",
       "settings": {
-        "title": "Describe your featured collection",
-        "heading_size": "h2",
+        "title": "New Items",
+        "heading_size": "h1",
         "description": "",
         "show_description": false,
         "description_style": "body",
         "collection": "all",
-        "products_to_show": 4,
+        "products_to_show": 16,
         "columns_desktop": 4,
         "full_width": false,
-        "show_view_all": false,
+        "show_view_all": true,
         "view_all_style": "solid",
         "enable_desktop_slider": false,
         "color_scheme": "background-2",
@@ -94,7 +125,34 @@
         "enable_quick_add": true,
         "columns_mobile": "2",
         "swipe_on_mobile": false,
-        "padding_top": 60,
+        "padding_top": 32,
+        "padding_bottom": 16
+      }
+    },
+    "featured-collection-1": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Comics for sale!",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 16,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "background-2",
+        "image_ratio": "portrait",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 32,
         "padding_bottom": 60
       }
     },
@@ -145,24 +203,26 @@
         "column-3"
       ],
       "settings": {
-        "title": "",
+        "title": "What they're all saying",
         "heading_size": "h1",
         "image_width": "half",
         "image_ratio": "adapt",
         "columns_desktop": 4,
         "column_alignment": "center",
-        "background_style": "none",
+        "background_style": "primary",
         "button_label": "",
         "button_link": "",
         "color_scheme": "background-2",
         "columns_mobile": "1",
-        "swipe_on_mobile": true,
+        "swipe_on_mobile": false,
         "padding_top": 32,
-        "padding_bottom": 92
+        "padding_bottom": 40,
+        "borders_block": true
       }
     },
     "image-with-text-1": {
       "type": "image-with-text",
+      "disabled": true,
       "blocks": {
         "heading": {
           "type": "heading",
@@ -200,12 +260,13 @@
         "content_layout": "no-overlap",
         "color_scheme": "background-2",
         "mobile_content_alignment": "left",
-        "padding_top": 0,
-        "padding_bottom": 60
+        "padding_top": 32,
+        "padding_bottom": 32
       }
     },
     "image-with-text-2": {
       "type": "image-with-text",
+      "disabled": true,
       "blocks": {
         "heading": {
           "type": "heading",
@@ -243,12 +304,13 @@
         "content_layout": "no-overlap",
         "color_scheme": "background-2",
         "mobile_content_alignment": "left",
-        "padding_top": 0,
-        "padding_bottom": 60
+        "padding_top": 32,
+        "padding_bottom": 32
       }
     },
     "image-with-text-3": {
       "type": "image-with-text",
+      "disabled": true,
       "blocks": {
         "heading": {
           "type": "heading",
@@ -286,69 +348,13 @@
         "content_layout": "no-overlap",
         "color_scheme": "background-2",
         "mobile_content_alignment": "left",
-        "padding_top": 0,
-        "padding_bottom": 60
-      }
-    },
-    "featured-collection-1": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "full_width": false,
-        "show_view_all": false,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "background-2",
-        "image_ratio": "portrait",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": false,
-        "enable_quick_add": true,
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 0,
-        "padding_bottom": 60
-      }
-    },
-    "rich-text": {
-      "type": "rich-text",
-      "blocks": {
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>INTRODUCE YOUR BRAND<\/p>"
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "<p>Describe what sets your brand apart from your competitors.<\/p>",
-            "heading_size": "h1"
-          }
-        }
-      },
-      "block_order": [
-        "text",
-        "heading"
-      ],
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "accent-2",
-        "full_width": true,
-        "padding_top": 60,
-        "padding_bottom": 60
+        "padding_top": 32,
+        "padding_bottom": 32
       }
     },
     "multicolumn-1": {
       "type": "multicolumn",
+      "disabled": true,
       "blocks": {
         "column-0": {
           "type": "column",
@@ -406,12 +412,14 @@
         "color_scheme": "accent-2",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
-        "padding_top": 0,
-        "padding_bottom": 60
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "borders_block": false
       }
     },
     "featured-blog": {
       "type": "featured-blog",
+      "disabled": true,
       "settings": {
         "heading": "Blog posts",
         "heading_size": "h2",
@@ -464,14 +472,14 @@
   },
   "order": [
     "30a3a7aa-f45d-4e61-b497-979ba929ed24",
+    "rich-text",
     "d2543e03-de3f-44ac-9b18-349e4b4e3117",
     "featured-collection-0",
+    "featured-collection-1",
     "multicolumn-0",
     "image-with-text-1",
     "image-with-text-2",
     "image-with-text-3",
-    "featured-collection-1",
-    "rich-text",
     "multicolumn-1",
     "featured-blog",
     "newsletter"
