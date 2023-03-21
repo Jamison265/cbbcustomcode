@@ -18,6 +18,8 @@
 .button--secondary {
     --color-shadow: var(--color-base-background-2);
     --color-button: var(--color-base-accent-2);
+    background-color: var(--gradient-base-accent-2);
+    color: var(--gradient-base-background-2);
 }
 
 .announcement-bar__message {
@@ -101,4 +103,24 @@
         width: min(95%, var(--page-wide-width));
         margin-inline: auto;
     }
+}
+
+/*
+* Utilities
+*/
+
+.u-border-0 {
+    border: 0 !important;
+}
+
+.u-border-block {
+    border-block: var(--product-card-border-width) solid rgb(var(--color-foreground));
+}
+
+.u-mt-1 {
+    margin-top: 1rem;
+}
+
+.u-mb-1 {
+    margin-bottom: 1rem;
 }
