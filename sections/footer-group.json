@@ -5,6 +5,14 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "image": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/CBB-badge-rgb.png",
+            "image_width": 150,
+            "alignment": "center"
+          }
+        },
         "footer-0": {
           "type": "link_list",
           "settings": {
@@ -25,20 +33,13 @@
             "heading": "Our mission",
             "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
           }
-        },
-        "image": {
-          "type": "image",
-          "settings": {
-            "image_width": 100,
-            "alignment": "center"
-          }
         }
       },
       "block_order": [
+        "image",
         "footer-0",
         "footer-1",
-        "text",
-        "image"
+        "text"
       ],
       "settings": {
         "color_scheme": "accent-2",
