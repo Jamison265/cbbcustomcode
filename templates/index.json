@@ -216,8 +216,7 @@
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 32,
-        "padding_bottom": 40,
-        "borders_block": true
+        "padding_bottom": 40
       }
     },
     "image-with-text-1": {
@@ -413,8 +412,7 @@
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 32,
-        "padding_bottom": 32,
-        "borders_block": false
+        "padding_bottom": 32
       }
     },
     "featured-blog": {
