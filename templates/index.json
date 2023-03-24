@@ -162,7 +162,7 @@
         "column-0": {
           "type": "column",
           "settings": {
-            "title": "Share a review or testimonial about your brand. Consider adding images to each column for more visual interest.",
+            "title": "Speaking with the Chris about Comics was a joy, his knowledge was amazing! San FraNcisco, CA",
             "text": "",
             "link_label": "",
             "link": ""
@@ -171,7 +171,7 @@
         "column-1": {
           "type": "column",
           "settings": {
-            "title": "Share a review or testimonial about your brand.",
+            "title": "The comic Bookbook Boys came out and got me paid! -Las Vegas, NV",
             "text": "",
             "link_label": "",
             "link": ""
@@ -180,7 +180,7 @@
         "column-2": {
           "type": "column",
           "settings": {
-            "title": "Share a review or testimonial about your brand.",
+            "title": "I receieved way more than I anticpated throught working with the comic book boys!  West covina, CA",
             "text": "",
             "link_label": "",
             "link": ""
@@ -189,7 +189,7 @@
         "column-3": {
           "type": "column",
           "settings": {
-            "title": "The COmic book boys sold my books for top dollar! -Comic Book Boy youtube TEstimonial",
+            "title": "The COmic book boys sold my books for top dollar! Houston, TX",
             "text": "",
             "link_label": "",
             "link": "https:\/\/www.youtube.com\/shorts\/Wa01TIq7DeM"
@@ -203,7 +203,7 @@
         "column-3"
       ],
       "settings": {
-        "title": "What they're all saying",
+        "title": "What they're all saying on youtube",
         "heading_size": "h1",
         "image_width": "half",
         "image_ratio": "adapt",
