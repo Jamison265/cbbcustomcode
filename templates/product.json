@@ -251,8 +251,7 @@
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 0,
-        "padding_bottom": 60,
-        "borders_block": false
+        "padding_bottom": 60
       }
     },
     "rich-text-1": {

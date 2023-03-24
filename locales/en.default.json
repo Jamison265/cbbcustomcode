@@ -454,5 +454,13 @@
       "copy_code_success": "Code copied successfully",
       "print_gift_card": "Print"
     }
+  },
+  "child": {
+    "products": {
+        "product": {
+            "add_to_cart": "Buy now",
+            "place_bid": "Place a bid"
+        }
+    }
   }
 }
