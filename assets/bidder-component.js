@@ -9,6 +9,7 @@ class BidderComponent extends HTMLElement {
             modal: document.getElementById("PopupModal-global"),
         };
         this.url = "/apps/appuction/bid";
+        this.min = Number(this.dataset.min);
         console.log("from bidder");
     }
 
