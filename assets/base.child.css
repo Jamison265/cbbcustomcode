@@ -1,5 +1,7 @@
 :root {
     --page-wide-width: 180rem;
+    --color-message-error: #f44336;
+    --color-message-success: #66bb6a;
 }
 
 .texture,
@@ -123,4 +125,20 @@
 
 .u-mb-1 {
     margin-bottom: 1rem;
+}
+
+.formMessage {
+    font-size: 1.4rem;
+    padding-left: 1rem;
+    display: block;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+.formMessage--success {
+    color: var(--color-message-success);
+}
+
+.formMessage--error {
+    color: var(--color-message-error);
 }
