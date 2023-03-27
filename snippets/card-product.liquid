@@ -198,15 +198,17 @@
               </p>
             {%- endif -%}
 
-            {% render 'price', product: card_product, price_class: '' %}
+            {% if card_product.metafields.auction.data.value.is_active %}
+              {% render 'bid-price-component' with product: card_product %}
+            {% else %}
+              {% render 'price', product: card_product, price_class: '' %}
+            {% endif %}
           </div>
         </div>
         {%- if show_quick_add -%}
           <div class="quick-add no-js-hidden">
-            {% if card_product.metafields.custom.auction_enabled %}
-              <button type="button" class="button button--secondary button--full-width">
-                Place a bid
-              </button>
+            {% if card_product.metafields.auction.data.value.is_active %}
+              {% render 'bidder-component' with product: card_product, customer: customer %}
             {% else  %}
               {%- liquid
                 assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id

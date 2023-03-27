@@ -12,10 +12,8 @@
 {% endcomment %}
 <div {{ block.shopify_attributes }}>
   {%- if product != blank -%}
-    {% if product.metafields.custom.auction_enabled %}
-      <button type="button" class="button button--secondary button--full-width">
-        {{ 'child.products.product.place_bid' | t }}
-      </button>
+    {% if product.metafields.auction.data.value.is_active %}
+     {% render 'bidder-component' with product: product, customer: customer %}
     {% else %}
       <product-form class="product-form">
         <div class="product-form__error-message-wrapper" role="alert" hidden>
