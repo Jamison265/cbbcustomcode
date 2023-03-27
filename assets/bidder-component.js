@@ -28,6 +28,12 @@ class BidderComponent extends HTMLElement {
             modalContent.innerHTML = template.innerHTML;
             this.global.modal.show(this.buttonRef);
         } else {
+            const amount = Number(this.formRef['amount'].value);
+          
+            if (amount < this.min) {
+                this.handlerErrors({ amount: ['Your bid should be equal or greater than the minimum price.']});
+                return false;
+            }
             console.log("submit");
             const { url } = this;
             const formData = new FormData(this.formRef);
