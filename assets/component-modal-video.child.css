@@ -1,0 +1,26 @@
+
+.modal-video--global .modal-video__content {
+    background-color: rgba(var(--color-background), 0.5);
+}
+
+.modal-video--global .modal-video__content-info {
+    background-color: rgb(var(--color-base-background-2));
+    width: calc(80% - 1rem);
+    min-height: 50%;
+    transform: translateY(45%);
+    height: auto;
+    transform: translateY(50%);
+    overflow: auto;
+}
+
+@media screen and (min-width: 750px) {
+    .modal-video--global .modal-video__content-info {
+        width: calc(80% - 9.6rem);
+    }
+}
+
+@media screen and (min-width: 990px) {
+    .modal-video--global .modal-video__content-info {
+        width: calc(80% - 8.6rem);
+    }
+}
