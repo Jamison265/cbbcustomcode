@@ -1,0 +1,29 @@
+<bidder-component>
+  <form>
+    {%- if customer -%}
+      <input type="hidden" name="customer_id" value="{{ customer.id }}" />
+    {%- endif -%}
+    <input type="hidden" name="product_id" value="{{ product.id }}" />
+    <input type="hidden" name="auction_id" value="{{ product.metafields.auction.data.value.auction_id }}" />
+    <div class="field">
+      <input id="BidForm--{{ section.id }}" class="field__input" type="number" name="amount"/>
+      <label class="field__label" for="BidForm--{{ section.id }}">
+        Amount
+      </label>
+    </div>
+    <div class="field u-mt-1">
+      <button type="submit" class="button button--secondary button--full-width">
+        {{- 'child.products.product.place_bid' | t -}}
+      </button>
+    </div>
+  </form>
+  {% unless customer %}
+    <template class="modalLoginTemplate">
+      <h2 class="center">Login to your account</h2>
+      <div class="rte center">
+        <p>Hey! Before placing a bid please <a href="{{ routes.account_login_url }}">login</a> into your account.</p>
+        <p><span class="font-body-bold">Don't have an account?</span> don't worry you can create one by clicking <a href="{{ routes.account_register_url }}">here</a></p>
+      </div>
+    </template>
+  {% endunless %}
+</bidder-component>

@@ -1,0 +1,13 @@
+<bid-price-component>
+  {% if product.metafields.auction.data.value.current_bid == blank %}
+    <span data-price-label class="h5">Min price</span>
+    <span class="price-item price-item--regular">
+      {{ product.metafields.auction.data.value.min_price | times: 100.00 | money }}
+    </span>
+  {% else %}
+    <span data-price-label class="h5">Current bid</span>
+    <span class="price-item price-item--regular">
+      {{ product.metafields.auction.data.value.current_bid | times: 100.00 | money }}
+    </span>
+  {% endif %}
+</bid-price-component>

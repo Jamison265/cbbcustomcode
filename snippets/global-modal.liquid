@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="{{ 'component-modal-video.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-modal-video.child.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<modal-dialog id="PopupModal-global" class="modal-video modal-video--global color-background-1">
+  <div
+    class="modal-video__content modal-video__content"
+    role="dialog"
+    aria-label=""
+    aria-modal="true"
+    tabindex="-1"
+  >
+    <button
+      id="ModalClose-global"
+      type="button"
+      class="modal-video__toggle"
+      aria-label="{{ 'accessibility.close' | t }}"
+    >
+      {% render 'icon-close' %}
+    </button>
+    <div class="modal-video__content-info">
+
+    </div>
+  </div>
+</modal-dialog>
