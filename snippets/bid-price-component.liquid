@@ -1,4 +1,4 @@
-<bid-price-component>
+<bid-price-component data-product-id="{{ product.id }}">
   {% if product.metafields.auction.data.value.current_bid == blank %}
     <span data-price-label class="h5">Min price</span>
     <span class="price-item price-item--regular">
