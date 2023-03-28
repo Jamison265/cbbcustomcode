@@ -460,6 +460,10 @@
         "product": {
             "add_to_cart": "Buy now",
             "place_bid": "Place a bid"
+        },
+        "auction": {
+            "min_price": "Min price: ",
+            "current_bid": "Current bid: "
         }
     }
   }
