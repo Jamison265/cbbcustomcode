@@ -9,7 +9,9 @@ class BidderComponent extends HTMLElement {
             modal: document.getElementById("PopupModal-global"),
         };
         this.url = "/apps/appuction/bid";
-        console.log("from bidder");
+        this.min = Number(this.dataset.min);
+        this.priceLabel = this.dataset.priceLabel.split(':')[0].toLocaleLowerCase();
+        this.isCustomerLogged = this.formRef['customer_id'] ? true : false;
     }
 
     connectedCallback() {
@@ -19,7 +21,7 @@ class BidderComponent extends HTMLElement {
     async onSubmitHandler(evt) {
         evt.preventDefault();
 
-        if (!this.formRef['customer_id']) {
+        if (!this.isCustomerLogged) {
             console.log("abrir pop up");
             const template = this.modalLoginTemplate.cloneNode(true);
             const modalContent = this.global.modal.querySelector(
@@ -28,7 +30,9 @@ class BidderComponent extends HTMLElement {
             modalContent.innerHTML = template.innerHTML;
             this.global.modal.show(this.buttonRef);
         } else {
-            console.log("submit");
+            const hasErrors = this.validateForm();
+            if (hasErrors) return false;
+
             const { url } = this;
             const formData = new FormData(this.formRef);
             const data = await this.mutate({
@@ -54,7 +58,7 @@ class BidderComponent extends HTMLElement {
                     new CustomEvent("bid:created", {
                         detail: {
                             bid: data,
-                        },
+                        }
                     })
                 );
             }
@@ -70,15 +74,37 @@ class BidderComponent extends HTMLElement {
 
     handlerErrors(errors) {
         for (const prop in errors) {
-            const values = errors[prop];
+            const value = Array.isArray(errors[prop]) ? errors[prop][0] : errors[prop];
 
-            for (let index = 0; index < values.length; index++) {
-                this.showMessage({
-                    type: "error",
-                    message: `🚨 ${values[index]}`,
-                });
-            }
+            this.showMessage({
+                type: "error",
+                message: `🚨 ${value}`,
+            });
         }
+    }
+
+    validateForm() {
+        const errors = {};
+
+        if (!this.formRef['amount']) {
+            errors["amount"] = "Amount field is required";
+        } else if (this.formRef['amount'].value == "") {
+            errors["amount"] = "Bid can't be blank submitted";
+        } else if (Number(this.formRef["amount"].value) < this.min && this.priceLabel == 'min price') {
+            errors["amount"] = `Your bid should be equal or greater than the ${this.priceLabel}`;
+        } else if (Number(this.formRef["amount"].value) <= this.min && this.priceLabel != 'min price') {
+            errors["amount"] = `Your bid should be greater than the ${this.priceLabel}`;
+        } else if (!this.formRef["customer_id"]) {
+            errors["customer"] = "Customer field is required";
+        } else if (!this.formRef["product_id"]) {
+            errors["product"] = "Product field is required";
+        } else if (!this.formRef["auction_id"]) {
+            errors["auction"] = "Auction field is required";
+        }
+
+        this.handlerErrors(errors);
+
+        return Object.keys(errors).length === 0 ? false : true;
     }
 
     showMessage({ type, message, removeMessage }) {
