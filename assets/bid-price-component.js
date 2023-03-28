@@ -4,7 +4,7 @@ class BidPriceComponent extends HTMLElement {
         this.minPrice = this.dataset.minPrice;
         this.priceLabelRef = this.querySelector('[data-price-label]');
         this.priceRef = this.querySelector('.price-item');
-        console.log("from bid price");
+        this.productId = this.dataset.productId;
     }
 
     connectedCallback() {
@@ -13,7 +13,10 @@ class BidPriceComponent extends HTMLElement {
     }
 
     onBidCreated(evt) {
-        const { amount } = evt.detail.bid.data;
+        const { product_id: productId, amount } = evt.detail.bid.data;
+
+        if (this.productId !== productId) return false;
+
         const dollarUS = Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",

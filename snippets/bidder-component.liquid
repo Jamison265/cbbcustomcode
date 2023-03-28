@@ -1,4 +1,4 @@
-<bidder-component>
+<bidder-component data-min="{{ product.metafields.auction.data.value.min_price }}" data-price-label="{% if product.metafields.auction.data.value.current_bid != blank %}{{ 'child.products.auction.current_bid' | t }}{% else %}{{ 'child.products.auction.min_price' | t }}{% endif %}">
   <form>
     {%- if customer -%}
       <input type="hidden" name="customer_id" value="{{ customer.id }}" />
