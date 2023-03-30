@@ -127,6 +127,10 @@
     margin-bottom: 1rem;
 }
 
+.u-pb-0 {
+    padding-bottom: 0 !important;
+}
+
 .formMessage {
     font-size: 1.4rem;
     padding-left: 1rem;

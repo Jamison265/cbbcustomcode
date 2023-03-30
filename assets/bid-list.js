@@ -123,6 +123,13 @@ class ObserverImp {
 
         if (button) {
             button.innerHTML = `
+                <countdown-component data-start="${obj.auction.start_at}" data-end="${obj.auction.end_at}" class="countdown">
+                    <div class="countdown__days">00 <span>Days</span></div>
+                    <div class="countdown__hours">00 <span>Hours</span></div>
+                    <div class="countdown__minutes">00 <span>Minutes</span></div>
+                    <div class="countdown__seconds">00 <span>Seconds</span></div>
+                </countdown-component>
+
                 <bidder-component data-logged-in="true" data-min="${Number(obj.currentBid)}" data-price-label="Current bid:">
                     <form>
                         <input type="hidden" name="product_id" value="${product.id}">
