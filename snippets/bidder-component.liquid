@@ -1,3 +1,20 @@
+{% if product.metafields.auction.data.value.is_active != blank %}
+  <countdown-component data-start="{{ product.metafields.auction.data.value.start }}" data-end="{{ product.metafields.auction.data.value.end }}" class="countdown">
+    <div class="countdown__days">
+      00<span>Days</span>
+    </div>
+    <div class="countdown__hours">
+      00<span>Hours</span>
+    </div>
+    <div class="countdown__minutes">
+      00<span>Minutes</span>
+    </div>
+    <div class="countdown__seconds">
+      00<span>Seconds</span>
+    </div>
+  </countdown-component>
+{% endif %}
+
 <bidder-component data-logged-in="{% if customer != blank %}true{% else %}false{% endif %}" data-min="{% if product.metafields.auction.data.value.current_bid != blank %}{{ product.metafields.auction.data.value.current_bid }}{% else %}{{ product.metafields.auction.data.value.min_price }}{% endif %}" data-price-label="{% if product.metafields.auction.data.value.current_bid != blank %}{{ 'child.products.auction.current_bid' | t }}{% else %}{{ 'child.products.auction.min_price' | t }}{% endif %}">
   <form>
     <input type="hidden" name="product_id" value="{{ product.id }}" />

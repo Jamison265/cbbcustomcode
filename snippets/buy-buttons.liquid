@@ -13,6 +13,7 @@
 <div {{ block.shopify_attributes }}>
   {%- if product != blank -%}
     {% if product.metafields.auction.data.value.is_active %}
+      {{ 'component-countdown.css' | asset_url | stylesheet_tag }}
      {% render 'bidder-component' with product: product, customer: customer %}
     {% else %}
       <product-form class="product-form">
