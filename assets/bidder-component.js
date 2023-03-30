@@ -11,7 +11,7 @@ class BidderComponent extends HTMLElement {
         this.url = "/apps/appuction/bid";
         this.min = Number(this.dataset.min);
         this.priceLabel = this.dataset.priceLabel.split(':')[0].toLocaleLowerCase();
-        this.isCustomerLogged = this.formRef['customer_id'] ? true : false;
+        this.isCustomerLogged = this.dataset.loggedIn.toLocaleLowerCase() == 'true' ? true : false;
     }
 
     connectedCallback() {
@@ -94,8 +94,6 @@ class BidderComponent extends HTMLElement {
             errors["amount"] = `Your bid should be equal or greater than the ${this.priceLabel}`;
         } else if (Number(this.formRef["amount"].value) <= this.min && this.priceLabel != 'min price') {
             errors["amount"] = `Your bid should be greater than the ${this.priceLabel}`;
-        } else if (!this.formRef["customer_id"]) {
-            errors["customer"] = "Customer field is required";
         } else if (!this.formRef["product_id"]) {
             errors["product"] = "Product field is required";
         } else if (!this.formRef["auction_id"]) {

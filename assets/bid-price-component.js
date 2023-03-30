@@ -1,15 +1,16 @@
 class BidPriceComponent extends HTMLElement {
     constructor() {
         super();
-        this.minPrice = this.dataset.minPrice;
-        this.priceLabelRef = this.querySelector('[data-price-label]');
-        this.priceRef = this.querySelector('.price-item');
-        this.productId = this.dataset.productId;
     }
 
     connectedCallback() {
-        document.addEventListener('bid:created', this.onBidCreated.bind(this));
-        this.addEventListener('bid:created', this.onBidCreated.bind(this));
+        //Setters
+        this.minPrice = this.dataset.minPrice;
+        this.priceLabelRef = this.querySelector("[data-price-label]");
+        this.priceRef = this.querySelector(".price-item");
+        this.productId = this.dataset.productId;
+
+        document.addEventListener("bid:created", this.onBidCreated.bind(this));
     }
 
     onBidCreated(evt) {
@@ -24,8 +25,8 @@ class BidPriceComponent extends HTMLElement {
 
         this.priceRef.innerHTML = dollarUS.format(Number(amount));
 
-        if (this.priceLabelRef.textContent === 'Min price') {
-            this.priceLabelRef.textContent = 'Current bid:';
+        if (this.priceLabelRef.textContent === "Min price") {
+            this.priceLabelRef.textContent = "Current bid:";
         }
     }
 }
