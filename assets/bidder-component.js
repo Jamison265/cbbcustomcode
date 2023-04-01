@@ -16,6 +16,7 @@ class BidderComponent extends HTMLElement {
 
     connectedCallback() {
         this.formRef.addEventListener("submit", this.onSubmitHandler.bind(this));
+        document.addEventListener('auction:ended', this.onAuctionEnded.bind(this));
     }
 
     async onSubmitHandler(evt) {
@@ -120,6 +121,19 @@ class BidderComponent extends HTMLElement {
 
         this.prepend(span);
         if (removeMessage) setTimeout(() => span.remove(), 5000);
+    }
+
+    onAuctionEnded(evt) {
+        const productId = evt.detail.productId;
+
+        if (productId == this.formRef['product_id'].value) {
+            const elements = this.formRef.elements;
+
+            for (let index = 0; index < elements.length; index++) {
+                const element = elements[index];
+                element.disabled = true;
+            }
+        }
     }
 }
 
