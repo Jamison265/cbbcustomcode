@@ -133,7 +133,7 @@ class ObserverImp {
                 <bidder-component data-logged-in="true" data-min="${Number(obj.currentBid)}" data-price-label="Current bid:">
                     <form>
                         <input type="hidden" name="product_id" value="${product.id}">
-                        <input type="hidden" name="auction_id" value="${obj.auction_id}">
+                        <input type="hidden" name="auction_id" value="${obj.auction.id}">
                         <div class="field">
                             <input id="BidForm--template--${product.id}__product-grid" class="field__input" type="number" name="amount">
                             <label class="field__label" for="BidForm--template--${product.id}__product-grid">

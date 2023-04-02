@@ -11,6 +11,7 @@ class BidPriceComponent extends HTMLElement {
         this.productId = this.dataset.productId;
 
         document.addEventListener("bid:created", this.onBidCreated.bind(this));
+        document.addEventListener("auction:ended", this.onAuctionEnded.bind(this));
     }
 
     onBidCreated(evt) {
@@ -28,6 +29,12 @@ class BidPriceComponent extends HTMLElement {
         if (this.priceLabelRef.textContent === "Min price") {
             this.priceLabelRef.textContent = "Current bid:";
         }
+    }
+
+    onAuctionEnded(evt) {
+        const productId = evt.detail.productId;
+
+        if (this.productId == productId) this.priceLabelRef.textContent = 'Final bid:';
     }
 }
 
