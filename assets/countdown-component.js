@@ -9,6 +9,7 @@ class CountdownComponent extends HTMLElement {
     }
 
     settings() {
+        this.productId = this.dataset.productId;
         this.startDate = this.dataset.start;
         this.endDate = this.dataset.end;
         this.startTime = new Date(this.startDate);
@@ -20,7 +21,7 @@ class CountdownComponent extends HTMLElement {
     }
 
     main() {
-        setInterval(() => {
+        this.countdownInterval = setInterval(() => {
             this.countdown();
         }, 1000);
     }
@@ -29,6 +30,19 @@ class CountdownComponent extends HTMLElement {
         const endTime = Date.parse(this.endTime) / 1000;
         let now = new Date();
         now = Date.parse(now) / 1000;
+
+        if (now >= endTime) {
+            this.innerHTML = '<span style="color: var(--color-message-success)" class="caption-large">Auction has finished</span>';
+            clearInterval(this.countdownInterval);
+
+            document.dispatchEvent(
+                new CustomEvent("auction:ended", {
+                    detail: {
+                        productId: this.productId,
+                    },
+                })
+            );
+        }
 
         let timeleft = endTime - now;
         let days = Math.floor(timeleft / 86400);
