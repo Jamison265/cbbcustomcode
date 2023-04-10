@@ -23,7 +23,6 @@ class BidderComponent extends HTMLElement {
         evt.preventDefault();
 
         if (!this.isCustomerLogged) {
-            console.log("abrir pop up");
             const template = this.modalLoginTemplate.cloneNode(true);
             const modalContent = this.global.modal.querySelector(
                 ".modal-video__content-info"
@@ -55,13 +54,6 @@ class BidderComponent extends HTMLElement {
                     message: "Bid successfully ✓",
                     removeMessage: true,
                 });
-                document.dispatchEvent(
-                    new CustomEvent("bid:created", {
-                        detail: {
-                            bid: data,
-                        }
-                    })
-                );
             }
         }
     }
