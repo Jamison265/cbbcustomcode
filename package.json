@@ -1,15 +1,11 @@
 {
   "scripts": {
-    "rollup:bundle": "npx rollup --config rollup.config.mjs"
+    "build": "vite build"
   },
   "devDependencies": {
-    "@rollup/plugin-eslint": "^9.0.3",
-    "@rollup/plugin-node-resolve": "^15.0.1",
+    "laravel-echo": "^1.15.0",
     "prettier": "2.8.4",
-    "rollup": "^3.17.3",
-    "rollup-plugin-import-css": "^3.1.0"
-  },
-  "dependencies": {
-    "@glidejs/glide": "^3.6.0"
+    "pusher-js": "^8.0.2",
+    "vite": "^4.2.1"
   }
 }

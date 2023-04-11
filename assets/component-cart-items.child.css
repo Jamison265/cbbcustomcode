@@ -1,0 +1,9 @@
+cart-remove-button .button {
+    background: none;
+    border: none;
+}
+
+.cart-drawer .cart-items th {
+    background-color: var(--gradient-base-background-2);
+    opacity: 1;
+}

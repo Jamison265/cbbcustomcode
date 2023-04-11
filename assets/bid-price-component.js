@@ -15,7 +15,7 @@ class BidPriceComponent extends HTMLElement {
     }
 
     onBidCreated(evt) {
-        const { product_id: productId, amount } = evt.detail.bid.data;
+        const { product_id: productId, amount } = evt.detail.bid;
 
         if (this.productId !== productId) return false;
 
