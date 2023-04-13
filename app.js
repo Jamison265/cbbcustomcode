@@ -12,9 +12,8 @@ window.Echo = new Echo({
     forceTLS: false,
     encrypted: true,
     disableStats: true,
-    enabledTransports: ["ws"],
+    enabledTransports: ["ws", "wss"],
     cluster: import.meta.env.VITE_PUSHER_CLUSTER,
-    //enabledTransports: ["ws", "wss"],
 });
 
 document.onreadystatechange = function() {
