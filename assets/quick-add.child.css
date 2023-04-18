@@ -1,0 +1,5 @@
+@media screen and (max-width: 749px) {
+    .card--card .quick-add {
+        margin-inline: 0rem;
+    }
+}
