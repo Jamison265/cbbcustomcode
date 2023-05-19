@@ -79,7 +79,7 @@ class ObserverImp {
         const pricesRef = Array.from(templateCopy.querySelectorAll('.card__information .price'));
         const button = templateCopy.querySelector(".quick-add.no-js-hidden");
 
-        if (mediasRef.length) {
+        if (mediasRef.length && product.image) {
             mediasRef.forEach((mediaRef) => {
                 mediaRef.innerHTML = `
                     <img src="${product.image.src}" alt="${product.image.alt}" width="${product.image.width}" height="${product.image.height}" />
@@ -162,6 +162,7 @@ class ObserverImp {
 
         if (!data.length) {
             this.#wrapper.parentElement.remove();
+            this.#wrapper.parentElement.firstElementChild.remove();
         } else {
             data.forEach((item) => {
                 const li = document.createElement("li");
