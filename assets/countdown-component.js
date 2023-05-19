@@ -14,9 +14,7 @@ class CountdownComponent extends HTMLElement {
         this.endDate = this.dataset.end;
         this.timezone = this.dataset.timezone;
         this.startTime = new Date(this.startDate);
-        this.endTime = new Date(new Date(this.endDate).toLocaleString("en-US", {
-            timeZone: this.timezone,
-        }));
+        this.endTime = new Date(this.endDate);
         this.daysRef = this.querySelector('.countdown__days');
         this.hoursRef = this.querySelector('.countdown__hours');
         this.minutesRef = this.querySelector('.countdown__minutes');
@@ -31,7 +29,9 @@ class CountdownComponent extends HTMLElement {
 
     countdown() {
         const endTime = Date.parse(this.endTime) / 1000;
-        let now = new Date();
+        let now = new Date(new Date().toLocaleString("en-US", {
+            timeZone: this.timezone,
+        }));
         now = Date.parse(now) / 1000;
 
         if (now >= endTime) {
