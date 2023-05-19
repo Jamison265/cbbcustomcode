@@ -12,8 +12,11 @@ class CountdownComponent extends HTMLElement {
         this.productId = this.dataset.productId;
         this.startDate = this.dataset.start;
         this.endDate = this.dataset.end;
+        this.timezone = this.dataset.timezone;
         this.startTime = new Date(this.startDate);
-        this.endTime = new Date(this.endDate);
+        this.endTime = new Date(new Date(this.endDate).toLocaleString("en-US", {
+            timeZone: this.timezone,
+        }));
         this.daysRef = this.querySelector('.countdown__days');
         this.hoursRef = this.querySelector('.countdown__hours');
         this.minutesRef = this.querySelector('.countdown__minutes');

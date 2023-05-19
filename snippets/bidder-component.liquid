@@ -1,5 +1,5 @@
 {% if product.metafields.auction.data.value.is_active != blank %}
-  <countdown-component data-start="{{ product.metafields.auction.data.value.start }}" data-end="{{ product.metafields.auction.data.value.end }}" data-product-id="{{ product.id }}" class="countdown">
+  <countdown-component data-start="{{ product.metafields.auction.data.value.start }}" data-end="{{ product.metafields.auction.data.value.end }}" data-product-id="{{ product.id }}" data-timezone="{{ product.metafields.auction.data.value.timezone }}" class="countdown">
     <div class="countdown__days">
       00<span>Days</span>
     </div>
