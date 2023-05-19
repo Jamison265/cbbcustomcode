@@ -198,7 +198,7 @@
               </p>
             {%- endif -%}
 
-            {% if card_product.metafields.auction.data.value.is_active %}
+            {% if card_product.metafields.auction.data.value.is_active == true or card_product.metafields.auction.data.value.is_active == false %}
               {% render 'bid-price-component' with product: card_product %}
             {% else %}
               {% render 'price', product: card_product, price_class: '' %}
@@ -207,7 +207,7 @@
         </div>
         {%- if show_quick_add -%}
           <div class="quick-add no-js-hidden">
-            {% if card_product.metafields.auction.data.value.is_active %}
+            {% if card_product.metafields.auction.data.value.is_active == true or card_product.metafields.auction.data.value.is_active == false %}
               {% render 'bidder-component' with product: card_product, customer: customer %}
             {% else  %}
               {%- liquid

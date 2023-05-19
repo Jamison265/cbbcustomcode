@@ -1,5 +1,10 @@
 <bid-price-component data-product-id="{{ product.id }}">
-  {% if product.metafields.auction.data.value.current_bid == blank %}
+  {% if product.metafields.auction.data.value.is_active == false %}
+    <span data-price-label class="h5">Final bid</span>
+    <span class="price-item price-item--regular">
+      {{ product.metafields.auction.data.value.current_bid | times: 100.00 | money }}
+    </span>
+  {% elsif product.metafields.auction.data.value.current_bid == blank %}
     <span data-price-label class="h5">Min price</span>
     <span class="price-item price-item--regular">
       {{ product.metafields.auction.data.value.min_price | times: 100.00 | money }}

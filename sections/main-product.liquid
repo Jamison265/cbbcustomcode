@@ -92,7 +92,7 @@
               </div>
             {%- when 'price' -%}
               <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                {% if product.metafields.auction.data.value.is_active %}
+                {% if product.metafields.auction.data.value.is_active == true or product.metafields.auction.data.value.is_active == false %}
                   {% render 'bid-price-component' with product: product %}
                 {% else  %}
                   {%- render 'price',

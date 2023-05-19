@@ -15,18 +15,24 @@
   </countdown-component>
 {% endif %}
 
+{% unless product.metafields.auction.data.value.is_active %}
+  <div class="u-ml-1">
+    <span style="color: var(--color-message-success)" class="caption-large">Auction has finished</span>
+  </div>
+{% endunless %}
+
 <bidder-component data-logged-in="{% if customer != blank %}true{% else %}false{% endif %}" data-min="{% if product.metafields.auction.data.value.current_bid != blank %}{{ product.metafields.auction.data.value.current_bid }}{% else %}{{ product.metafields.auction.data.value.min_price }}{% endif %}" data-price-label="{% if product.metafields.auction.data.value.current_bid != blank %}{{ 'child.products.auction.current_bid' | t }}{% else %}{{ 'child.products.auction.min_price' | t }}{% endif %}">
   <form>
     <input type="hidden" name="product_id" value="{{ product.id }}" />
     <input type="hidden" name="auction_id" value="{{ product.metafields.auction.data.value.auction_id }}" />
     <div class="field">
-      <input id="BidForm--{{ section.id }}" class="field__input" type="number" name="amount"/>
+      <input {% unless product.metafields.auction.data.value.is_active %}disabled {% endunless %} id="BidForm--{{ section.id }}" class="field__input" type="number" name="amount"/>
       <label class="field__label" for="BidForm--{{ section.id }}">
         Amount
       </label>
     </div>
     <div class="field u-mt-1">
-      <button type="submit" class="button button--secondary button--full-width">
+    <button {% unless product.metafields.auction.data.value.is_active %}disabled {% endunless %} type="submit" class="button button--secondary button--full-width">
         {{- 'child.products.product.place_bid' | t -}}
       </button>
     </div>
