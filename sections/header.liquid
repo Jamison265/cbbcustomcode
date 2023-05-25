@@ -580,18 +580,16 @@
       </details-modal>
 
       {%- if shop.customer_accounts_enabled -%}
-        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
-          {% render 'icon-account' %}
-          <span class="visually-hidden">
-            {%- liquid
-              if customer
-                echo 'customer.account_fallback' | t
-              else
-                echo 'customer.log_in' | t
-              endif
-            -%}
-          </span>
-        </a>
+        {% if customer %}
+          <div class="grid-auto-flow small-hide medium-hide">
+            <a href="{{ routes.account_url }}" class="button button--primary button--small">{{ 'child.header.account.my_account' | t }}</a>
+          </div>
+        {% else %}
+          <div class="grid-auto-flow small-hide medium-hide">
+            <a href="{{ routes.account_register_url }}" class="button button--primary button--small">{{ 'child.header.account.register' | t }}</a>
+            <a href="{{ routes.account_login_url }}" class="button button--primary button--small u-ml-1">{{ 'child.header.account.login' | t }}</a>
+          </div>
+        {% endif %}
       {%- endif -%}
 
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
@@ -621,6 +619,19 @@
   </div>
 
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
+
+{%- if shop.customer_accounts_enabled -%}
+  {% if customer %}
+    <div class="header-account-buttons grid-auto-flow large-up-hide page-width">
+      <a href="{{ routes.account_url }}" class="button button--primary">{{ 'child.header.account.my_account' | t }}</a>
+    </div>
+  {% else %}
+    <div class="header-account-buttons grid-auto-flow large-up-hide page-width">
+      <a href="{{ routes.account_register_url }}" class="button button--primary">{{ 'child.header.account.register' | t }}</a>
+      <a href="{{ routes.account_login_url }}" class="button button--primary u-ml-1">{{ 'child.header.account.login' | t }}</a>
+    </div>
+  {% endif %}
+{% endif %}
 
 {%- if settings.cart_type == "notification" -%}
   {%- render 'cart-notification', color_scheme: section.settings.color_scheme -%}
