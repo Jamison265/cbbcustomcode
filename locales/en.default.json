@@ -465,6 +465,13 @@
             "min_price": "Min price: ",
             "current_bid": "Current bid: "
         }
+    },
+    "header": {
+        "account": {
+            "register": "Register",
+            "login": "Login",
+            "my_account": "My account"
+        }
     }
   }
 }

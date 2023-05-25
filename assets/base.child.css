@@ -24,6 +24,13 @@
     color: var(--gradient-base-background-2);
 }
 
+.button--small {
+    padding: 0 1rem;
+    font-size: 1.4rem;
+    min-width: calc(9rem + var(--buttons-border-width) * 2);
+    min-height: calc(3rem + var(--buttons-border-width) * 2);
+}
+
 .announcement-bar__message {
     letter-spacing: 0.15rem;
 }
@@ -63,6 +70,16 @@
     }
 }
 
+.scrolled-past-header .header-account-buttons {
+    opacity: 0;
+    z-index: -1;
+}
+
+.header-account-buttons {
+    margin-top: 2.5rem;
+    max-width: 40rem;
+}
+
 .searchBar {
     display: none;
 }
@@ -78,6 +95,12 @@
     max-width: 50rem;
     display: block;
     margin-inline: auto;
+}
+
+@media screen and (min-width: 990px) {
+    .searchBar .searchBar__form {
+        width: 80%;
+    }
 }
 
 .searchBar .search__button {
