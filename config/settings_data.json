@@ -143,15 +143,7 @@
     },
     "content_for_index": [
 
-    ],
-    "blocks": {
-      "5602652911132133646": {
-        "type": "shopify:\/\/apps\/auction-today\/blocks\/CodeBlockAuction\/3af9f16c-d5a0-475a-93f3-205210e8a9d6",
-        "disabled": false,
-        "settings": {
-        }
-      }
-    }
+    ]
   },
   "presets": {
     "Default": {
