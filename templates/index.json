@@ -6,14 +6,14 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-0": {
           "type": "heading",
           "settings": {
-            "heading": "The Georgia GOLDEN PEACH AUCTION DROPS!",
+            "heading": "OUR STORE IS OPEN",
             "heading_size": "h1"
           }
         },
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-1": {
           "type": "text",
           "settings": {
-            "text": "<p>Auction Starts May 1st!  Hundreds of Golden Age KEys. Books Previewed at WonderCon! This auction site will fully launch on Peach start date!<\/p>",
+            "text": "<p>BUY IT NOws are live and ready to go! Please browse with the search bar or by age of comic. welcome!<\/p>",
             "text_style": "h2"
           }
         },
@@ -81,14 +81,9 @@
         "title": "CURRENT HIGH BIDS(no auction)",
         "heading_size": "h2",
         "description": "",
-        "show_description": false,
         "description_style": "body",
-        "collection": "test",
-        "products_to_show": 5,
         "columns_desktop": 5,
         "section_width": "wide_width",
-        "show_view_all": true,
-        "view_all_style": "solid",
         "enable_desktop_slider": false,
         "color_scheme": "background-1",
         "image_ratio": "square",
@@ -216,7 +211,8 @@
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 32,
-        "padding_bottom": 40
+        "padding_bottom": 40,
+        "borders_block": false
       }
     },
     "image-with-text-1": {
@@ -412,7 +408,8 @@
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 32,
-        "padding_bottom": 32
+        "padding_bottom": 32,
+        "borders_block": false
       }
     },
     "featured-blog": {
