@@ -5,6 +5,7 @@
       "blocks": {
         "slide": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "image": "{{ collection.image }}",
             "heading": "{{ collection.title }}",
