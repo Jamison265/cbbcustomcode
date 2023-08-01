@@ -280,24 +280,6 @@
                       disabled
                     >
                     <div class="field">
-                      <a
-                        class="quick-add__submit button button--full-width"
-                        {% if card_product.selected_or_first_available_variant.available == false %}
-                          disabled role="button"
-                        {% else %}
-                          href="/cart/{{card_product.selected_or_first_available_variant.id}}:1"
-                        {% endif %}
-                      >
-                        <span>
-                          {%- if card_product.selected_or_first_available_variant.available -%}
-                            {{ 'child.products.product.add_to_cart' | t }}
-                          {%- else -%}
-                            {{ 'products.product.sold_out' | t }}
-                          {%- endif -%}
-                        </span>
-                      </a>
-                    </div>
-                    <div class="field u-mt-1">
                       <button
                         id="{{ product_form_id }}-submit"
                         type="submit"
@@ -336,6 +318,24 @@
                           </svg>
                         </div>
                       </button>
+                    </div>
+                    <div class="field u-mt-1">
+                      <a
+                        class="quick-add__submit button button--full-width"
+                        {% if card_product.selected_or_first_available_variant.available == false %}
+                          disabled role="button"
+                        {% else %}
+                          href="/cart/{{card_product.selected_or_first_available_variant.id}}:1"
+                        {% endif %}
+                      >
+                        <span>
+                          {%- if card_product.selected_or_first_available_variant.available -%}
+                            {{ 'child.products.product.add_to_cart' | t }}
+                          {%- else -%}
+                            {{ 'products.product.sold_out' | t }}
+                          {%- endif -%}
+                        </span>
+                      </a>
                     </div>
                   {%- endform -%}
                 </product-form>
