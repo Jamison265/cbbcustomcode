@@ -56,6 +56,7 @@
                 assign quantity_rule_soldout = true
               endif
             -%}
+            {% comment %}
             <a {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %} disabled role="butto" {% else %}href="/cart/{{product.selected_or_first_available_variant.id}}:1"{% endif %} class="product-form__submit button button--full-width button--primary">
               <span>
                 {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
@@ -65,7 +66,8 @@
                 {%- endif -%}
               </span>
             </a>
-            {% comment %}
+            {% endcomment %}
+            
             <button
               id = "ProductSubmitButton-{{ section_id }}"
               type="button"
@@ -94,7 +96,7 @@
                 </svg>
               </div>
             </button>
-            {% endcomment %}
+            
             {%- if block.settings.show_dynamic_checkout -%}
               {{ form | payment_button }}
             {%- endif -%}
