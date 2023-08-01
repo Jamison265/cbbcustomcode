@@ -24,7 +24,7 @@
           "type": "link_list",
           "settings": {
             "heading": "About",
-            "menu": ""
+            "menu": "about-us"
           }
         },
         "text": {
