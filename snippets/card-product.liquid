@@ -199,7 +199,6 @@
             {%- endif -%}
 
             {% if card_product.metafields.auction.data.value.is_active == true or card_product.metafields.auction.data.value.is_active == false %}
-              {{ 'component-countdown.css' | asset_url | stylesheet_tag }}
               {% render 'bid-price-component' with product: card_product %}
             {% else %}
               {% render 'price', product: card_product, price_class: '' %}
@@ -209,6 +208,7 @@
         {%- if show_quick_add -%}
           <div class="quick-add no-js-hidden">
             {% if card_product.metafields.auction.data.value.is_active == true or card_product.metafields.auction.data.value.is_active == false %}
+              {{ 'component-countdown.css' | asset_url | stylesheet_tag }}
               {% render 'bidder-component' with product: card_product, customer: customer %}
             {% else  %}
               {%- liquid
