@@ -4,6 +4,10 @@
     --color-message-success: #66bb6a;
 }
 
+.shopify-payment-button__button--unbranded {
+  padding: unset;
+}
+
 .texture,
 .button,
 .shopify-payment-button__button {
