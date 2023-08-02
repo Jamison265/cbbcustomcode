@@ -457,21 +457,26 @@
   },
   "child": {
     "products": {
-        "product": {
-            "add_to_cart": "Buy now",
-            "place_bid": "Place a bid"
-        },
-        "auction": {
-            "min_price": "Min price: ",
-            "current_bid": "Current bid: "
-        }
+      "product": {
+        "add_to_cart": "Buy now",
+        "place_bid": "Place a bid"
+      },
+      "auction": {
+        "min_price": "Min price: ",
+        "current_bid": "Current bid: "
+      }
     },
     "header": {
-        "account": {
-            "register": "Register",
-            "login": "Login",
-            "my_account": "My account"
-        }
+      "account": {
+        "register": "Register",
+        "login": "Login",
+        "my_account": "My account"
+      }
+    }
+  },
+  "shopify": {
+    "links": {
+      "powered_by_shopify": " "
     }
   }
 }
