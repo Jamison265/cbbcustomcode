@@ -472,6 +472,9 @@
         "login": "Login",
         "my_account": "My account"
       }
+    },
+    "event-registration": {
+        "details_heading": "Event Details"
     }
   },
   "shopify": {

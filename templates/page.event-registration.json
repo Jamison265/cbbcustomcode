@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-event-registration-page",
+      "blocks": {
+        "e8630b96-3e85-408d-9e9a-3ddff8dafd33": {
+          "type": "shopify:\/\/apps\/forms\/blocks\/inline\/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "23735",
+            "text_color": "#121212",
+            "button_background_color": "#0090da",
+            "button_label_color": "#ffffff",
+            "links_color": "#1878b9",
+            "errors_color": "#e02229",
+            "text_alignment": "left",
+            "form_alignment": "center",
+            "padding_top": 8,
+            "padding_bottom": 8,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        }
+      },
+      "block_order": [
+        "e8630b96-3e85-408d-9e9a-3ddff8dafd33"
+      ],
+      "settings": {
+        "banner_image": "shopify:\/\/shop_images\/Convention_Banner.jpg",
+        "image_overlay_opacity": 30,
+        "event_date": "August 5th, 2023",
+        "event_time": "01:00pm - 8:00pm",
+        "event_timezone": "PDT",
+        "event_topic": "Comics and Cocktails"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Subscribe to our emails",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Be the first to know about new collections and exclusive offers.<\/p>"
+          }
+        },
+        "email-form": {
+          "type": "email_form",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "paragraph",
+        "email-form"
+      ],
+      "settings": {
+        "color_scheme": "accent-2",
+        "full_width": true,
+        "padding_top": 60,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}

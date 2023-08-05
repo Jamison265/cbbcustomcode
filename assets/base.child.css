@@ -183,3 +183,22 @@
 .formMessage--error {
     color: var(--color-message-error);
 }
+
+.text-with-icon {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    column-gap: 0.8rem;
+}
+
+.text-with-icon .icon {
+    margin-bottom: 0.5rem;
+}
+
+.grid--2-col-desktop .grid__item--whole,
+.grid__item--whole {
+    width: 100%;
+    max-width: 100%;
+}
+
+

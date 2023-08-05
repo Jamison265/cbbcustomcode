@@ -3238,5 +3238,32 @@
         "name": "Collapsible content"
       }
     }
+  },
+  "child": {
+    "sections": {
+        "main-event-registration-page": {
+            "name": "Event Registration",
+            "event-details": {
+                "heading": "Event Details"
+            },
+            "settings": {
+                "banner": {
+                    "label": "Banner Image"
+                },
+                "event-date": {
+                    "label": "Event Date"
+                },
+                "event-time": {
+                    "label": "Event Time"
+                },
+                "event-timezone": {
+                    "label": "Event Timezone"
+                },
+                "event-topic": {
+                    "label": "Event Topic"
+                }
+            }
+        }
+    }
   }
 }
