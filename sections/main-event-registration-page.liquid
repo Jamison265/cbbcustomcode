@@ -1,0 +1,155 @@
+{{ 'section-main-event-registration-page.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.child.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #Banner-{{ section.id }}::after {
+    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  }
+{%- endstyle -%}
+
+<div class="event-registration">
+  <div id="Banner-{{ section.id }}" class="media event-registration__media">
+    {% if section.settings.banner_image != blank %}
+      {{ section.settings.banner_image | image_url: width: section.settings.banner_image.width | image_tag:
+        loading: 'lazy',
+        sizes: 'auto',
+        widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
+      }}
+    {% else  %}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+    {% endif %}
+  </div>
+  <div class="event-registration__body">
+    <div class="page-width">
+      <div class="grid grid--1-col grid--2-col-desktop">
+        <div class="grid__item grid__item--whole">
+          <h1 class="main-page-title page-title h0">
+            {{ page.title | escape }}
+          </h1>
+          {% if section.settings.event_date != blank or section.settings.event_time != blank or section.settings.event_timezone != blank or section.settings.event_topic != blank %}
+            <div class="product-card-wrapper event-registration__details">
+              <div class="card card--card color-background-2 gradient">
+                <div class="card__content">
+                  <div class="card__information">
+                    <h3 class="card__heading h2">
+                      {{ 'child.event-registration.details_heading' | t }}
+                    </h3>
+                    <div class="grid grid--2-col u-mt-1">
+                      {% if section.settings.event_date != blank %}
+                        <div class="grid__item">
+                          <div class="text-with-icon">
+                            {% render 'icon-calendar' %}
+                            <span>{{ section.settings.event_date }}</span>
+                          </div>
+                        </div>
+                      {% endif %}
+                      {% if section.settings.event_time != blank %}
+                        <div class="grid__item">
+                          <div class="text-with-icon">
+                            {% render 'icon-clock' %}
+                            <span>{{ section.settings.event_time }}</span>
+                          </div>
+                        </div>
+                      {% endif %}
+                      {% if section.settings.event_timezone != blank %}
+                        <div class="grid__item">
+                          <div class="text-with-icon">
+                            {% render 'icon-globe' %}
+                            <span>{{ section.settings.event_timezone }}</span>
+                          </div>
+                        </div>
+                      {% endif %}
+                      {% if section.settings.event_topic != blank %}
+                        <div class="grid__item">
+                          <div class="text-with-icon">
+                            {% render 'icon-tag' %}
+                            <span>{{ section.settings.event_topic }}</span>
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        <div class="grid__item">
+          <div class="rte">
+            {{ page.content }}
+          </div>
+        </div>
+        {% if section.blocks.size > 0 %}
+          <div class="grid__item">
+            <div class="event-registration__blocks">
+              {% for block in section.blocks %}
+                <h2 style="color: #e72424;" class="h1 center u-mt-2">Register Now!</h2>
+                {% render block %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "t:child.sections.main-event-registration-page.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "t:child.sections.main-event-registration-page.settings.banner.label"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "t:sections.image-banner.settings.image_overlay_opacity.label",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:child.sections.main-event-registration-page.event-details.heading"
+    },
+    {
+      "type": "text",
+      "id": "event_date",
+      "label": "t:child.sections.main-event-registration-page.settings.event-date.label"
+    },
+    {
+      "type": "text",
+      "id": "event_time",
+      "label": "t:child.sections.main-event-registration-page.settings.event-time.label"
+    },
+    {
+      "type": "text",
+      "id": "event_timezone",
+      "label": "t:child.sections.main-event-registration-page.settings.event-timezone.label"
+    },
+    {
+      "type": "text",
+      "id": "event_topic",
+      "label": "t:child.sections.main-event-registration-page.settings.event-topic.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}

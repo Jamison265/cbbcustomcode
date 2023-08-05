@@ -1,0 +1,60 @@
+.header-account-buttons {
+    margin-bottom: 2.5rem;
+}
+.event-registration {
+    position: relative;
+}
+
+.event-registration__media {
+    height: 33rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.event-registration__media::after,
+.event-registration__media::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.event-registration__media::after {
+    background-color: #000000;
+    opacity: 0;
+}
+
+.event-registration__media::before {
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(0)" opacity="0.2" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g  fill="%23250E17"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>');
+    background-size: 10px, 100%;
+}
+
+.event-registration__body {
+    --page-width: 140rem;
+    padding-bottom: 2.4rem;
+    position: relative;
+    z-index: 1;
+}
+
+@media screen and (min-width: 990px) {
+    .event-registration__details {
+        max-width: 50%;
+    }
+}
+
+.main-page-title {
+    color: rgb(var(--color-base-background-2));
+    text-shadow: 0 0.2rem 0.4rem var(--gradient-base-accent-2);
+}
+
+.featured-logo-media {
+    height: 15.5rem;
+}
+
+.featured-logo-media img {
+    object-fit: contain;
+}
