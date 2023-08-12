@@ -2,6 +2,7 @@
     --page-wide-width: 180rem;
     --color-message-error: #f44336;
     --color-message-success: #66bb6a;
+    --color-message-info: #2986cc;
 }
 
 .shopify-payment-button__button--unbranded {
@@ -182,6 +183,10 @@
 
 .formMessage--error {
     color: var(--color-message-error);
+}
+
+.formMessage--info {
+    color: var(--color-message-info);
 }
 
 .text-with-icon {

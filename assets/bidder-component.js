@@ -48,6 +48,13 @@ class BidderComponent extends HTMLElement {
 
             if (data.errors) {
                 this.handlerErrors(data.errors);
+            } else if (data.message) {
+                this.showMessage({
+                    type: "info",
+                    message: data.message,
+                    removeMessage: true,
+                });
+                this.formRef['amount'].value = data.bid.amount;
             } else {
                 this.showMessage({
                     type: "success",
