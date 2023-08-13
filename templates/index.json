@@ -101,12 +101,12 @@
     "featured-collection-0": {
       "type": "featured-collection-auction",
       "settings": {
-        "title": "LIVE AUCTION COMICS",
+        "title": "Buy it now",
         "heading_size": "h1",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "summer-super-collection",
+        "collection": "slabbed-comics",
         "products_to_show": 16,
         "columns_desktop": 4,
         "full_width": false,
