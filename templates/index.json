@@ -6,7 +6,7 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-0": {
           "type": "heading",
           "settings": {
-            "heading": "OUR STORE IS OPEN",
+            "heading": "FREE SHIPPING ON ALL ORDERS!!",
             "heading_size": "h1"
           }
         },
@@ -46,7 +46,6 @@
     },
     "rich-text": {
       "type": "rich-text",
-      "disabled": true,
       "blocks": {
         "text": {
           "type": "text",
@@ -66,6 +65,7 @@
         "text",
         "heading"
       ],
+      "disabled": true,
       "settings": {
         "desktop_content_position": "right",
         "content_alignment": "right",
@@ -218,7 +218,6 @@
     },
     "image-with-text-1": {
       "type": "image-with-text",
-      "disabled": true,
       "blocks": {
         "heading": {
           "type": "heading",
@@ -247,6 +246,7 @@
         "text",
         "button"
       ],
+      "disabled": true,
       "settings": {
         "height": "adapt",
         "desktop_image_width": "small",
@@ -262,7 +262,6 @@
     },
     "image-with-text-2": {
       "type": "image-with-text",
-      "disabled": true,
       "blocks": {
         "heading": {
           "type": "heading",
@@ -291,6 +290,7 @@
         "text",
         "button"
       ],
+      "disabled": true,
       "settings": {
         "height": "adapt",
         "desktop_image_width": "medium",
@@ -306,7 +306,6 @@
     },
     "image-with-text-3": {
       "type": "image-with-text",
-      "disabled": true,
       "blocks": {
         "heading": {
           "type": "heading",
@@ -335,6 +334,7 @@
         "text",
         "button"
       ],
+      "disabled": true,
       "settings": {
         "height": "adapt",
         "desktop_image_width": "small",
@@ -350,7 +350,6 @@
     },
     "multicolumn-1": {
       "type": "multicolumn",
-      "disabled": true,
       "blocks": {
         "column-0": {
           "type": "column",
@@ -395,6 +394,7 @@
         "column-2",
         "column-3"
       ],
+      "disabled": true,
       "settings": {
         "title": "",
         "heading_size": "h1",
