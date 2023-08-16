@@ -1,4 +1,4 @@
-<bid-price-component data-product-id="{{ product.id }}">
+<bid-price-component data-product-id="{{ product.id }}" data-min-price="{% if product.metafields.auction.data.value.current_bid != blank %}{{ product.metafields.auction.data.value.current_bid }}{% else %}{{ product.metafields.auction.data.value.min_price }}{% endif %}">
   {% if product.metafields.auction.data.value.is_active == false %}
     <span data-price-label class="h5">Final bid</span>
     <span class="price-item price-item--regular">
