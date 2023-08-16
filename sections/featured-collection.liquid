@@ -75,8 +75,7 @@
         role="list"
         aria-label="{{ 'general.slider.name' | t }}"
       >
-        {% assign availableProducts = section.settings.collection.products | where: "available", true %}
-        {%- for product in availableProducts limit: section.settings.products_to_show -%}
+        {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
           <li
             id="Slide-{{ section.id }}-{{ forloop.index }}"
             class="grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide{% endif %}"
