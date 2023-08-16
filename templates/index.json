@@ -99,7 +99,7 @@
       }
     },
     "featured-collection-0": {
-      "type": "featured-collection-auction",
+      "type": "featured-collection",
       "settings": {
         "title": "Buy it now",
         "heading_size": "h1",

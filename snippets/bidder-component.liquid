@@ -21,7 +21,7 @@
   </div>
 {% endunless %}
 
-<bidder-component data-logged-in="{% if customer != blank %}true{% else %}false{% endif %}" data-min="{% if product.metafields.auction.data.value.current_bid != blank %}{{ product.metafields.auction.data.value.current_bid }}{% else %}{{ product.metafields.auction.data.value.min_price }}{% endif %}" data-price-label="{% if product.metafields.auction.data.value.current_bid != blank %}{{ 'child.products.auction.current_bid' | t }}{% else %}{{ 'child.products.auction.min_price' | t }}{% endif %}">
+<bidder-component data-product-id="{{ product.id }}" data-logged-in="{% if customer != blank %}true{% else %}false{% endif %}" data-min="{% if product.metafields.auction.data.value.current_bid != blank %}{{ product.metafields.auction.data.value.current_bid }}{% else %}{{ product.metafields.auction.data.value.min_price }}{% endif %}" data-price-label="{% if product.metafields.auction.data.value.current_bid != blank %}{{ 'child.products.auction.current_bid' | t }}{% else %}{{ 'child.products.auction.min_price' | t }}{% endif %}">
   <form>
     <input type="hidden" name="product_id" value="{{ product.id }}" />
     <input type="hidden" name="auction_id" value="{{ product.metafields.auction.data.value.auction_id }}" />
