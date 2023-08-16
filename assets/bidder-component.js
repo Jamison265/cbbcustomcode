@@ -8,6 +8,7 @@ class BidderComponent extends HTMLElement {
         this.global = {
             modal: document.getElementById("PopupModal-global"),
         };
+        this.productId = this.dataset.productId;
         this.url = "/apps/appuction/bid";
         this.min = Number(this.dataset.min);
         this.priceLabel = this.dataset.priceLabel.split(':')[0].toLocaleLowerCase();
@@ -17,6 +18,7 @@ class BidderComponent extends HTMLElement {
     connectedCallback() {
         this.formRef.addEventListener("submit", this.onSubmitHandler.bind(this));
         document.addEventListener('auction:ended', this.onAuctionEnded.bind(this));
+        document.addEventListener('bid:created', this.onBidCreated.bind(this));
     }
 
     async onSubmitHandler(evt) {
@@ -65,8 +67,8 @@ class BidderComponent extends HTMLElement {
         }
     }
 
-    async mutate({ url, data, fetchConfig}) {
-        const response = await fetch(url, {...fetchConfig, body: data});
+    async mutate({ url, data, fetchConfig }) {
+        const response = await fetch(url, { ...fetchConfig, body: data });
         const formattedData = await response.json();
 
         return formattedData;
@@ -85,19 +87,21 @@ class BidderComponent extends HTMLElement {
 
     validateForm() {
         const errors = {};
+        const amount = Number(this.formRef["amount"].value);
+        const nextBid = this.nextBid(this.min);
 
         if (!this.formRef['amount']) {
             errors["amount"] = "Amount field is required";
         } else if (this.formRef['amount'].value == "") {
             errors["amount"] = "Bid can't be blank submitted";
-        } else if (Number(this.formRef["amount"].value) < this.min && this.priceLabel == 'min price') {
+        } else if (amount < this.min && this.priceLabel == 'min price') {
             errors["amount"] = `Your bid should be equal or greater than the ${this.priceLabel}`;
-        } else if (Number(this.formRef["amount"].value) <= this.min && this.priceLabel != 'min price') {
-            errors["amount"] = `Your bid should be greater than the ${this.priceLabel}`;
         } else if (!this.formRef["product_id"]) {
             errors["product"] = "Product field is required";
         } else if (!this.formRef["auction_id"]) {
             errors["auction"] = "Auction field is required";
+        } else if (amount < nextBid) {
+            errors["amount"] = `Next bid should be ${this.formatCurrency(nextBid)} or higher`;
         }
 
         this.handlerErrors(errors);
@@ -133,6 +137,43 @@ class BidderComponent extends HTMLElement {
                 element.disabled = true;
             }
         }
+    }
+
+    onBidCreated(evt) {
+        const { product_id: productId, amount } = evt.detail.bid;
+
+        if (this.productId !== productId) return false;
+
+        this.min = Number(amount);
+    }
+
+    nextBid(amount) {
+        const ranges = [
+            50, 99, 199, 499, 999, 1999, 4999, 9999, 19999, 49999, 99999,
+            199999, 499999, 999999, 1999999, 9999999, 10000000,
+        ];
+        const increments = [
+            1, 2, 5, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000, 12500,
+            25000, 50000, 100000,
+        ];
+
+        const currentRange = ranges.find((range) => range >= amount);
+
+        if (currentRange) {
+            const incrementIndex = ranges.indexOf(currentRange);
+            return amount + increments[incrementIndex];
+        }
+
+        return amount + 1;
+    }
+
+    formatCurrency(amount) {
+        const dollarUS = Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+        });
+
+        return dollarUS.format(amount);
     }
 }
 
