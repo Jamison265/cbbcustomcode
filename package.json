@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "dev": "shopify theme dev -s alienbs-store.myshopify.com"
   },
   "devDependencies": {
     "laravel-echo": "^1.15.0",
