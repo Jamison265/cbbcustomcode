@@ -128,12 +128,12 @@
     "featured-collection-1": {
       "type": "featured-collection",
       "settings": {
-        "title": "Comics for sale!",
+        "title": "BLOW OUT DEALS!!",
         "heading_size": "h1",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "bronze-age",
+        "collection": "fire-deals",
         "products_to_show": 16,
         "columns_desktop": 4,
         "full_width": false,
