@@ -1,24 +1,36 @@
 class BidderComponent extends HTMLElement {
+    #provider;
 
     constructor() {
         super();
-        this.formRef = this.querySelector('form');
-        this.buttonRef = this.querySelector('button');
+        this.url = "/apps/appuction/bid";
+    }
+
+    connectedCallback() {
+        this.#provider = this.parentElement;
+        this.#provider.addObserver(this);
+        this.settings();
+        this.formRef.addEventListener("submit", this.onSubmitHandler.bind(this));
+        this.subscribeFormRef.addEventListener("submit", this.onSubscribe.bind(this));
+        this.main();
+    }
+
+    settings() {
+        const { productId, min, priceLabel, isCustomerLogged } = this.#provider.getState();
+        this.formRef = this.querySelector('form[data-action="bid"]');
+        this.subscribeFormRef = this.querySelector('form[data-action="subscribe"]');
+        this.buttonRef = this.querySelector("button");
         this.modalLoginTemplate = this.querySelector(".modalLoginTemplate");
         this.global = {
             modal: document.getElementById("PopupModal-global"),
         };
-        this.productId = this.dataset.productId;
-        this.url = "/apps/appuction/bid";
-        this.min = Number(this.dataset.min);
-        this.priceLabel = this.dataset.priceLabel.split(':')[0].toLocaleLowerCase();
-        this.isCustomerLogged = this.dataset.loggedIn.toLocaleLowerCase() == 'true' ? true : false;
+        this.productId = productId;
+        this.priceLabel = priceLabel;
+        this.isCustomerLogged = isCustomerLogged;
     }
 
-    connectedCallback() {
-        this.formRef.addEventListener("submit", this.onSubmitHandler.bind(this));
-        document.addEventListener('auction:ended', this.onAuctionEnded.bind(this));
-        document.addEventListener('bid:created', this.onBidCreated.bind(this));
+    main() {
+        this.onAuctionEnded();
     }
 
     async onSubmitHandler(evt) {
@@ -67,6 +79,50 @@ class BidderComponent extends HTMLElement {
         }
     }
 
+    async onSubscribe(evt) {
+        evt.preventDefault();
+        const button = this.subscribeFormRef.querySelector('button');
+
+        if (!this.isCustomerLogged) {
+            const template = this.modalLoginTemplate.cloneNode(true);
+            const modalContent = this.global.modal.querySelector(".modal-video__content-info");
+            modalContent.innerHTML = template.innerHTML;
+            const firstParagraph = modalContent.querySelector('.rte p');
+            firstParagraph.innerHTML = 'Hey! Before subscribing to get notifications about this product, please <a href="/account/login">login</a> into your account.';
+            this.global.modal.show(button);
+        } else {
+            const URL = `/apps/appuction/auction-details/${this.formRef["auction_id"].value}/${this.formRef["product_id"].value}`;
+            const response = await fetch(URL);
+
+            if (response.error) {
+                console.error(response.error);
+                return false;
+            }
+
+            const auctionDetail = await response.json();
+            const formData = new FormData(this.subscribeFormRef);
+            const data = await this.mutate({
+                url: `/apps/appuction/auction-details/${auctionDetail.data.id}/subscriptions`,
+                data: formData,
+                fetchConfig: {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                    },
+                },
+            });
+
+            if (!data.error) {
+                this.showMessage({
+                    type: "success",
+                    message: `Subscribed successfully ✓`,
+                    removeMessage: true,
+                });
+            }
+
+        }
+    }
+
     async mutate({ url, data, fetchConfig }) {
         const response = await fetch(url, { ...fetchConfig, body: data });
         const formattedData = await response.json();
@@ -86,22 +142,23 @@ class BidderComponent extends HTMLElement {
     }
 
     validateForm() {
+        const { min } = this.#provider.getState();
         const errors = {};
         const amount = Number(this.formRef["amount"].value);
-        const nextBid = this.nextBid(this.min);
+        const nextBid = this.#provider.nextBid(min);
 
         if (!this.formRef['amount']) {
             errors["amount"] = "Amount field is required";
         } else if (this.formRef['amount'].value == "") {
             errors["amount"] = "Bid can't be blank submitted";
-        } else if (amount < this.min && this.priceLabel == 'min price') {
+        } else if (amount < min && this.priceLabel == 'min price') {
             errors["amount"] = `Your bid should be equal or greater than the ${this.priceLabel}`;
         } else if (!this.formRef["product_id"]) {
             errors["product"] = "Product field is required";
         } else if (!this.formRef["auction_id"]) {
             errors["auction"] = "Auction field is required";
         } else if (amount < nextBid) {
-            errors["amount"] = `Next bid should be ${this.formatCurrency(nextBid)} or higher`;
+            errors["amount"] = `Next bid should be ${this.#provider.formatCurrency(nextBid)} or higher`;
         }
 
         this.handlerErrors(errors);
@@ -126,54 +183,24 @@ class BidderComponent extends HTMLElement {
         if (removeMessage) setTimeout(() => span.remove(), 5000);
     }
 
-    onAuctionEnded(evt) {
-        const productId = evt.detail.productId;
+    onAuctionEnded() {
+        const { auctionEnded } = this.#provider.getState()
 
-        if (productId == this.formRef['product_id'].value) {
+        if (auctionEnded) {
             const elements = this.formRef.elements;
+            const notifyBtn = this.subscribeFormRef.querySelector("button");
 
             for (let index = 0; index < elements.length; index++) {
                 const element = elements[index];
                 element.disabled = true;
             }
+
+            notifyBtn.disabled = true;
         }
     }
 
-    onBidCreated(evt) {
-        const { product_id: productId, amount } = evt.detail.bid;
-
-        if (this.productId !== productId) return false;
-
-        this.min = Number(amount);
-    }
-
-    nextBid(amount) {
-        const ranges = [
-            50, 99, 199, 499, 999, 1999, 4999, 9999, 19999, 49999, 99999,
-            199999, 499999, 999999, 1999999, 9999999, 10000000,
-        ];
-        const increments = [
-            1, 2, 5, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000, 12500,
-            25000, 50000, 100000,
-        ];
-
-        const currentRange = ranges.find((range) => range >= amount);
-
-        if (currentRange) {
-            const incrementIndex = ranges.indexOf(currentRange);
-            return amount + increments[incrementIndex];
-        }
-
-        return amount + 1;
-    }
-
-    formatCurrency(amount) {
-        const dollarUS = Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-        });
-
-        return dollarUS.format(amount);
+    update() {
+        this.main();
     }
 }
 

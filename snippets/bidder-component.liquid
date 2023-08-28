@@ -1,49 +1,76 @@
-{% if product.metafields.auction.data.value.is_active != blank %}
-  <countdown-component data-start="{{ product.metafields.auction.data.value.start }}" data-end="{{ product.metafields.auction.data.value.end }}" data-product-id="{{ product.id }}" data-timezone="{{ product.metafields.auction.data.value.timezone }}" class="countdown">
-    <div class="countdown__days">
-      00<span>Days</span>
-    </div>
-    <div class="countdown__hours">
-      00<span>Hours</span>
-    </div>
-    <div class="countdown__minutes">
-      00<span>Minutes</span>
-    </div>
-    <div class="countdown__seconds">
-      00<span>Seconds</span>
-    </div>
-  </countdown-component>
-{% endif %}
-
-{% unless product.metafields.auction.data.value.is_active %}
-  <div class="u-ml-1">
-    <span style="color: var(--color-message-success)" class="caption-large">Auction has finished</span>
-  </div>
-{% endunless %}
-
-<bidder-component data-product-id="{{ product.id }}" data-logged-in="{% if customer != blank %}true{% else %}false{% endif %}" data-min="{% if product.metafields.auction.data.value.current_bid != blank %}{{ product.metafields.auction.data.value.current_bid }}{% else %}{{ product.metafields.auction.data.value.min_price }}{% endif %}" data-price-label="{% if product.metafields.auction.data.value.current_bid != blank %}{{ 'child.products.auction.current_bid' | t }}{% else %}{{ 'child.products.auction.min_price' | t }}{% endif %}">
-  <form>
-    <input type="hidden" name="product_id" value="{{ product.id }}" />
-    <input type="hidden" name="auction_id" value="{{ product.metafields.auction.data.value.auction_id }}" />
-    <div class="field">
-      <input {% unless product.metafields.auction.data.value.is_active %}disabled {% endunless %} id="BidForm--{{ section.id }}" class="field__input" type="number" name="amount"/>
-      <label class="field__label" for="BidForm--{{ section.id }}">
-        Amount
-      </label>
-    </div>
-    <div class="field u-mt-1">
-    <button {% unless product.metafields.auction.data.value.is_active %}disabled {% endunless %} type="submit" class="button button--secondary button--full-width">
-        {{- 'child.products.product.place_bid' | t -}}
-      </button>
-    </div>
-  </form>
-  {% unless customer %}
-    <template class="modalLoginTemplate">
-      <h2 class="center">Login to your account</h2>
-      <div class="rte center">
-        <p>Hey! Before placing a bid please <a href="{{ routes.account_login_url }}">login</a> into your account.</p>
-        <p><span class="font-body-bold">Don't have an account?</span> don't worry you can create one by clicking <a href="{{ routes.account_register_url }}">here</a></p>
+<auction-provider>
+  <script type="application/json">
+    {
+      "startDate": "{{ product.metafields.auction.data.value.start }}",
+      "endDate": "{{ product.metafields.auction.data.value.end }}",
+      "productId": {{ product.id }},
+      "timezone": "{{ product.metafields.auction.data.value.timezone }}",
+      "active": {{ product.metafields.auction.data.value.is_active }},
+      "isCustomerLogged": {% if customer != blank %}true{% else %}false{% endif %},
+      "min": {% if product.metafields.auction.data.value.current_bid != blank %}{{ product.metafields.auction.data.value.current_bid }}{% else %}{{ product.metafields.auction.data.value.min_price }}{% endif %},
+      "priceLabel": "{% if product.metafields.auction.data.value.current_bid != blank %}{{ 'child.products.auction.current_bid' | t }}{% else %}{{ 'child.products.auction.min_price' | t }}{% endif %}",
+      "auctionId": {{ product.metafields.auction.data.value.auction_id }},
+      "amount": 0,
+      "subscribed": null,
+      "channel": null
+    }
+  </script>
+  {% if product.metafields.auction.data.value.is_active != blank %}
+    <countdown-component class="countdown">
+      <div class="countdown__days">
+        00<span>Days</span>
       </div>
-    </template>
+      <div class="countdown__hours">
+        00<span>Hours</span>
+      </div>
+      <div class="countdown__minutes">
+        00<span>Minutes</span>
+      </div>
+      <div class="countdown__seconds">
+        00<span>Seconds</span>
+      </div>
+    </countdown-component>
+  {% endif %}
+
+  {% unless product.metafields.auction.data.value.is_active %}
+    <div class="u-ml-1">
+      <span style="color: var(--color-message-success)" class="caption-large">Auction has finished</span>
+    </div>
   {% endunless %}
-</bidder-component>
+
+  <bidder-component data-product-id="{{ product.id }}" data-logged-in="{% if customer != blank %}true{% else %}false{% endif %}" data-min="{% if product.metafields.auction.data.value.current_bid != blank %}{{ product.metafields.auction.data.value.current_bid }}{% else %}{{ product.metafields.auction.data.value.min_price }}{% endif %}" data-price-label="{% if product.metafields.auction.data.value.current_bid != blank %}{{ 'child.products.auction.current_bid' | t }}{% else %}{{ 'child.products.auction.min_price' | t }}{% endif %}">
+    <form data-action="bid">
+      <input type="hidden" name="product_id" value="{{ product.id }}" />
+      <input type="hidden" name="auction_id" value="{{ product.metafields.auction.data.value.auction_id }}" />
+      <div class="field">
+        <input {% unless product.metafields.auction.data.value.is_active %}disabled {% endunless %} id="BidForm--{{ section.id }}" class="field__input" type="number" name="amount"/>
+        <label class="field__label" for="BidForm--{{ section.id }}">
+          Amount
+        </label>
+      </div>
+      <div class="field u-mt-1">
+      <button {% unless product.metafields.auction.data.value.is_active %}disabled {% endunless %} type="submit" class="button button--secondary button--full-width">
+          {{- 'child.products.product.place_bid' | t -}}
+        </button>
+      </div>
+    </form>
+    <form data-action="subscribe">
+      <input type="hidden" name="channel" value="sms and email" />
+      <div class="u-mt-1">
+        <button aria-label="{{- 'child.products.auction.notify' | t -}}" {% unless product.metafields.auction.data.value.is_active %}disabled {% endunless %} type="submit" class="button button--tertiary button--full-width">
+          {% render 'icon-bell' %}
+          <span aria-hidden="true" class="u-ml-small small-hide">{{- 'child.products.auction.notify' | t -}}</span>
+        </button>
+      </div>
+    </form>
+    {% unless customer %}
+      <template class="modalLoginTemplate">
+        <h2 class="center">Login to your account</h2>
+        <div class="rte center">
+          <p>Hey! Before placing a bid please <a href="{{ routes.account_login_url }}">login</a> into your account.</p>
+          <p><span class="font-body-bold">Don't have an account?</span> don't worry you can create one by clicking <a href="{{ routes.account_register_url }}">here</a></p>
+        </div>
+      </template>
+    {% endunless %}
+  </bidder-component>
+</auction-provider>
