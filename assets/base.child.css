@@ -31,6 +31,10 @@
     color: var(--gradient-base-background-2);
 }
 
+.button--tertiary {
+    font-size: 1.5rem;
+}
+
 .button--small {
     padding: 0 1rem;
     font-size: 1.4rem;
@@ -163,6 +167,10 @@
 
 .u-ml-1 {
     margin-left: 1rem;
+}
+
+.u-ml-small {
+    margin-left: 0.4rem;
 }
 
 .u-pb-0 {
