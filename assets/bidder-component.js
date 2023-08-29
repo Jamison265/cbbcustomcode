@@ -1,5 +1,6 @@
 class BidderComponent extends HTMLElement {
     #provider;
+    #isSubscribed;
 
     constructor() {
         super();
@@ -16,7 +17,8 @@ class BidderComponent extends HTMLElement {
     }
 
     settings() {
-        const { productId, min, priceLabel, isCustomerLogged } = this.#provider.getState();
+        const { productId, priceLabel, isCustomerLogged, isSubscribed } = this.#provider.getState();
+        this.#isSubscribed = isSubscribed;
         this.formRef = this.querySelector('form[data-action="bid"]');
         this.subscribeFormRef = this.querySelector('form[data-action="subscribe"]');
         this.buttonRef = this.querySelector("button");
@@ -81,6 +83,7 @@ class BidderComponent extends HTMLElement {
 
     async onSubscribe(evt) {
         evt.preventDefault();
+        const { isSubscribed, detailId } = this.#provider.getState();
         const button = this.subscribeFormRef.querySelector('button');
 
         if (!this.isCustomerLogged) {
@@ -91,21 +94,24 @@ class BidderComponent extends HTMLElement {
             firstParagraph.innerHTML = 'Hey! Before subscribing to get notifications about this product, please <a href="/account/login">login</a> into your account.';
             this.global.modal.show(button);
         } else {
-            const URL = `/apps/appuction/auction-details/${this.formRef["auction_id"].value}/${this.formRef["product_id"].value}`;
-            const response = await fetch(URL);
+            const formData = new FormData(this.subscribeFormRef);
+            const method = isSubscribed ? 'DELETE' : 'POST';
 
-            if (response.error) {
-                console.error(response.error);
-                return false;
+            for (let index = 0; index < button.children.length; index++) {
+                const element = button.children[index];
+
+                if (element.classList.contains('loading-overlay__spinner')) {
+                    element.classList.remove('hidden');
+                } else {
+                    element.classList.add('hidden');
+                }
             }
 
-            const auctionDetail = await response.json();
-            const formData = new FormData(this.subscribeFormRef);
             const data = await this.mutate({
-                url: `/apps/appuction/auction-details/${auctionDetail.data.id}/subscriptions`,
+                url: `/apps/appuction/auction-details/${detailId}/subscriptions`,
                 data: formData,
                 fetchConfig: {
-                    method: "POST",
+                    method: method,
                     headers: {
                         Accept: "application/json",
                     },
@@ -115,11 +121,33 @@ class BidderComponent extends HTMLElement {
             if (!data.error) {
                 this.showMessage({
                     type: "success",
-                    message: `Subscribed successfully ✓`,
+                    message: `${data.data.message} ✓`,
                     removeMessage: true,
                 });
-            }
 
+                this.#provider.mutate({ isSubscribed: !isSubscribed });
+            }
+        }
+    }
+
+    onSubscriptionChange() {
+        const { isSubscribed } = this.#provider.getState();
+        const button = this.subscribeFormRef.querySelector("button");
+
+        if (isSubscribed == this.#isSubscribed) return false;
+        this.#isSubscribed = isSubscribed;
+        const currentText = button.getAttribute("aria-label");
+        const labelAlternative = button.dataset.labelAlternative;
+
+        button.classList.toggle("button--success");
+        button.classList.toggle("button--tertiary");
+        button.setAttribute("aria-label", labelAlternative);
+        button.children[1].textContent = labelAlternative;
+        button.dataset.labelAlternative = currentText;
+
+        for (let index = 0; index < button.children.length; index++) {
+            const element = button.children[index];
+            element.classList.toggle('hidden');
         }
     }
 
@@ -142,23 +170,24 @@ class BidderComponent extends HTMLElement {
     }
 
     validateForm() {
-        const { min } = this.#provider.getState();
+        let { min, priceLabel, currentBid } = this.#provider.getState();
         const errors = {};
         const amount = Number(this.formRef["amount"].value);
-        const nextBid = this.#provider.nextBid(min);
+
+        if (priceLabel == "Min price: ") {
+            min = currentBid;
+        }
 
         if (!this.formRef['amount']) {
             errors["amount"] = "Amount field is required";
         } else if (this.formRef['amount'].value == "") {
             errors["amount"] = "Bid can't be blank submitted";
-        } else if (amount < min && this.priceLabel == 'min price') {
-            errors["amount"] = `Your bid should be equal or greater than the ${this.priceLabel}`;
         } else if (!this.formRef["product_id"]) {
             errors["product"] = "Product field is required";
         } else if (!this.formRef["auction_id"]) {
             errors["auction"] = "Auction field is required";
-        } else if (amount < nextBid) {
-            errors["amount"] = `Next bid should be ${this.#provider.formatCurrency(nextBid)} or higher`;
+        } else if (amount < min) {
+            errors["amount"] = `Next bid should be ${this.#provider.formatCurrency(min)} or higher`;
         }
 
         this.handlerErrors(errors);
@@ -200,7 +229,8 @@ class BidderComponent extends HTMLElement {
     }
 
     update() {
-        this.main();
+        this.onAuctionEnded();
+        this.onSubscriptionChange();
     }
 }
 
