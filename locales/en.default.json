@@ -464,7 +464,10 @@
       "auction": {
         "min_price": "Min price: ",
         "current_bid": "Current bid: ",
-        "notify": "Get notified"
+        "notification": {
+            "subscribe": "Get notified",
+            "unsubscribe": "Unsubscribe"
+        }
       }
     },
     "header": {
