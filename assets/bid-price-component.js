@@ -15,7 +15,7 @@ class BidPriceComponent extends HTMLElement {
     }
 
     main() {
-        if (this.priceLabelRef.textContent !== "Min price") {
+        if (this.priceLabelRef.textContent !== "Min price: ") {
             this.createNextMinBidUI();
         }
 
@@ -24,11 +24,10 @@ class BidPriceComponent extends HTMLElement {
 
     onBidCreated() {
         const { amount } = this.#provider.getState();
+        if (amount > 0) this.priceRef.innerHTML = this.#provider.formatCurrency(Number(amount));
 
-        this.priceRef.innerHTML = this.#provider.formatCurrency(Number(amount));
-
-        if (this.priceLabelRef.textContent === "Min price") {
-            this.priceLabelRef.textContent = "Current bid:";
+        if (this.priceLabelRef.textContent === "Min price: " && amount > 0) {
+            this.priceLabelRef.textContent = "Current bid: ";
         }
     }
 
@@ -37,7 +36,7 @@ class BidPriceComponent extends HTMLElement {
         const nextMinBidRef = this.querySelector("[data-next-min-bid]");
 
         if (auctionEnded) {
-            this.priceLabelRef.textContent = 'Final bid:';
+            this.priceLabelRef.textContent = 'Final bid';
             nextMinBidRef.remove();
         }
     }
@@ -45,22 +44,18 @@ class BidPriceComponent extends HTMLElement {
     createNextMinBidUI() {
         const { min, amount } = this.#provider.getState();
         let nextMinBidRef = this.querySelector("[data-next-min-bid]");
-        let nextBid;
         let needsTobeAppended = false;
 
         if (!nextMinBidRef) {
-            nextBid = this.#provider.nextBid(min);
             nextMinBidRef = document.createElement("div");
             needsTobeAppended = true;
-        } else {
-            nextBid = this.#provider.nextBid(amount);
         }
 
-        nextMinBidRef.dataset.nextMinBid = `${nextBid}`;
+        nextMinBidRef.dataset.nextMinBid = `${min}`;
         nextMinBidRef.innerHTML = `
-            <span class="h5">Next min bid</span>
+            <span class="h5">Next min bid:</span>
             <span class="price-item price-item--regular">
-                ${this.#provider.formatCurrency(nextBid)}
+                ${this.#provider.formatCurrency(min)}
             </span>
         `;
 
@@ -68,8 +63,8 @@ class BidPriceComponent extends HTMLElement {
     }
 
     update() {
-        this.main();
         this.onBidCreated();
+        this.main();
     }
 }
 
