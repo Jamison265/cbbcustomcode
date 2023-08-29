@@ -7,11 +7,13 @@ class AuctionProvider extends HTMLElement {
         timezone: null,
         active: null,
         isCustomerLogged: null,
+        currentBid: null,
         min: null,
         priceLabel: "",
         auctionId: null,
+        detailId: null,
         amount: 0,
-        subscribed: null,
+        isSubscribed: null,
         channel: null,
         auctionEnded: false,
     };
@@ -22,15 +24,22 @@ class AuctionProvider extends HTMLElement {
 
     connectedCallback() {
         const data = this.#getData();
+        data.currentBid = data.min;
+        data.min = this.nextBid(data.min);
         this.#state = data;
         document.addEventListener("bid:created", this.onBidCreated.bind(this));
     }
 
     onBidCreated(evt) {
         const { product_id, amount } = evt.detail.bid;
+        const currentAmount = Number(amount);
 
         if (this.#state.productId !== Number(product_id)) return false;
-        this.mutate({ amount: Number(amount) });
+        this.mutate({
+            amount: currentAmount,
+            min: this.nextBid(currentAmount),
+            currentBid: currentAmount,
+        });
     }
 
     #getData() {
