@@ -42,6 +42,13 @@
     min-height: calc(3rem + var(--buttons-border-width) * 2);
 }
 
+.button--success {
+    background-color: var(--color-message-success);
+    color: var(--gradient-base-background-2);
+    --color-button: var(--color-message-success);
+    --color-button-text: var(--color-foreground);
+}
+
 .announcement-bar__message {
     letter-spacing: 0.15rem;
 }
