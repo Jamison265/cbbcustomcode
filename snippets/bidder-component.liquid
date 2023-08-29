@@ -1,4 +1,13 @@
 <auction-provider>
+  {% liquid
+    assign isSubscribed = false
+
+    for id in customer.metafields.auction.data.value.subscribed
+      if id == product.id
+        assign isSubscribed = true
+      endif
+    endfor
+  %}
   <script type="application/json">
     {
       "startDate": "{{ product.metafields.auction.data.value.start }}",
@@ -10,8 +19,9 @@
       "min": {% if product.metafields.auction.data.value.current_bid != blank %}{{ product.metafields.auction.data.value.current_bid }}{% else %}{{ product.metafields.auction.data.value.min_price }}{% endif %},
       "priceLabel": "{% if product.metafields.auction.data.value.current_bid != blank %}{{ 'child.products.auction.current_bid' | t }}{% else %}{{ 'child.products.auction.min_price' | t }}{% endif %}",
       "auctionId": {{ product.metafields.auction.data.value.auction_id }},
+      "detailId": {% if product.metafields.auction.data.value.detail_id %} {{ product.metafields.auction.data.value.detail_id }} {% else %}null{% endif %},
       "amount": 0,
-      "subscribed": null,
+      "isSubscribed": {{ isSubscribed }},
       "channel": null
     }
   </script>
@@ -50,16 +60,44 @@
       </div>
       <div class="field u-mt-1">
       <button {% unless product.metafields.auction.data.value.is_active %}disabled {% endunless %} type="submit" class="button button--secondary button--full-width">
-          {{- 'child.products.product.place_bid' | t -}}
+          <span>{{- 'child.products.product.place_bid' | t -}}</span>
+          <div class="loading-overlay__spinner hidden">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              class="spinner"
+              viewBox="0 0 66 66"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+            </svg>
+          </div>
         </button>
       </div>
     </form>
     <form data-action="subscribe">
       <input type="hidden" name="channel" value="sms and email" />
       <div class="u-mt-1">
-        <button aria-label="{{- 'child.products.auction.notify' | t -}}" {% unless product.metafields.auction.data.value.is_active %}disabled {% endunless %} type="submit" class="button button--tertiary button--full-width">
+        <button {% if isSubscribed %}aria-label="{{- 'child.products.auction.notification.unsubscribe' | t -}}" data-label-alternative="{{- 'child.products.auction.notification.subscribe' | t -}}"{% else %}aria-label="{{- 'child.products.auction.notification.subscribe' | t -}}" data-label-alternative="{{- 'child.products.auction.notification.unsubscribe' | t -}}"{% endif %} {% unless product.metafields.auction.data.value.is_active %}disabled {% endunless %} type="submit" class="button button--full-width {% if isSubscribed %} button--success {% else %}button--tertiary{% endif %}">
           {% render 'icon-bell' %}
-          <span aria-hidden="true" class="u-ml-small small-hide">{{- 'child.products.auction.notify' | t -}}</span>
+          <span aria-hidden="true" class="u-ml-small small-hide">
+            {% if isSubscribed %}
+              {{- 'child.products.auction.notification.unsubscribe' | t -}}
+            {% else %}
+              {{- 'child.products.auction.notification.subscribe' | t -}}
+            {% endif %}
+          </span>
+          <div class="loading-overlay__spinner hidden">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              class="spinner"
+              viewBox="0 0 66 66"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+            </svg>
+          </div>
         </button>
       </div>
     </form>
