@@ -5,12 +5,12 @@
       {{ product.metafields.auction.data.value.current_bid | times: 100.00 | money }}
     </span>
   {% elsif product.metafields.auction.data.value.current_bid == blank %}
-    <span data-price-label class="h5">Min price</span>
+    <span data-price-label class="h5">{{ 'child.products.auction.min_price' | t }}</span>
     <span class="price-item price-item--regular">
       {{ product.metafields.auction.data.value.min_price | times: 100.00 | money }}
     </span>
   {% else %}
-    <span data-price-label class="h5">Current bid</span>
+    <span data-price-label class="h5">{{ 'child.products.auction.current_bid' | t }}</span>
     <span class="price-item price-item--regular">
       {{ product.metafields.auction.data.value.current_bid | times: 100.00 | money }}
     </span>

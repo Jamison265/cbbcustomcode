@@ -1,20 +1,20 @@
 class CountdownComponent extends HTMLElement {
+    #provider;
     constructor() {
         super();
     }
 
     connectedCallback() {
+        this.#provider = this.parentElement;
         this.settings();
         this.main();
     }
 
     settings() {
-        this.productId = this.dataset.productId;
-        this.startDate = this.dataset.start;
-        this.endDate = this.dataset.end;
+        const { startDate, endDate } = this.#provider.getState();
         this.timezone = this.dataset.timezone;
-        this.startTime = new Date(this.startDate);
-        this.endTime = new Date(this.endDate);
+        this.startTime = new Date(startDate);
+        this.endTime = new Date(endDate);
         this.daysRef = this.querySelector('.countdown__days');
         this.hoursRef = this.querySelector('.countdown__hours');
         this.minutesRef = this.querySelector('.countdown__minutes');
@@ -28,9 +28,10 @@ class CountdownComponent extends HTMLElement {
     }
 
     countdown() {
+        const { timezone, productId } = this.#provider.getState();
         const endTime = Date.parse(this.endTime) / 1000;
         let now = new Date(new Date().toLocaleString("en-US", {
-            timeZone: this.timezone,
+            timeZone: timezone,
         }));
         now = Date.parse(now) / 1000;
 
@@ -38,13 +39,7 @@ class CountdownComponent extends HTMLElement {
             this.innerHTML = '<span style="color: var(--color-message-success)" class="caption-large">Auction has finished</span>';
             clearInterval(this.countdownInterval);
 
-            document.dispatchEvent(
-                new CustomEvent("auction:ended", {
-                    detail: {
-                        productId: this.productId,
-                    },
-                })
-            );
+            this.#provider.mutate({ auctionEnded: true });
         }
 
         let timeleft = endTime - now;

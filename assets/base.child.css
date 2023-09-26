@@ -31,11 +31,22 @@
     color: var(--gradient-base-background-2);
 }
 
+.button--tertiary {
+    font-size: 1.5rem;
+}
+
 .button--small {
     padding: 0 1rem;
     font-size: 1.4rem;
     min-width: calc(9rem + var(--buttons-border-width) * 2);
     min-height: calc(3rem + var(--buttons-border-width) * 2);
+}
+
+.button--success {
+    background-color: var(--color-message-success);
+    color: var(--gradient-base-background-2);
+    --color-button: var(--color-message-success);
+    --color-button-text: var(--color-foreground);
 }
 
 .announcement-bar__message {
@@ -163,6 +174,10 @@
 
 .u-ml-1 {
     margin-left: 1rem;
+}
+
+.u-ml-small {
+    margin-left: 0.4rem;
 }
 
 .u-pb-0 {

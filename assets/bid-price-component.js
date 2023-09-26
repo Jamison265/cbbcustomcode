@@ -1,84 +1,70 @@
 class BidPriceComponent extends HTMLElement {
+    #provider;
     constructor() {
         super();
     }
 
     connectedCallback() {
         //Setters
-        this.minPrice = Number(this.dataset.minPrice);
+        const parent = this.closest(".card__content") || this.closest(".product__info-container");
+        this.#provider = parent.querySelector("auction-provider");
+        this.#provider.addObserver(this);
         this.priceLabelRef = this.querySelector("[data-price-label]");
         this.priceRef = this.querySelector(".price-item");
-        this.productId = this.dataset.productId;
+        this.main();
+    }
 
-        document.addEventListener("bid:created", this.onBidCreated.bind(this));
-        document.addEventListener("auction:ended", this.onAuctionEnded.bind(this));
-
-        if (this.priceLabelRef.textContent !== "Min price") {
+    main() {
+        if (this.priceLabelRef.textContent !== "Min price: ") {
             this.createNextMinBidUI();
+        }
+
+        this.onAuctionEnded();
+    }
+
+    onBidCreated() {
+        const { amount } = this.#provider.getState();
+        if (amount > 0) this.priceRef.innerHTML = this.#provider.formatCurrency(Number(amount));
+
+        if (this.priceLabelRef.textContent === "Min price: " && amount > 0) {
+            this.priceLabelRef.textContent = "Current bid: ";
         }
     }
 
-    formatCurrency(amount) {
-        const dollarUS = Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-        });
-
-        return dollarUS.format(amount);
-    }
-
-    onBidCreated(evt) {
-        const { product_id: productId, amount } = evt.detail.bid;
+    onAuctionEnded() {
+        const { auctionEnded } = this.#provider.getState();
         const nextMinBidRef = this.querySelector("[data-next-min-bid]");
 
-        if (this.productId !== productId) return false;
-
-        this.priceRef.innerHTML = this.formatCurrency(Number(amount));
-
-        if (this.priceLabelRef.textContent === "Min price") {
-            this.priceLabelRef.textContent = "Current bid:";
+        if (auctionEnded) {
+            this.priceLabelRef.textContent = 'Final bid';
+            nextMinBidRef.remove();
         }
-
-        if (nextMinBidRef) {
-            const nextBid = this.nextBid(Number(amount));
-            nextMinBidRef.dataset.nextMinBid = nextBid;
-            nextMinBidRef.querySelector(".price-item").textContent = this.formatCurrency(nextBid);
-        } else {
-            this.createNextMinBidUI();
-        }
-    }
-
-    onAuctionEnded(evt) {
-        const productId = evt.detail.productId;
-
-        if (this.productId == productId) this.priceLabelRef.textContent = 'Final bid:';
-    }
-
-    nextBid(amount) {
-        const ranges = [ 50, 99, 199, 499, 999, 1999, 4999, 9999, 19999, 49999, 99999, 199999, 499999, 999999, 1999999, 9999999, 10000000];
-        const increments = [1, 2, 5, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000, 12500, 25000, 50000, 100000];
-
-        const currentRange = ranges.find(range => range >= amount);
-
-        if (currentRange) {
-            const incrementIndex = ranges.indexOf(currentRange);
-            return amount + increments[incrementIndex];
-        }
-
-        return amount + 1;
     }
 
     createNextMinBidUI() {
-        const nextBid = this.nextBid(this.minPrice);
-        const div = document.createElement("div");
-        div.dataset.nextMinBid = `${nextBid}`;
-        div.innerHTML = `
-                <span class="h5">Next min bid</span>
-                <span class="price-item price-item--regular">
-                    ${this.formatCurrency(nextBid)}
-                </span>
-            `;
-        this.appendChild(div);
+        const { min, amount } = this.#provider.getState();
+        let nextMinBidRef = this.querySelector("[data-next-min-bid]");
+        let needsTobeAppended = false;
+
+        if (!nextMinBidRef) {
+            nextMinBidRef = document.createElement("div");
+            needsTobeAppended = true;
+        }
+
+        nextMinBidRef.dataset.nextMinBid = `${min}`;
+        nextMinBidRef.innerHTML = `
+            <span class="h5">Next min bid:</span>
+            <span class="price-item price-item--regular">
+                ${this.#provider.formatCurrency(min)}
+            </span>
+        `;
+
+        if (needsTobeAppended) this.appendChild(nextMinBidRef);
+    }
+
+    update() {
+        this.onBidCreated();
+        this.main();
     }
 }
 

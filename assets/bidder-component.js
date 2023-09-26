@@ -1,24 +1,38 @@
 class BidderComponent extends HTMLElement {
+    #provider;
+    #isSubscribed;
 
     constructor() {
         super();
-        this.formRef = this.querySelector('form');
-        this.buttonRef = this.querySelector('button');
+        this.url = "/apps/appuction/bid";
+    }
+
+    connectedCallback() {
+        this.#provider = this.parentElement;
+        this.#provider.addObserver(this);
+        this.settings();
+        this.formRef.addEventListener("submit", this.onSubmitHandler.bind(this));
+        this.subscribeFormRef.addEventListener("submit", this.onSubscribe.bind(this));
+        this.main();
+    }
+
+    settings() {
+        const { productId, priceLabel, isCustomerLogged, isSubscribed } = this.#provider.getState();
+        this.#isSubscribed = isSubscribed;
+        this.formRef = this.querySelector('form[data-action="bid"]');
+        this.subscribeFormRef = this.querySelector('form[data-action="subscribe"]');
+        this.buttonRef = this.querySelector("button");
         this.modalLoginTemplate = this.querySelector(".modalLoginTemplate");
         this.global = {
             modal: document.getElementById("PopupModal-global"),
         };
-        this.productId = this.dataset.productId;
-        this.url = "/apps/appuction/bid";
-        this.min = Number(this.dataset.min);
-        this.priceLabel = this.dataset.priceLabel.split(':')[0].toLocaleLowerCase();
-        this.isCustomerLogged = this.dataset.loggedIn.toLocaleLowerCase() == 'true' ? true : false;
+        this.productId = productId;
+        this.priceLabel = priceLabel;
+        this.isCustomerLogged = isCustomerLogged;
     }
 
-    connectedCallback() {
-        this.formRef.addEventListener("submit", this.onSubmitHandler.bind(this));
-        document.addEventListener('auction:ended', this.onAuctionEnded.bind(this));
-        document.addEventListener('bid:created', this.onBidCreated.bind(this));
+    main() {
+        this.onAuctionEnded();
     }
 
     async onSubmitHandler(evt) {
@@ -67,6 +81,76 @@ class BidderComponent extends HTMLElement {
         }
     }
 
+    async onSubscribe(evt) {
+        evt.preventDefault();
+        const { isSubscribed, detailId } = this.#provider.getState();
+        const button = this.subscribeFormRef.querySelector('button');
+
+        if (!this.isCustomerLogged) {
+            const template = this.modalLoginTemplate.cloneNode(true);
+            const modalContent = this.global.modal.querySelector(".modal-video__content-info");
+            modalContent.innerHTML = template.innerHTML;
+            const firstParagraph = modalContent.querySelector('.rte p');
+            firstParagraph.innerHTML = 'Hey! Before subscribing to get notifications about this product, please <a href="/account/login">login</a> into your account.';
+            this.global.modal.show(button);
+        } else {
+            const formData = new FormData(this.subscribeFormRef);
+            const method = isSubscribed ? 'DELETE' : 'POST';
+
+            for (let index = 0; index < button.children.length; index++) {
+                const element = button.children[index];
+
+                if (element.classList.contains('loading-overlay__spinner')) {
+                    element.classList.remove('hidden');
+                } else {
+                    element.classList.add('hidden');
+                }
+            }
+
+            const data = await this.mutate({
+                url: `/apps/appuction/auction-details/${detailId}/subscriptions`,
+                data: formData,
+                fetchConfig: {
+                    method: method,
+                    headers: {
+                        Accept: "application/json",
+                    },
+                },
+            });
+
+            if (!data.error) {
+                this.showMessage({
+                    type: "success",
+                    message: `${data.data.message} ✓`,
+                    removeMessage: true,
+                });
+
+                this.#provider.mutate({ isSubscribed: !isSubscribed });
+            }
+        }
+    }
+
+    onSubscriptionChange() {
+        const { isSubscribed } = this.#provider.getState();
+        const button = this.subscribeFormRef.querySelector("button");
+
+        if (isSubscribed == this.#isSubscribed) return false;
+        this.#isSubscribed = isSubscribed;
+        const currentText = button.getAttribute("aria-label");
+        const labelAlternative = button.dataset.labelAlternative;
+
+        button.classList.toggle("button--success");
+        button.classList.toggle("button--tertiary");
+        button.setAttribute("aria-label", labelAlternative);
+        button.children[1].textContent = labelAlternative;
+        button.dataset.labelAlternative = currentText;
+
+        for (let index = 0; index < button.children.length; index++) {
+            const element = button.children[index];
+            element.classList.toggle('hidden');
+        }
+    }
+
     async mutate({ url, data, fetchConfig }) {
         const response = await fetch(url, { ...fetchConfig, body: data });
         const formattedData = await response.json();
@@ -86,22 +170,24 @@ class BidderComponent extends HTMLElement {
     }
 
     validateForm() {
+        let { min, priceLabel, currentBid } = this.#provider.getState();
         const errors = {};
         const amount = Number(this.formRef["amount"].value);
-        const nextBid = this.nextBid(this.min);
+
+        if (priceLabel == "Min price: ") {
+            min = currentBid;
+        }
 
         if (!this.formRef['amount']) {
             errors["amount"] = "Amount field is required";
         } else if (this.formRef['amount'].value == "") {
             errors["amount"] = "Bid can't be blank submitted";
-        } else if (amount < this.min && this.priceLabel == 'min price') {
-            errors["amount"] = `Your bid should be equal or greater than the ${this.priceLabel}`;
         } else if (!this.formRef["product_id"]) {
             errors["product"] = "Product field is required";
         } else if (!this.formRef["auction_id"]) {
             errors["auction"] = "Auction field is required";
-        } else if (amount < nextBid) {
-            errors["amount"] = `Next bid should be ${this.formatCurrency(nextBid)} or higher`;
+        } else if (amount < min) {
+            errors["amount"] = `Next bid should be ${this.#provider.formatCurrency(min)} or higher`;
         }
 
         this.handlerErrors(errors);
@@ -126,54 +212,25 @@ class BidderComponent extends HTMLElement {
         if (removeMessage) setTimeout(() => span.remove(), 5000);
     }
 
-    onAuctionEnded(evt) {
-        const productId = evt.detail.productId;
+    onAuctionEnded() {
+        const { auctionEnded } = this.#provider.getState()
 
-        if (productId == this.formRef['product_id'].value) {
+        if (auctionEnded) {
             const elements = this.formRef.elements;
+            const notifyBtn = this.subscribeFormRef.querySelector("button");
 
             for (let index = 0; index < elements.length; index++) {
                 const element = elements[index];
                 element.disabled = true;
             }
+
+            notifyBtn.disabled = true;
         }
     }
 
-    onBidCreated(evt) {
-        const { product_id: productId, amount } = evt.detail.bid;
-
-        if (this.productId !== productId) return false;
-
-        this.min = Number(amount);
-    }
-
-    nextBid(amount) {
-        const ranges = [
-            50, 99, 199, 499, 999, 1999, 4999, 9999, 19999, 49999, 99999,
-            199999, 499999, 999999, 1999999, 9999999, 10000000,
-        ];
-        const increments = [
-            1, 2, 5, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000, 12500,
-            25000, 50000, 100000,
-        ];
-
-        const currentRange = ranges.find((range) => range >= amount);
-
-        if (currentRange) {
-            const incrementIndex = ranges.indexOf(currentRange);
-            return amount + increments[incrementIndex];
-        }
-
-        return amount + 1;
-    }
-
-    formatCurrency(amount) {
-        const dollarUS = Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-        });
-
-        return dollarUS.format(amount);
+    update() {
+        this.onAuctionEnded();
+        this.onSubscriptionChange();
     }
 }
 
