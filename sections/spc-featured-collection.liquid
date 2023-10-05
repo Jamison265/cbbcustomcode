@@ -87,7 +87,7 @@
           assign active_index = section.settings.columns_desktop | divided_by: 2.0 | ceil
         -%}
         
-        {%- for i in (1..products_count) limit: limit -%}
+        {%- for i in (0..products_count) limit: limit -%}
           {% assign current_ref = shop.metafields.auction.topBiddest.value[forloop.index] %}
           {% assign product = all_products[current_ref] %}
           <li
