@@ -79,7 +79,7 @@
     "d2543e03-de3f-44ac-9b18-349e4b4e3117": {
       "type": "spc-featured-collection",
       "settings": {
-        "title": "CURRENT HIGH BIDS(no auction)",
+        "title": "CURRENT HIGH BIDS",
         "heading_size": "h2",
         "description": "",
         "description_style": "body",
