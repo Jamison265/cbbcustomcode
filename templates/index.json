@@ -98,8 +98,36 @@
         "padding_bottom": 36
       }
     },
+    "155d302f-28c8-4eb1-9df4-c501db6c5bcf": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "{{ section.settings.collection.title }} Auction",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": true,
+        "description_style": "body",
+        "collection": "ben-and-jerrys-comics",
+        "products_to_show": 25,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "background-2",
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "featured-collection-0": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "Buy it now",
         "heading_size": "h1",
@@ -127,6 +155,7 @@
     },
     "featured-collection-1": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "BLOW OUT DEALS!!",
         "heading_size": "h1",
@@ -470,6 +499,7 @@
     "30a3a7aa-f45d-4e61-b497-979ba929ed24",
     "rich-text",
     "d2543e03-de3f-44ac-9b18-349e4b4e3117",
+    "155d302f-28c8-4eb1-9df4-c501db6c5bcf",
     "featured-collection-0",
     "featured-collection-1",
     "multicolumn-0",
