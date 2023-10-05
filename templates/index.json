@@ -104,7 +104,7 @@
         "title": "{{ section.settings.collection.title }} Auction",
         "heading_size": "h1",
         "description": "",
-        "show_description": true,
+        "show_description": false,
         "description_style": "body",
         "collection": "ben-and-jerrys-comics",
         "products_to_show": 25,
