@@ -107,7 +107,7 @@
         "show_description": false,
         "description_style": "body",
         "collection": "ben-and-jerrys-comics",
-        "products_to_show": 25,
+        "products_to_show": 50,
         "columns_desktop": 4,
         "full_width": false,
         "show_view_all": true,
