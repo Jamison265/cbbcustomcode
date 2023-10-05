@@ -5,6 +5,7 @@
       "blocks": {
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-0": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "heading": "FREE SHIPPING ON ALL ORDERS!!",
             "heading_size": "h1"
@@ -13,7 +14,7 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-1": {
           "type": "text",
           "settings": {
-            "text": "<p>BUY IT NOws are live and ready to go! Please browse with the search bar or by age of comic. welcome!<\/p>",
+            "text": "<p>FEATURING THE BEN & JERRY COLLECTION auction! Bid now!<\/p>",
             "text_style": "h2"
           }
         },
