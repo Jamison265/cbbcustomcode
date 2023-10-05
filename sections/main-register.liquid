@@ -114,32 +114,32 @@
       <input
         type="tel"
         pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-        name="customer[phone]"
-        id="RegisterForm-phone"
-        {% if form.phone %}
-          value="{{ form.phone }}"
+        name="customer[number]"
+        id="RegisterForm-PhoneNumber"
+        {% if form.number %}
+          value="{{ form.number }}"
         {% endif %}
         spellcheck="false"
         autocapitalize="off"
         autocomplete="tel"
         aria-required="true"
-        {% if form.errors contains 'phone' %}
+        {% if form.errors contains 'number' %}
           aria-invalid="true"
-          aria-describedby="RegisterForm-phone-error"
+          aria-describedby="RegisterForm-PhoneNumber-error"
         {% endif %}
         placeholder="Phone Number"
       >
-      <label for="RegisterForm-phone">
+      <label for="RegisterForm-PhoneNumber">
         Phone Number
       </label>
     </div>
-    {%- if form.errors contains 'phone' -%}
-      <span id="RegisterForm-phone-error" class="form__message">
+    {%- if form.errors contains 'number' -%}
+      <span id="RegisterForm-PhoneNumber-error" class="form__message">
         <svg aria-hidden="true" focusable="false">
           <use href="#icon-error" />
         </svg>
-        {{ form.errors.translated_fields.phone | capitalize }}
-        {{ form.errors.messages.phone }}.
+        {{ form.errors.translated_fields.number | capitalize }}
+        {{ form.errors.messages.number }}.
       </span>
     {%- endif -%}
     <div class="field">
