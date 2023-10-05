@@ -86,7 +86,7 @@
 
           assign active_index = section.settings.columns_desktop | divided_by: 2.0 | ceil
         -%}
-          <h2>{{ shop.metafields.auction.topBiddest.value | json }} - {{ shop.metafields.auction.topBiddest.value[0] }}</h2>
+        
         {%- for i in (1..products_count) limit: limit -%}
           {% assign current_ref = shop.metafields.auction.topBiddest.value[forloop.index] %}
           {% assign product = collections['all'].products | where: 'id', current_ref | first %}
