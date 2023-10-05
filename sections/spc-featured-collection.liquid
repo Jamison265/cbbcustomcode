@@ -90,7 +90,7 @@
         {%- for i in (0..products_count) limit: limit -%}
           {% assign current_ref = shop.metafields.auction.topBiddest.value[forloop.index0] %}
           {% assign product = all_products[current_ref] %}
-          <h2>{{ product.title }}</h2>
+          
           <li
             id="Slide-{{ section.id }}-{{ forloop.index }}"
             class="grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide {% if forloop.index == active_index %}slider__slide--active{% endif %}{% endif %}"
