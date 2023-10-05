@@ -112,37 +112,6 @@
     {%- endif -%}
     <div class="field">
       <input
-        type="tel"
-        name="customer[phone_number]"
-        id="RegisterForm-PhoneNumber"
-        {% if form.phone_number %}
-          value="{{ form.phone_number }}"
-        {% endif %}
-        spellcheck="false"
-        autocapitalize="off"
-        autocomplete="tel"
-        aria-required="true"
-        {% if form.errors contains 'phone_number' %}
-          aria-invalid="true"
-          aria-describedby="RegisterForm-PhoneNumber-error"
-        {% endif %}
-        placeholder="Phone Number"
-      >
-      <label for="RegisterForm-PhoneNumber">
-        Phone Number
-      </label>
-    </div>
-    {%- if form.errors contains 'phone_number' -%}
-      <span id="RegisterForm-PhoneNumber-error" class="form__message">
-        <svg aria-hidden="true" focusable="false">
-          <use href="#icon-error" />
-        </svg>
-        {{ form.errors.translated_fields.phone_number | capitalize }}
-        {{ form.errors.messages.phone_number }}.
-      </span>
-    {%- endif -%}
-    <div class="field">
-      <input
         type="password"
         name="customer[password]"
         id="RegisterForm-password"
