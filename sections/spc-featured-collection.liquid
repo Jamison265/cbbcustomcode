@@ -88,7 +88,7 @@
         -%}
         
         {%- for i in (0..products_count) limit: limit -%}
-          {% assign current_ref = shop.metafields.auction.topBiddest.value[forloop.index] %}
+          {% assign current_ref = shop.metafields.auction.topBiddest.value[forloop.index0] %}
           {% assign product = all_products[current_ref] %}
           <h2>{{ product.title }}</h2>
           <li
