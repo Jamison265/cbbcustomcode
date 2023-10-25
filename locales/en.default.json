@@ -465,8 +465,8 @@
         "min_price": "Min price: ",
         "current_bid": "Current bid: ",
         "notification": {
-            "subscribe": "Get notified",
-            "unsubscribe": "Unsubscribe"
+          "subscribe": "Watch",
+          "unsubscribe": "Unsubscribe"
         }
       }
     },
@@ -478,7 +478,7 @@
       }
     },
     "event-registration": {
-        "details_heading": "Event Details"
+      "details_heading": "Event Details"
     }
   },
   "shopify": {
