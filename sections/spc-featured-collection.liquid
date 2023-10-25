@@ -86,10 +86,11 @@
 
           assign active_index = section.settings.columns_desktop | divided_by: 2.0 | ceil
         -%}
-
-        {%- for i in (1..products_count) limit: limit -%}
-          {% assign current_ref = shop.metafields.auction.topBiddest.value[forloop.index0] | times: 1 %}
-          {% assign product = collections['all'].products | where: 'id', current_ref | first %}
+        
+        {%- for i in (0..products_count) limit: limit -%}
+          {% assign current_ref = shop.metafields.auction.topBiddest.value[forloop.index0] %}
+          {% assign product = all_products[current_ref] %}
+          
           <li
             id="Slide-{{ section.id }}-{{ forloop.index }}"
             class="grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide {% if forloop.index == active_index %}slider__slide--active{% endif %}{% endif %}"
