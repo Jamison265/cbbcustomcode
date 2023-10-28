@@ -3263,6 +3263,16 @@
             "label": "Event Topic"
           }
         }
+      },
+      "consign-form": {
+        "name": "Consign Form"
+      },
+      "main-page": {
+        "settings": {
+          "page_width": {
+            "label": "Page width narrow"
+          }
+        }
       }
     }
   }
