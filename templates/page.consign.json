@@ -45,6 +45,34 @@
         "padding_bottom": 28
       }
     },
+    "16985295626bc8b058": {
+      "type": "apps",
+      "blocks": {
+        "ff8cc43c-ed4a-4cb2-85b4-0f7836944729": {
+          "type": "shopify:\/\/apps\/forms\/blocks\/inline\/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "41436",
+            "text_color": "#202020",
+            "button_background_color": "#202020",
+            "button_label_color": "#FFFFFF",
+            "links_color": "#1878B9",
+            "errors_color": "#E02229",
+            "text_alignment": "center",
+            "form_alignment": "flex-start",
+            "padding_top": 16,
+            "padding_bottom": 16,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        }
+      },
+      "block_order": [
+        "ff8cc43c-ed4a-4cb2-85b4-0f7836944729"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
     "newsletter": {
       "type": "newsletter",
       "blocks": {
@@ -84,6 +112,7 @@
     "a72d0b0e-e432-4578-be5f-d80250ae8738",
     "1698505322d8617bfa",
     "main",
+    "16985295626bc8b058",
     "newsletter"
   ]
 }
