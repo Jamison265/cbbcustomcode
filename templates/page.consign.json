@@ -45,6 +45,15 @@
         "padding_bottom": 8
       }
     },
+    "36cac9e2-b5d7-4c2c-80e3-e0973ba7375b": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"page-width\">\n<h2>Consign with us!<\/h2>\n<\/div>",
+        "color_scheme": "background-2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "16985295626bc8b058": {
       "type": "apps",
       "blocks": {
@@ -112,6 +121,7 @@
     "a72d0b0e-e432-4578-be5f-d80250ae8738",
     "1698505322d8617bfa",
     "main",
+    "36cac9e2-b5d7-4c2c-80e3-e0973ba7375b",
     "16985295626bc8b058",
     "newsletter"
   ]
