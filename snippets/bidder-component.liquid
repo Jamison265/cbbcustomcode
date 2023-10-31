@@ -80,7 +80,7 @@
       <div class="u-mt-1">
         <button {% if isSubscribed %}aria-label="{{- 'child.products.auction.notification.unsubscribe' | t -}}" data-label-alternative="{{- 'child.products.auction.notification.subscribe' | t -}}"{% else %}aria-label="{{- 'child.products.auction.notification.subscribe' | t -}}" data-label-alternative="{{- 'child.products.auction.notification.unsubscribe' | t -}}"{% endif %} {% unless product.metafields.auction.data.value.is_active %}disabled {% endunless %} type="submit" class="button button--full-width {% if isSubscribed %} button--success {% else %}button--tertiary{% endif %}">
           {% render 'icon-bell' %}
-          <span aria-hidden="true" class="u-ml-small small-hide">
+          <span aria-hidden="true" class="u-ml-small">
             {% if isSubscribed %}
               {{- 'child.products.auction.notification.unsubscribe' | t -}}
             {% else %}
