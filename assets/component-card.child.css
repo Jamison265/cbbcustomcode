@@ -49,3 +49,13 @@
     background-color: hsl(200, 20%, 95%);
   }
 }
+
+.card .card__content {
+  min-height: 0;
+  min-width: 0;
+}
+
+.card--card .quick-add {
+  overflow: hidden;
+  min-width: 0;
+}
