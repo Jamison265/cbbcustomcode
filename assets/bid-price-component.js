@@ -46,6 +46,12 @@ class BidPriceComponent extends HTMLElement {
         let nextMinBidRef = this.querySelector("[data-next-min-bid]");
         let needsTobeAppended = false;
 
+        if (min == null) {
+            setTimeout(() => {
+                this.createNextMinBidUI();
+            }, 1000);
+        }
+
         if (!nextMinBidRef) {
             nextMinBidRef = document.createElement("div");
             needsTobeAppended = true;

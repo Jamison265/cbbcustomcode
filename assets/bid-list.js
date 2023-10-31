@@ -1,3 +1,24 @@
+const getSubscriptionsProductsIds = async () => {
+    let data = [];
+
+    try {
+        const response = await fetch('/apps/appuction/subscriptions', {
+            method: 'GET',
+            headers: new Headers({
+                "ngrok-skip-browser-warning": "69420",
+                Accept: "application/json"
+            }),
+        });
+
+        data = await response.json();
+    } catch (error) {
+        data = error;
+    }
+
+    return data;
+}
+
+
 const getBids = async () => {
     let data = [];
 
@@ -187,6 +208,38 @@ const onDomLoaded = () => {
     getBids().then((data) => {
         model.addObserver(view);
         model.setBids(data);
+    });
+
+    getSubscriptionsProductsIds().then((response) => {
+        const data = response.data;
+        const handles = data.map((item) => item.handle);
+        
+        // write promises to be executed in Promise.all
+        const promises = handles.map((handle) => fetch(`/products/${handle}?section_id=template-product-card`));
+
+        Promise.all(promises)
+            .then(response => Promise.all(response.map(res => res.text())))
+            .then((data) => {
+                const wrapper = document.getElementById("productsToWatch");
+                wrapper.innerHTML = '<div class="page-width"><h2>Watch list</h2></div>';
+                const gridContainer = document.getElementById("ProductGridContainer").cloneNode(true);
+                const grid = gridContainer.querySelector("#product-grid");
+                grid.innerHTML = '';
+                grid.innerHTML = `${data.map((item) => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(item, "text/html");
+                    const template = doc.querySelector(".card-wrapper");
+
+                    if (!template) return;
+
+                    return `<li class="grid__item">${template.outerHTML}</li>`;
+                }).join('')}`;
+                wrapper.appendChild(gridContainer);
+
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     });
 
     document.addEventListener("bid:created", (evt) => model.updateBid(evt.detail.bid.data));
