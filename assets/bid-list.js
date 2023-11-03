@@ -212,6 +212,7 @@ const onDomLoaded = () => {
 
     getSubscriptionsProductsIds().then((response) => {
         const data = response.data;
+        if (!data?.length) return;
         const handles = data.map((item) => item.handle);
         
         // write promises to be executed in Promise.all
