@@ -22,7 +22,7 @@ class BidderComponent extends HTMLElement {
         this.formRef = this.querySelector('form[data-action="bid"]');
         this.subscribeFormRef = this.querySelector('form[data-action="subscribe"]');
         this.buttonRef = this.querySelector("button");
-        this.modalLoginTemplate = this.querySelector(".modalLoginTemplate");
+        this.modalTemplate = this.querySelector(".modalTemplate");
         this.global = {
             modal: document.getElementById("PopupModal-global"),
         };
@@ -37,47 +37,83 @@ class BidderComponent extends HTMLElement {
 
     async onSubmitHandler(evt) {
         evt.preventDefault();
+        let template = this.modalTemplate.cloneNode(true);
+        const modalContent = this.global.modal.querySelector(
+            ".modal-video__content-info"
+        );
 
         if (!this.isCustomerLogged) {
-            const template = this.modalLoginTemplate.cloneNode(true);
-            const modalContent = this.global.modal.querySelector(
-                ".modal-video__content-info"
-            );
             modalContent.innerHTML = template.innerHTML;
             this.global.modal.show(this.buttonRef);
         } else {
             const hasErrors = this.validateForm();
             if (hasErrors) return false;
 
-            const { url } = this;
-            const formData = new FormData(this.formRef);
-            const data = await this.mutate({
-                url,
-                data: formData,
-                fetchConfig: {
-                    method: "POST",
-                    headers: {
-                        Accept: "application/json",
+            const closeBtn = document.getElementById("ModalClose-global");
+
+            modalContent.classList.add("modal-video__content-info--confirm-bid");
+
+            modalContent.innerHTML = template.innerHTML;
+            const spanAmount = modalContent.querySelector("#bidAmount");
+            spanAmount.innerHTML = "$" + this.formRef["amount"].value;
+            this.global.modal.show(this.buttonRef);
+
+            const confirmBtn = modalContent.querySelector("#confirmBid");
+            const cancelBtn = modalContent.querySelector("#cancelBid");
+            const _this = this;
+
+            confirmBtn.addEventListener("click", async function(evt) {
+                const { url } = _this;
+                const formData = new FormData(_this.formRef);
+                const spinner = confirmBtn.querySelector('.loading-overlay__spinner');
+                const span = confirmBtn.querySelector('span');
+
+                span.classList.add('hidden');
+                spinner.classList.remove('hidden');
+                confirmBtn.disabled = true;
+
+                const data = await _this.mutate({
+                    url,
+                    data: formData,
+                    fetchConfig: {
+                        method: "POST",
+                        headers: {
+                            Accept: "application/json",
+                        },
                     },
-                },
+                });
+    
+                if (data.errors) {
+                    _this.handlerErrors(data.errors);
+                } else if (data.message) {
+                    _this.showMessage({
+                        type: "info",
+                        message: data.message,
+                        removeMessage: true,
+                    });
+                    _this.formRef['amount'].value = data.bid.amount;
+                } else {
+                    _this.showMessage({
+                        type: "success",
+                        message: "Bid successfully ✓",
+                        removeMessage: true,
+                    });
+                }
+
+                spinner.classList.add('hidden');
+                span.classList.remove('hidden');
+                confirmBtn.disabled = false;
+
+                closeBtn.click();
             });
 
-            if (data.errors) {
-                this.handlerErrors(data.errors);
-            } else if (data.message) {
-                this.showMessage({
-                    type: "info",
-                    message: data.message,
-                    removeMessage: true,
-                });
-                this.formRef['amount'].value = data.bid.amount;
-            } else {
-                this.showMessage({
-                    type: "success",
-                    message: "Bid successfully ✓",
-                    removeMessage: true,
-                });
-            }
+            cancelBtn.addEventListener("click", function(evt) {
+                evt.preventDefault();
+                closeBtn.click();
+
+                modalContent.classList.remove("modal-video__content-info--confirm-bid");
+            });
+
         }
     }
 

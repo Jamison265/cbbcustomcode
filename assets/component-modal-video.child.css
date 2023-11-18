@@ -13,14 +13,28 @@
     overflow: auto;
 }
 
+.modal-video--global .modal-video__content-info--confirm-bid {
+    width: 90%;
+    padding: 3.2rem 1.6rem;
+    min-height: auto;
+}
+
 @media screen and (min-width: 750px) {
     .modal-video--global .modal-video__content-info {
         width: calc(80% - 9.6rem);
+    }
+
+    .modal-video--global .modal-video__content-info--confirm-bid {
+        width: calc(60% - 9.6rem);
     }
 }
 
 @media screen and (min-width: 990px) {
     .modal-video--global .modal-video__content-info {
         width: calc(80% - 8.6rem);
+    }
+
+    .modal-video--global .modal-video__content-info--confirm-bid {
+        width: calc(50% - 8.6rem);
     }
 }
