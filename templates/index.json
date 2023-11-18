@@ -14,7 +14,7 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-1": {
           "type": "text",
           "settings": {
-            "text": "<p>FEATURING THE B & JERRY COLLECTION! Bid now! Auction ends NOV 5th! Free shipping on all won items!<\/p>",
+            "text": "<p>**UPDATE ALL INVOICES NOW WORK**  We appreciate everyone that participated in our auction.  <\/p>",
             "text_style": "h2"
           }
         },
@@ -78,6 +78,7 @@
     },
     "d2543e03-de3f-44ac-9b18-349e4b4e3117": {
       "type": "spc-featured-collection",
+      "disabled": true,
       "settings": {
         "title": "CURRENT HIGH BIDS",
         "heading_size": "h2",
@@ -100,6 +101,7 @@
     },
     "155d302f-28c8-4eb1-9df4-c501db6c5bcf": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "B & Jerry Auction",
         "heading_size": "h1",
@@ -127,7 +129,6 @@
     },
     "featured-collection-0": {
       "type": "featured-collection",
-      "disabled": true,
       "settings": {
         "title": "Buy it now",
         "heading_size": "h1",
@@ -155,7 +156,6 @@
     },
     "featured-collection-1": {
       "type": "featured-collection",
-      "disabled": true,
       "settings": {
         "title": "BLOW OUT DEALS!!",
         "heading_size": "h1",
