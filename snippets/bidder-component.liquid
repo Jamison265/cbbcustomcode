@@ -2,8 +2,8 @@
   {% liquid
     assign isSubscribed = false
 
-    for id in customer.metafields.auction.data.value.subscribed
-      if id == product.id
+    for handle in customer.metafields.auction.data.value.subscribed
+      if handle == product.handle
         assign isSubscribed = true
       endif
     endfor
