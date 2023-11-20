@@ -23,35 +23,76 @@
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding">
-  <div id="productsToWatch"></div>
+  {% if customer.metafields.auction.data.value.subscribed.size > 0 %}
+    <div class="page-width">
+      <h2>Watch List</h2>
+    </div>
   
-  {% if section.settings.heading != blank %}
+    <div class="product-grid-container" id="WatchListProductGridContainer">
+      <div class="collection page-width">
+        <ul
+          id="watchlist-product-grid"
+          data-id="{{ section.id }}"
+          class="
+            grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
+            grid--{{ section.settings.columns_desktop }}-col-desktop
+          "
+        >
+          {% for handle in customer.metafields.auction.data.value.subscribed %}
+            {% assign product = all_products[handle] %}
+            
+            {% if product != blank %}
+              <li class="grid__item">
+                {% render 'card-product',
+                  card_product: product,
+                  show_secondary_image: true,
+                  show_quick_add: true,
+                  section_id: section.id
+                %}
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+  
+  {% if section.settings.heading != blank and customer.metafields.auction.bids.value.bid_list.size > 0 %}
     <div class="page-width">
       <h2>{{ section.settings.heading }}</h2>
     </div>
-  {% endif %}
-  <div class="product-grid-container" id="ProductGridContainer">
-    <div class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}">
-      <div class="loading-overlay gradient"></div>
-      <ul
-        id="product-grid"
-        data-id="{{ section.id }}"
-        class="
-          grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
-          grid--{{ section.settings.columns_desktop }}-col-desktop
-        "
-      >
-        {%- for i in (0..3) -%}
-          <li class="grid__item">
-            {% render 'skeleton-card' %}
-          </li>
-        {%- endfor -%}
-      </ul>
+
+    <div class="product-grid-container" id="BidListProductGridContainer">
+      <div class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}">
+        <div class="loading-overlay gradient"></div>
+        <ul
+          id="bidlist-product-grid"
+          data-id="{{ section.id }}"
+          class="
+            grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
+            grid--{{ section.settings.columns_desktop }}-col-desktop
+          "
+        >
+          {% for handle in customer.metafields.auction.bids.value.bid_list %}
+            {% assign product = all_products[handle] %}
+            
+            {% if product != blank %}
+              <li class="grid__item">
+                {% render 'card-product',
+                  card_product: product,
+                  show_secondary_image: true,
+                  show_quick_add: true,
+                  section_id: section.id
+                %}
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
     </div>
-  </div>
+  {% endif %}
 </div>
 
-<script src="{{ 'bid-list.js' | asset_url }}" defer="defer"></script>
 {% schema %}
 {
   "name": "Bids list",
