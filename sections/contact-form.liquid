@@ -112,7 +112,7 @@
               type="text"
               id="ContactForm-BestTimeToContact"
               name="contact[time_to_contact]"
-              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              value="{% if form.time_to_contact %}{{ form.time_to_contact }}{% endif %}"
               placeholder="Best time to contact"
             >
             <label class="field__label" for="ContactForm-name">Best time to contact</label>
