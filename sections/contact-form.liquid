@@ -91,33 +91,80 @@
           {%- endif -%}
         </div>
       </div>
-      <div class="field">
-        <input
-          type="tel"
-          id="ContactForm-phone"
-          class="field__input"
-          autocomplete="tel"
-          name="contact[{{ 'templates.contact.form.phone' | t }}]"
-          pattern="[0-9\-]*"
-          value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-          placeholder="{{ 'templates.contact.form.phone' | t }}"
-        >
-        <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
-      </div>
-      <div class="field">
-        <textarea
-          rows="10"
-          id="ContactForm-body"
-          class="text-area field__input"
-          name="contact[{{ 'templates.contact.form.comment' | t }}]"
-          placeholder="{{ 'templates.contact.form.comment' | t }}"
-        >
-          {{- form.body -}}
-        </textarea>
-        <label class="form__label field__label" for="ContactForm-body">
-          {{- 'templates.contact.form.comment' | t -}}
-        </label>
-      </div>
+      {% if template.suffix == 'auction-rules' %}
+        <div class="contact__fields">
+          <div class="field">
+            <input
+              type="tel"
+              id="ContactForm-phone"
+              class="field__input"
+              autocomplete="tel"
+              name="contact[{{ 'templates.contact.form.phone' | t }}]"
+              pattern="[0-9\-]*"
+              value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+              placeholder="{{ 'templates.contact.form.phone' | t }}"
+            >
+            <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+          </div>
+          <div class="field">
+            <input
+              class="field__input"
+              type="text"
+              id="ContactForm-BestTimeToContact"
+              name="contact[time_to_contact]"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              placeholder="Best time to contact"
+            >
+            <label class="field__label" for="ContactForm-name">Best time to contact</label>
+          </div>
+        </div>
+      {% else %}
+        <div class="field">
+          <input
+            type="tel"
+            id="ContactForm-phone"
+            class="field__input"
+            autocomplete="tel"
+            name="contact[{{ 'templates.contact.form.phone' | t }}]"
+            pattern="[0-9\-]*"
+            value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+            placeholder="{{ 'templates.contact.form.phone' | t }}"
+          >
+          <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+        </div>
+      {% endif %}
+
+      {% if template.suffix == 'auction-rules' %}
+        <div class="field">
+          <textarea
+            rows="10"
+            id="ContactForm-body"
+            class="text-area field__input"
+            name="contact[{{ 'templates.contact.form.comment' | t }}]"
+            placeholder="Question"
+          >
+            {{- form.body -}}
+          </textarea>
+          <label class="form__label field__label" for="ContactForm-body">
+            Question for support
+          </label>
+        </div>
+      {% else %}
+        <div class="field">
+          <textarea
+            rows="10"
+            id="ContactForm-body"
+            class="text-area field__input"
+            name="contact[{{ 'templates.contact.form.comment' | t }}]"
+            placeholder="{{ 'templates.contact.form.comment' | t }}"
+          >
+            {{- form.body -}}
+          </textarea>
+          <label class="form__label field__label" for="ContactForm-body">
+            {{- 'templates.contact.form.comment' | t -}}
+          </label>
+        </div>
+      {% endif %}
       <div class="contact__button">
         <button type="submit" class="button">
           {{ 'templates.contact.form.send' | t }}
