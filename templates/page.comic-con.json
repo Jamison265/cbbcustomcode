@@ -1,0 +1,122 @@
+{
+  "sections": {
+    "23bd9b2f-56d5-493d-8b4b-6ead38662900": {
+      "type": "image-banner",
+      "blocks": {
+        "template--21571916759337__23bd9b2f-56d5-493d-8b4b-6ead38662900-heading-1": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Image banner",
+            "heading_size": "h1"
+          }
+        },
+        "template--21571916759337__23bd9b2f-56d5-493d-8b4b-6ead38662900-text-1": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text_style": "body"
+          }
+        },
+        "template--21571916759337__23bd9b2f-56d5-493d-8b4b-6ead38662900-buttons-1": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "Button label",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Button label",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--21571916759337__23bd9b2f-56d5-493d-8b4b-6ead38662900-heading-1",
+        "template--21571916759337__23bd9b2f-56d5-493d-8b4b-6ead38662900-text-1",
+        "template--21571916759337__23bd9b2f-56d5-493d-8b4b-6ead38662900-buttons-1"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 989px) {#Banner-template--21571916759337__23bd9b2f-56d5-493d-8b4b-6ead38662900 {margin-top: 16px; }}"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/comic-con.webp",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": false
+      }
+    },
+    "main": {
+      "type": "main-page-comic-con",
+      "settings": {
+        "page_width": false,
+        "padding_top": 0,
+        "padding_bottom": 28
+      }
+    },
+    "form": {
+        "type": "register-lacc",
+        "settings": {
+            "padding_top": 36,
+            "padding_bottom": 36
+        }
+    },
+    "0df29f59-59c9-4bf4-94a8-685dbf3dfce9": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"page-width\">\n<p>If you would like to watch the live drawing follow us on instagram.<\/p>\n<p>SCAN & GO WITHOUT PURCHASE = 1 ENTRY <br\/>\nPURCHASE & GO= 3 Entries \n<\/p>\n<div class=\"grid grid--3-col\">\n<div class=\"grid__item\">\n<img width=\"100%\" loading=\"lazy\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0721\/5955\/9977\/files\/cbbauctions_com_1.png?v=1701401399\"\/>\n<\/div>\n\n<div class=\"grid__item\">\n<img width=\"100%\" loading=\"lazy\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0721\/5955\/9977\/files\/My_Instagram_QR_Code.png?v=1701401418\"\/>\n<\/div>\n\n<\/div>\n<\/div>",
+        "color_scheme": "background-2",
+        "padding_top": 0,
+        "padding_bottom": 16
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Subscribe to our emails",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Be the first to know about new collections and exclusive offers.<\/p>"
+          }
+        },
+        "email-form": {
+          "type": "email_form",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "paragraph",
+        "email-form"
+      ],
+      "settings": {
+        "color_scheme": "accent-2",
+        "full_width": true,
+        "padding_top": 60,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "23bd9b2f-56d5-493d-8b4b-6ead38662900",
+    "main",
+    "form",
+    "0df29f59-59c9-4bf4-94a8-685dbf3dfce9",
+    "newsletter"
+  ]
+}
