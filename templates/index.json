@@ -78,6 +78,7 @@
     },
     "d2543e03-de3f-44ac-9b18-349e4b4e3117": {
       "type": "spc-featured-collection",
+      "disabled": true,
       "settings": {
         "title": "CURRENT HIGH BIDS",
         "heading_size": "h2",
@@ -100,6 +101,7 @@
     },
     "155d302f-28c8-4eb1-9df4-c501db6c5bcf": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "GOLDEN AGE AUCTION!",
         "heading_size": "h1",
