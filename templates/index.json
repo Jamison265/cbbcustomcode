@@ -14,7 +14,7 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-1": {
           "type": "text",
           "settings": {
-            "text": "<p>GOLDEN AGE TURKEY AUCTION WELCOME AND HAPPY BIDDING! HOLIDAY FREE SHIPPING ON ALL ITEMS WON!<\/p>",
+            "text": "<p>New AUCTION WIll be laucnhing on dec.17th!<\/p>",
             "text_style": "h2"
           }
         },
@@ -78,6 +78,7 @@
     },
     "d2543e03-de3f-44ac-9b18-349e4b4e3117": {
       "type": "spc-featured-collection",
+      "disabled": true,
       "settings": {
         "title": "CURRENT HIGH BIDS",
         "heading_size": "h2",
@@ -100,6 +101,7 @@
     },
     "155d302f-28c8-4eb1-9df4-c501db6c5bcf": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "GOLDEN AGE AUCTION!",
         "heading_size": "h1",
