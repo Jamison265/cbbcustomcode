@@ -81,34 +81,31 @@
       >
         {%- liquid
           assign products_count = shop.metafields.auction.topBiddest.value.size
-          assign limit = 10
+          assign limit = 5
           assign columns_number = section.settings.columns_desktop
-          assign products_to_display = products_count
 
           assign active_index = section.settings.columns_desktop | divided_by: 2.0 | ceil
         -%}
-
+        
         {%- for i in (0..products_count) limit: limit -%}
           {% assign current_ref = shop.metafields.auction.topBiddest.value[forloop.index0] %}
           {% assign product = all_products[current_ref] %}
-
-          {% if product != blank %}
-            <li
-              id="Slide-{{ section.id }}-{{ forloop.index }}"
-              class="grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide {% if forloop.index == active_index %}slider__slide--active{% endif %}{% endif %}"
-            >
-              {% render 'card-product',
-                card_product: product,
-                media_aspect_ratio: section.settings.image_ratio,
-                show_secondary_image: section.settings.show_secondary_image,
-                show_vendor: section.settings.show_vendor,
-                show_rating: section.settings.show_rating,
-                show_quick_add: section.settings.enable_quick_add,
-                section_id: section.id,
-                modifier: 'secondary'
-              %}
-            </li>
-          {% endif %}
+          
+          <li
+            id="Slide-{{ section.id }}-{{ forloop.index }}"
+            class="grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide {% if forloop.index == active_index %}slider__slide--active{% endif %}{% endif %}"
+          >
+            {% render 'card-product',
+              card_product: product,
+              media_aspect_ratio: section.settings.image_ratio,
+              show_secondary_image: section.settings.show_secondary_image,
+              show_vendor: section.settings.show_vendor,
+              show_rating: section.settings.show_rating,
+              show_quick_add: section.settings.enable_quick_add,
+              section_id: section.id,
+              modifier: 'secondary'
+            %}
+          </li>
         {%- else -%}
           {%- for i in (1..4) -%}
             <li class="grid__item">
