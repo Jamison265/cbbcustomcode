@@ -8,10 +8,6 @@
     .slider--with-state {
         justify-content: flex-start;
     }
-
-    .slider--with-state .slider__slide:not(.slider__slide--active) > div {
-        transform: scale(0.85);
-    }
 }
 
 slider-component.slider-component--with-state {
