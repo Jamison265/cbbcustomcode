@@ -14,7 +14,7 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-1": {
           "type": "text",
           "settings": {
-            "text": "<p>New AUCTION WIll be laucnhing on dec.17th!<\/p>",
+            "text": "<p>New AUCTION Will be launching on dec.20th!<\/p>",
             "text_style": "h2"
           }
         },
@@ -32,6 +32,7 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-2"
       ],
       "settings": {
+        "image": "shopify:\/\/shop_images\/auction.jpg",
         "height": "medium",
         "desktop_image_width": "medium",
         "layout": "text_first",
@@ -77,6 +78,7 @@
     },
     "d2543e03-de3f-44ac-9b18-349e4b4e3117": {
       "type": "spc-featured-collection",
+      "disabled": true,
       "settings": {
         "title": "CURRENT HIGH BIDS",
         "heading_size": "h2",
@@ -99,13 +101,14 @@
     },
     "155d302f-28c8-4eb1-9df4-c501db6c5bcf": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "GOLDEN AGE AUCTION!",
         "heading_size": "h1",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "barbie",
+        "collection": "turkey",
         "products_to_show": 50,
         "columns_desktop": 4,
         "full_width": false,
