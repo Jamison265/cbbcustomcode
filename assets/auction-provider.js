@@ -62,8 +62,10 @@ class AuctionProvider extends HTMLElement {
         );
 
         if (minutes <= 1 && seconds <= 30) {
-            // add a minute and a half to the clock (90 seconds)
-            const newEndDate = new Date(endDate);
+            //reset the clock to 1 minute and 30 seconds
+            const newEndDate = new Date(new Date().toLocaleString("en-US", {
+                timeZone: timezone,
+            }));
             newEndDate.setSeconds(newEndDate.getSeconds() + 90);
             this.mutate({ endDate: newEndDate });
         }
