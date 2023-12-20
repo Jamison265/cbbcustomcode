@@ -82,7 +82,7 @@ class BidderComponent extends HTMLElement {
                         },
                     },
                 });
-    
+
                 if (data.errors) {
                     _this.handlerErrors(data.errors);
                 } else if (data.message) {
@@ -98,6 +98,29 @@ class BidderComponent extends HTMLElement {
                         message: "Bid successfully ✓",
                         removeMessage: true,
                     });
+
+                    //check if clock is a minute and a half or less
+                    const { endDate } = _this.#provider.getState();
+                    const endTime = Date.parse(endDate) / 1000;
+                    let now = new Date(new Date().toLocaleString("en-US", {
+                        timeZone: _this.timezone,
+                    }));
+
+                    now = Date.parse(now) / 1000;
+                    let timeleft = endTime - now;
+                    let days = Math.floor(timeleft / 86400);
+                    let hours = Math.floor((timeleft - days * 86400) / 3600);
+                    let minutes = Math.floor((timeleft - days * 86400 - hours * 3600) / 60);
+                    let seconds = Math.floor(
+                        timeleft - days * 86400 - hours * 3600 - minutes * 60
+                    );
+
+                    if (minutes <= 1 && seconds <= 30) {
+                        // add a minute and a half to the clock (90 seconds)
+                        const newEndDate = new Date(endDate);
+                        newEndDate.setSeconds(newEndDate.getSeconds() + 90);
+                        _this.#provider.mutate({ endDate: newEndDate });
+                    }
                 }
 
                 spinner.classList.add('hidden');

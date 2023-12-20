@@ -6,6 +6,12 @@ class CountdownComponent extends HTMLElement {
 
     connectedCallback() {
         this.#provider = this.parentElement;
+        this.#provider.addObserver(this);
+        this.settings();
+        this.main();
+    }
+
+    update() {
         this.settings();
         this.main();
     }
@@ -54,10 +60,10 @@ class CountdownComponent extends HTMLElement {
         if (minutes < "10") minutes = "0" + minutes;
         if (seconds < "10") seconds = "0" + seconds;
 
-        this.daysRef.innerHTML = days == 0 ? '' : `${days} <span>Days</span>`;
-        this.hoursRef.innerHTML = hours == 0 ? '' : `${hours} <span>Hours</span>`;
-        this.minutesRef.innerHTML = `${minutes} <span>Minutes</span>`;
-        this.secondsRef.innerHTML = `${seconds} <span>Seconds</span>`;
+        if (this.daysRef) this.daysRef.innerHTML = days == 0 ? '' : `${days} <span>Days</span>`;
+        if (this.hoursRef) this.hoursRef.innerHTML = hours == 0 ? '' : `${hours} <span>Hours</span>`;
+        if (this.minutesRef) this.minutesRef.innerHTML = `${minutes} <span>Minutes</span>`;
+        if (this.secondsRef) this.secondsRef.innerHTML = `${seconds} <span>Seconds</span>`;
     }
 }
 
