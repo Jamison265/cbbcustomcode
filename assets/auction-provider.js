@@ -40,6 +40,33 @@ class AuctionProvider extends HTMLElement {
             min: this.nextBid(currentAmount),
             currentBid: currentAmount,
         });
+
+        this.updateClock();
+    }
+
+    updateClock() {
+        //check if clock is a minute and a half or less
+        const { endDate, timezone } = this.getState();
+        const endTime = Date.parse(endDate) / 1000;
+        let now = new Date(new Date().toLocaleString("en-US", {
+            timeZone: timezone,
+        }));
+
+        now = Date.parse(now) / 1000;
+        let timeleft = endTime - now;
+        let days = Math.floor(timeleft / 86400);
+        let hours = Math.floor((timeleft - days * 86400) / 3600);
+        let minutes = Math.floor((timeleft - days * 86400 - hours * 3600) / 60);
+        let seconds = Math.floor(
+            timeleft - days * 86400 - hours * 3600 - minutes * 60
+        );
+
+        if (minutes <= 1 && seconds <= 30) {
+            // add a minute and a half to the clock (90 seconds)
+            const newEndDate = new Date(endDate);
+            newEndDate.setSeconds(newEndDate.getSeconds() + 90);
+            this.mutate({ endDate: newEndDate });
+        }
     }
 
     #getData() {
