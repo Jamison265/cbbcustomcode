@@ -35,6 +35,29 @@ class BidderComponent extends HTMLElement {
         this.onAuctionEnded();
     }
 
+    onBidCreated(evt) {
+        const { product_id, amount } = evt.detail.bid;
+
+        if (this.productId !== Number(product_id)) return false;
+        this.toggleFormLoading();
+    }
+
+    toggleFormLoading() {
+        const button = this.buttonRef;
+        const spinner = button.querySelector('.loading-overlay__spinner');
+        const span = button.querySelector('span');
+
+        if (!button.disabled) {
+            span.classList.add('hidden');
+            spinner.classList.remove('hidden');
+            button.disabled = true;
+        } else {
+            spinner.classList.add('hidden');
+            span.classList.remove('hidden');
+            button.disabled = false;
+        }
+    }
+
     async onSubmitHandler(evt) {
         evt.preventDefault();
         let template = this.modalTemplate.cloneNode(true);
@@ -72,6 +95,13 @@ class BidderComponent extends HTMLElement {
                 spinner.classList.remove('hidden');
                 confirmBtn.disabled = true;
 
+                spinner.classList.add('hidden');
+                span.classList.remove('hidden');
+                confirmBtn.disabled = false;
+
+                _this.toggleFormLoading();
+                closeBtn.click();
+
                 const data = await _this.mutate({
                     url,
                     data: formData,
@@ -82,6 +112,8 @@ class BidderComponent extends HTMLElement {
                         },
                     },
                 });
+
+                _this.toggleFormLoading();
 
                 if (data.errors) {
                     _this.handlerErrors(data.errors);
@@ -99,12 +131,6 @@ class BidderComponent extends HTMLElement {
                         removeMessage: true,
                     });
                 }
-
-                spinner.classList.add('hidden');
-                span.classList.remove('hidden');
-                confirmBtn.disabled = false;
-
-                closeBtn.click();
             });
 
             cancelBtn.addEventListener("click", function(evt) {
