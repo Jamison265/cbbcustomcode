@@ -14,7 +14,7 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-1": {
           "type": "text",
           "settings": {
-            "text": "<h2> <strong>Attention Snipers<\/strong>, due to server issues make sure to place bids outside of 10 seconds. <\/h2>",
+            "text": "<h2> <strong>Attention Snipers<\/strong>, due to server delay issues make sure to place bids with more than 10 seconds remaining, otherwise it may not process.<\/h2>",
             "text_style": "h2"
           }
         },
