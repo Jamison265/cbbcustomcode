@@ -61,6 +61,8 @@ class AuctionProvider extends HTMLElement {
             timeleft - days * 86400 - hours * 3600 - minutes * 60
         );
 
+        if (hours > 0) return false;
+
         if ((minutes === 1 && seconds <= 30) || minutes === 0) {
             //reset the clock to 1 minute and 30 seconds
             const newEndDate = new Date(new Date().toLocaleString("en-US", {
