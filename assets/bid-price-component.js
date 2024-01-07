@@ -32,10 +32,10 @@ class BidPriceComponent extends HTMLElement {
     }
 
     onAuctionEnded() {
-        const { auctionEnded } = this.#provider.getState();
+        const { auctionEnded, active } = this.#provider.getState();
         const nextMinBidRef = this.querySelector("[data-next-min-bid]");
 
-        if (auctionEnded) {
+        if (auctionEnded || !active) {
             this.priceLabelRef.textContent = 'Final bid';
             nextMinBidRef.remove();
         }
@@ -68,9 +68,39 @@ class BidPriceComponent extends HTMLElement {
         if (needsTobeAppended) this.appendChild(nextMinBidRef);
     }
 
+    createCustomerBidUI() {
+        const { customerBid, min, auctionEnded, active } = this.#provider.getState();
+        let customerBidRef = this.querySelector("[data-customer-bid]");
+        let needsTobeAppended = false;
+
+        if (customerBid) {
+            if (!customerBidRef) {
+                customerBidRef = document.createElement("div");
+                needsTobeAppended = true;
+            }
+
+            customerBidRef.dataset.customerBid = `${customerBid}`;
+            customerBidRef.innerHTML = `
+                <span class="h5">Your bid:</span>
+                <span class="price-item price-item--regular">
+                    ${this.#provider.formatCurrency(customerBid)}
+                </span>
+            `;
+
+            if (needsTobeAppended) this.appendChild(customerBidRef);
+
+            if (this.#provider.nextBid(customerBid) == min) {
+                customerBidRef.style = "color: var(--color-message-success);"
+            } else {
+                customerBidRef.style = "";
+            }
+        }
+    }
+
     update() {
         this.onBidCreated();
         this.main();
+        this.createCustomerBidUI();
     }
 }
 

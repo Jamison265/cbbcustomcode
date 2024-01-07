@@ -7,6 +7,7 @@ class AuctionProvider extends HTMLElement {
         timezone: null,
         active: null,
         isCustomerLogged: null,
+        customerBid: null,
         currentBid: null,
         min: null,
         priceLabel: "",
@@ -28,6 +29,30 @@ class AuctionProvider extends HTMLElement {
         data.min = this.nextBid(data.min);
         this.#state = data;
         document.addEventListener("bid:created", this.onBidCreated.bind(this));
+
+        if (this.#state.isCustomerLogged) {
+
+            // intersection observer to fetch the customer bid
+            const options = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.1,
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        this.#getCustomerBid().then((response) => {
+                            if (response.data) {
+                                this.mutate({ customerBid: response.data.maxBid });
+                            }
+                        });
+                    }
+                });
+            }, options);
+
+            observer.observe(this);
+        }
     }
 
     onBidCreated(evt) {
@@ -39,6 +64,7 @@ class AuctionProvider extends HTMLElement {
             amount: currentAmount,
             min: this.nextBid(currentAmount),
             currentBid: currentAmount,
+            customerBid: currentAmount,
         });
 
         this.updateClock();
@@ -61,6 +87,8 @@ class AuctionProvider extends HTMLElement {
             timeleft - days * 86400 - hours * 3600 - minutes * 60
         );
 
+        if (hours > 0) return false;
+
         if ((minutes === 1 && seconds <= 30) || minutes === 0) {
             //reset the clock to 1 minute and 30 seconds
             const newEndDate = new Date(new Date().toLocaleString("en-US", {
@@ -69,6 +97,29 @@ class AuctionProvider extends HTMLElement {
             newEndDate.setSeconds(newEndDate.getSeconds() + 90);
             this.mutate({ endDate: newEndDate });
         }
+    }
+
+    async #getCustomerBid() {
+        const { auctionId, detailId } = this.getState();
+        const URL = `/apps/appuction/auction-details/${detailId}/bid`;
+
+        try {
+            const response = await fetch(URL, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+
     }
 
     #getData() {
