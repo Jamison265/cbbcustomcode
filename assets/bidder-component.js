@@ -4,7 +4,7 @@ class BidderComponent extends HTMLElement {
 
     constructor() {
         super();
-        this.url = "/apps/appuction/bid";
+        this.url = "/tools/appuction/bid";
     }
 
     connectedCallback() {
@@ -170,7 +170,7 @@ class BidderComponent extends HTMLElement {
             }
 
             const data = await this.mutate({
-                url: `/apps/appuction/auction-details/${detailId}/subscriptions`,
+                url: `/tools/appuction/auction-details/${detailId}/subscriptions`,
                 data: formData,
                 fetchConfig: {
                     method: method,
