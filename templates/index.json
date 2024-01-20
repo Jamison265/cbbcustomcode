@@ -32,7 +32,6 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-2"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/auction.jpg",
         "height": "medium",
         "desktop_image_width": "medium",
         "layout": "text_first",
@@ -106,7 +105,7 @@
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "santa",
+        "collection": "boys-toys",
         "products_to_show": 50,
         "columns_desktop": 4,
         "full_width": false,
