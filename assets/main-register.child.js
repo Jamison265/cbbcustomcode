@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(this);
 
         try {
-            const response = await fetch('/apps/appuction/register', {
+            const response = await fetch('/tools/appuction/register', {
                 method: 'POST',
                 body: formData
             });
