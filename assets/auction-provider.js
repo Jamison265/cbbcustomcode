@@ -101,7 +101,7 @@ class AuctionProvider extends HTMLElement {
 
     async #getCustomerBid() {
         const { auctionId, detailId } = this.getState();
-        const URL = `/tools/appuction/auction-details/${detailId}/bid`;
+        const URL = `/apps/appuction/auction-details/${detailId}/bid`;
 
         try {
             const response = await fetch(URL, {
