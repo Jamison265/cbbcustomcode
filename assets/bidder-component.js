@@ -80,6 +80,7 @@ class BidderComponent extends HTMLElement {
             const spanAmount = modalContent.querySelector("#bidAmount");
             spanAmount.innerHTML = "$" + this.formRef["amount"].value;
             this.global.modal.show(this.buttonRef);
+            this.#provider.mutate({ isModalOpen: true });
 
             const confirmBtn = modalContent.querySelector("#confirmBid");
             const cancelBtn = modalContent.querySelector("#cancelBid");
@@ -101,6 +102,7 @@ class BidderComponent extends HTMLElement {
 
                 _this.toggleFormLoading();
                 closeBtn.click();
+                _this.#provider.mutate({ isModalOpen: false });
 
                 const data = await _this.mutate({
                     url,
@@ -130,6 +132,8 @@ class BidderComponent extends HTMLElement {
                         message: "Bid successfully ✓",
                         removeMessage: true,
                     });
+
+                    _this.formRef.reset();
                 }
             });
 
@@ -138,6 +142,7 @@ class BidderComponent extends HTMLElement {
                 closeBtn.click();
 
                 modalContent.classList.remove("modal-video__content-info--confirm-bid");
+                _this.#provider.mutate({ isModalOpen: false });
             });
 
         }
@@ -275,9 +280,29 @@ class BidderComponent extends HTMLElement {
     }
 
     onAuctionEnded() {
-        const { auctionEnded } = this.#provider.getState()
+        const { auctionEnded, isModalOpen } = this.#provider.getState();
 
         if (auctionEnded) {
+
+            if(isModalOpen) {
+                /**
+                * If the auction has ended, we need to update the content of the modal
+                */
+               const modalContent = this.global.modal.querySelector(
+                   ".modal-video__content-info"
+               );
+
+               modalContent.innerHTML = `
+                   <h2>Sorry, this auction has ended.</h2>
+                   <div class="rte">
+                       <p>
+                           Our auctions are only available for a limited time. Please check back soon for more auctions.
+                           <a href="/collections/all">Shop now</a>
+                       </p>
+                   </div>
+               `;
+            } // Here ends the modal update
+
             const elements = this.formRef.elements;
             const notifyBtn = this.subscribeFormRef.querySelector("button");
 
@@ -287,6 +312,7 @@ class BidderComponent extends HTMLElement {
             }
 
             notifyBtn.disabled = true;
+            this.#provider.removeObserver(this);
         }
     }
 
