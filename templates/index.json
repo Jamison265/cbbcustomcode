@@ -14,7 +14,7 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-1": {
           "type": "text",
           "settings": {
-            "text": "<h2>Holiday auction ends 1\/7\/24. Tons of great deals still! Happy bidding!<\/h2>",
+            "text": "<h2>server error sent out multiple invoices. Please view most recent email for invoices!  any issues please email info@cbbauctions.com<\/h2>",
             "text_style": "h2"
           }
         },
@@ -32,6 +32,7 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-2"
       ],
       "settings": {
+        "image": "shopify:\/\/shop_images\/auction.jpg",
         "height": "medium",
         "desktop_image_width": "medium",
         "layout": "text_first",
@@ -99,13 +100,14 @@
     },
     "155d302f-28c8-4eb1-9df4-c501db6c5bcf": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "HOLIDAY GOLD AND SILVER AGE  AUCTION!",
         "heading_size": "h1",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "dolls",
+        "collection": "santa",
         "products_to_show": 50,
         "columns_desktop": 4,
         "full_width": false,
