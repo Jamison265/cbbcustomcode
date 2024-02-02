@@ -14,6 +14,7 @@ class BidderComponent extends HTMLElement {
         this.formRef.addEventListener("submit", this.onSubmitHandler.bind(this));
         this.subscribeFormRef.addEventListener("submit", this.onSubscribe.bind(this));
         this.main();
+        document.addEventListener("bid:created", this.onBidCreated.bind(this));
     }
 
     settings() {
@@ -40,6 +41,13 @@ class BidderComponent extends HTMLElement {
 
         if (this.productId !== Number(product_id)) return false;
         this.toggleFormLoading();
+        this.showMessage({
+            type: "success",
+            message: "Bid successfully ✓",
+            removeMessage: true,
+        });
+
+        this.formRef.reset();
     }
 
     toggleFormLoading() {
@@ -115,7 +123,9 @@ class BidderComponent extends HTMLElement {
                     },
                 });
 
-                _this.toggleFormLoading();
+                if (_this.buttonRef.disabled) {
+                    _this.toggleFormLoading();
+                }
 
                 if (data.errors) {
                     _this.handlerErrors(data.errors);
@@ -126,14 +136,6 @@ class BidderComponent extends HTMLElement {
                         removeMessage: true,
                     });
                     _this.formRef['amount'].value = data.bid.amount;
-                } else {
-                    _this.showMessage({
-                        type: "success",
-                        message: "Bid successfully ✓",
-                        removeMessage: true,
-                    });
-
-                    _this.formRef.reset();
                 }
             });
 
