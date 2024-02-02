@@ -106,7 +106,7 @@
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "stuffed-toys",
+        "collection": "building-sets",
         "products_to_show": 50,
         "columns_desktop": 4,
         "full_width": false,
