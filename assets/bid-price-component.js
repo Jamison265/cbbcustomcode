@@ -79,17 +79,15 @@ class BidPriceComponent extends HTMLElement {
                 needsTobeAppended = true;
             }
 
-            if (isMine) {
-              customerBidRef.dataset.customerBid = `${customerBid}`;
-              customerBidRef.innerHTML = `
-                  <span class="h5">Your bid:</span>
-                  <span class="price-item price-item--regular">
-                      ${this.#provider.formatCurrency(customerBid)}
-                  </span>
-              `;
-  
-              if (needsTobeAppended) this.appendChild(customerBidRef);
-            }
+            customerBidRef.dataset.customerBid = `${customerBid}`;
+            customerBidRef.innerHTML = `
+                <span class="h5">Your bid:</span>
+                <span class="price-item price-item--regular">
+                    ${this.#provider.formatCurrency(customerBid)}
+                </span>
+            `;
+
+            if (needsTobeAppended) this.appendChild(customerBidRef);
 
             if (this.#provider.nextBid(customerBid) == min && isMine) {
                 customerBidRef.style = "color: var(--color-message-success);"
