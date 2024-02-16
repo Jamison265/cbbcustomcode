@@ -91,7 +91,7 @@ class BidPriceComponent extends HTMLElement {
 
             if (needsTobeAppended) this.appendChild(customerBidRef);
 
-            if (this.#provider.nextBid(customerBid) == min && isMine) {
+            if (this.#provider.nextBid(customerBid) == min) {
                 customerBidRef.style = "color: var(--color-message-success);"
             } else {
                 customerBidRef.style = "color: var(--color-message-error);";
