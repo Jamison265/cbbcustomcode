@@ -106,9 +106,7 @@ class BidPriceComponent extends HTMLElement {
         this.onBidCreated();
         this.main();
 
-        if (isMine) {
-          this.createCustomerBidUI();
-        }
+        this.createCustomerBidUI(isMine);
     }
 }
 
