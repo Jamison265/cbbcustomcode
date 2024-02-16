@@ -56,7 +56,8 @@ class AuctionProvider extends HTMLElement {
     }
 
     onBidCreated(evt) {
-        const { product_id, amount } = evt.detail.bid;
+        const { product_id, amount, customer_id } = evt.detail.bid;
+        const { customerId } = this.getState();
         const currentAmount = Number(amount);
 
         if (this.#state.productId !== Number(product_id)) return false;
@@ -65,6 +66,7 @@ class AuctionProvider extends HTMLElement {
             min: this.nextBid(currentAmount),
             currentBid: currentAmount,
             customerBid: currentAmount,
+            isMine: customerId == Number(customer_id)
         });
 
         this.updateClock();
