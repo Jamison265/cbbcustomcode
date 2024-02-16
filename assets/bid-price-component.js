@@ -69,7 +69,7 @@ class BidPriceComponent extends HTMLElement {
     }
 
     createCustomerBidUI() {
-        const { customerBid, min, auctionEnded, active, isMine } = this.#provider.getState();
+        const { customerBid, min, auctionEnded, active } = this.#provider.getState();
         let customerBidRef = this.querySelector("[data-customer-bid]");
         let needsTobeAppended = false;
 
@@ -89,7 +89,7 @@ class BidPriceComponent extends HTMLElement {
 
             if (needsTobeAppended) this.appendChild(customerBidRef);
 
-            if (this.#provider.nextBid(customerBid) == min && isMine) {
+            if (this.#provider.nextBid(customerBid) == min) {
                 customerBidRef.style = "color: var(--color-message-success);"
             } else {
                 customerBidRef.style = "color: var(--color-message-error);";
