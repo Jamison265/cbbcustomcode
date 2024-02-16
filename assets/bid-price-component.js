@@ -70,6 +70,7 @@ class BidPriceComponent extends HTMLElement {
 
     createCustomerBidUI() {
         const { customerBid, min, auctionEnded, active } = this.#provider.getState();
+      console.log(customerBid);
         let customerBidRef = this.querySelector("[data-customer-bid]");
         let needsTobeAppended = false;
 
