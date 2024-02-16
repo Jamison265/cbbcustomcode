@@ -99,6 +99,7 @@ class BidPriceComponent extends HTMLElement {
 
     update() {
         const { isMine } = this.#provider.getState();
+        console.log("is mine?", isMine);
       
         this.onBidCreated();
         this.main();
