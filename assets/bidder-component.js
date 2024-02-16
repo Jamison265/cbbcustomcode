@@ -40,7 +40,8 @@ class BidderComponent extends HTMLElement {
     onBidCreated(evt) {
         const { product_id, amount, customer_id } = evt.detail.bid;
 
-        if (this.productId !== Number(product_id) && this.customerId !== Number(customer_id)) return false;
+        if (this.productId !== Number(product_id)) return false;
+        if (this.customerId !== Number(customer_id)) return false;
       
         this.toggleFormLoading();
         this.showMessage({
