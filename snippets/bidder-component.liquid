@@ -22,7 +22,8 @@
       "detailId": {% if product.metafields.auction.data.value.detail_id %} {{ product.metafields.auction.data.value.detail_id }} {% else %}null{% endif %},
       "amount": 0,
       "isSubscribed": {{ isSubscribed }},
-      "channel": null
+      "channel": null,
+      "customer_id": {{ customer.id }}
     }
   </script>
   {% if product.metafields.auction.data.value.is_active != blank %}
