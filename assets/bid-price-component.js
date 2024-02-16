@@ -98,9 +98,14 @@ class BidPriceComponent extends HTMLElement {
     }
 
     update() {
+        const { isMine } = this.#provider.getState();
+      
         this.onBidCreated();
         this.main();
-        this.createCustomerBidUI();
+
+        if (isMine) {
+          this.createCustomerBidUI();
+        }
     }
 }
 
