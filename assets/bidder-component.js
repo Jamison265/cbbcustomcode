@@ -18,7 +18,7 @@ class BidderComponent extends HTMLElement {
     }
 
     settings() {
-        const { productId, priceLabel, isCustomerLogged, isSubscribed } = this.#provider.getState();
+        const { productId, priceLabel, isCustomerLogged, isSubscribed, customerId } = this.#provider.getState();
         this.#isSubscribed = isSubscribed;
         this.formRef = this.querySelector('form[data-action="bid"]');
         this.subscribeFormRef = this.querySelector('form[data-action="subscribe"]');
@@ -29,6 +29,7 @@ class BidderComponent extends HTMLElement {
         };
         this.productId = productId;
         this.priceLabel = priceLabel;
+        this.customerId = customerId;
         this.isCustomerLogged = isCustomerLogged;
     }
 
@@ -37,11 +38,13 @@ class BidderComponent extends HTMLElement {
     }
 
     onBidCreated(evt) {
-        const { product_id, amount } = evt.detail.bid;
+        const { product_id, amount, customer_id } = evt.detail.bid;
 
         console.log(evt.detail.bid);
 
         if (this.productId !== Number(product_id)) return false;
+        if (this.customerId !== Number(customer_id)) return false;
+      
         this.toggleFormLoading();
         this.showMessage({
             type: "success",
