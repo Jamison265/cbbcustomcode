@@ -87,6 +87,8 @@ class BidPriceComponent extends HTMLElement {
                       ${this.#provider.formatCurrency(customerBid)}
                   </span>
               `;
+            } else {
+              customerBidRef.style = "color: var(--color-message-error);";
             }
 
             if (needsTobeAppended) this.appendChild(customerBidRef);
