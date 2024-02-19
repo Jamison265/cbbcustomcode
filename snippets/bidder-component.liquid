@@ -23,7 +23,7 @@
       "amount": 0,
       "isSubscribed": {{ isSubscribed }},
       "channel": null,
-      "customerId": {{ customer.id }}
+      "customerId": {% if customer != blank %}{{ customer.id }}{% else %}null{% endif %}
     }
   </script>
   {% if product.metafields.auction.data.value.is_active != blank %}
