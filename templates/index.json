@@ -100,14 +100,13 @@
     },
     "155d302f-28c8-4eb1-9df4-c501db6c5bcf": {
       "type": "featured-collection",
-      "disabled": true,
       "settings": {
         "title": "HOLIDAY GOLD AND SILVER AGE  AUCTION!",
         "heading_size": "h1",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "santa",
+        "collection": "94",
         "products_to_show": 50,
         "columns_desktop": 4,
         "full_width": false,
