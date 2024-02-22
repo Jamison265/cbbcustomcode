@@ -42,8 +42,9 @@ class BidderComponent extends HTMLElement {
 
         if (this.productId !== Number(product_id)) return false;
         if (this.customerId !== Number(customer_id)) return false;
-      
-        this.toggleFormLoading();
+
+        if (this.buttonRef.disabled) this.toggleFormLoading();
+
         this.showMessage({
             type: "success",
             message: "Bid successfully ✓",
