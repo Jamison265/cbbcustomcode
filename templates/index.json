@@ -78,6 +78,7 @@
     },
     "d2543e03-de3f-44ac-9b18-349e4b4e3117": {
       "type": "spc-featured-collection",
+      "disabled": true,
       "settings": {
         "title": "CURRENT HIGH BIDS",
         "heading_size": "h2",
@@ -107,7 +108,7 @@
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "santa",
+        "collection": "94",
         "products_to_show": 50,
         "columns_desktop": 4,
         "full_width": false,
