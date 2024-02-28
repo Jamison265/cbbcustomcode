@@ -156,6 +156,7 @@
     },
     "featured-collection-1": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "BLOW OUT DEALS!!",
         "heading_size": "h1",
