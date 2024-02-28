@@ -78,7 +78,6 @@
     },
     "d2543e03-de3f-44ac-9b18-349e4b4e3117": {
       "type": "spc-featured-collection",
-      "disabled": true,
       "settings": {
         "title": "CURRENT HIGH BIDS",
         "heading_size": "h2",
@@ -108,7 +107,7 @@
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "94",
+        "collection": "north-east",
         "products_to_show": 50,
         "columns_desktop": 4,
         "full_width": false,
@@ -129,6 +128,7 @@
     },
     "featured-collection-0": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "Buy it now",
         "heading_size": "h1",
