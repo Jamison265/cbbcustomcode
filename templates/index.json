@@ -163,7 +163,7 @@
         "show_description": false,
         "description_style": "body",
         "collection": "north-east",
-        "products_to_show": 16,
+        "products_to_show": 30,
         "columns_desktop": 4,
         "full_width": false,
         "show_view_all": true,
