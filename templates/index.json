@@ -156,14 +156,13 @@
     },
     "featured-collection-1": {
       "type": "featured-collection",
-      "disabled": true,
       "settings": {
         "title": "BLOW OUT DEALS!!",
         "heading_size": "h1",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "fire-deals",
+        "collection": "north-east",
         "products_to_show": 16,
         "columns_desktop": 4,
         "full_width": false,
