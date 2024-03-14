@@ -14,7 +14,7 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-1": {
           "type": "text",
           "settings": {
-            "text": "<h2>ALWAYS BUYING COLLECTIONS.  MAKE SURE TO CHECK OUT ALL OF OUR COMICS!<\/h2>",
+            "text": "<h2>Our email server crashed and sent out multiple emails. Please pay one invoice and email info@cbbauctions.com if you have any issues.  Thanks! <\/h2>",
             "text_style": "h2"
           }
         },
@@ -78,7 +78,6 @@
     },
     "d2543e03-de3f-44ac-9b18-349e4b4e3117": {
       "type": "spc-featured-collection",
-      "disabled": true,
       "settings": {
         "title": "CURRENT HIGH BIDS",
         "heading_size": "h2",
@@ -108,7 +107,7 @@
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "94",
+        "collection": "north-east",
         "products_to_show": 50,
         "columns_desktop": 4,
         "full_width": false,
@@ -129,6 +128,7 @@
     },
     "featured-collection-0": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "Buy it now",
         "heading_size": "h1",
@@ -157,13 +157,13 @@
     "featured-collection-1": {
       "type": "featured-collection",
       "settings": {
-        "title": "BLOW OUT DEALS!!",
+        "title": "NORTH EAST AUCTION!",
         "heading_size": "h1",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "fire-deals",
-        "products_to_show": 16,
+        "collection": "north-east",
+        "products_to_show": 30,
         "columns_desktop": 4,
         "full_width": false,
         "show_view_all": true,
