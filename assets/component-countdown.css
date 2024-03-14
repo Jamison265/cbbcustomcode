@@ -16,9 +16,3 @@
     font-size: 1.4rem;
     font-style: italic;
 }
-
-@media screen and (max-width: 749px) {
-    .countdown > * {
-        font-size: 1.2rem;
-    }
-}
