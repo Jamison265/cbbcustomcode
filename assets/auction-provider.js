@@ -91,12 +91,12 @@ class AuctionProvider extends HTMLElement {
 
         if (hours > 0) return false;
 
-        if ((minutes === 1 && seconds <= 30) || minutes === 0) {
+        if ((minutes === 0 && seconds <= 45) || minutes === 0) {
             //reset the clock to 1 minute and 30 seconds
             const newEndDate = new Date(new Date().toLocaleString("en-US", {
                 timeZone: timezone,
             }));
-            newEndDate.setSeconds(newEndDate.getSeconds() + 90);
+            newEndDate.setSeconds(newEndDate.getSeconds() + 45);
             this.mutate({ endDate: newEndDate });
         }
     }
