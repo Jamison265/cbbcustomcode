@@ -155,6 +155,7 @@
     },
     "featured-collection-1": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "NORTH EAST AUCTION!",
         "heading_size": "h1",
