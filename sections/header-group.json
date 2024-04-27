@@ -27,7 +27,7 @@
         "color_scheme": "background-2",
         "logo_position": "top-left",
         "menu_color_scheme": "accent-2",
-        "menu": "no-auction",
+        "menu": "main-menu",
         "menu_type_desktop": "dropdown",
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": false,
