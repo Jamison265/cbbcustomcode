@@ -22,6 +22,38 @@
   }
 {%- endstyle -%}
 
+{%- capture contentForQuerystring -%}{{ content_for_header }}{%- endcapture -%}
+  {%- assign pageUrl = contentForQuerystring
+    | split: '"pageurl":"'
+    | last
+    | split: '"'
+    | first
+    | split: '.myshopify.com'
+    | last
+    | replace: '\/', '/'
+    | replace: '%20', ' '
+    | replace: '\u0026', '&'
+  -%}
+{% capture finalurl %}https://{{ pageUrl }}{% endcapture %}
+
+{%- if finalurl contains '?page=' -%}
+  {%- assign pageParam = finalurl 
+    | split: '?' 
+    | last 
+    | split: '=' 
+    | last 
+  -%}
+{%- else -%}
+  {%- assign pageParam = 1 -%}
+{%- endif -%}
+
+{%- assign limit = 10 -%}
+{%- assign loop_limit = limit | minus: 1 -%}
+{%- assign offset = pageParam | times: limit | minus: limit -%}
+
+{% assign watchlist_pages = customer.metafields.auction.data.value.subscribed | size | divided_by: 10.0 | ceil %}
+{% assign bidlist_pages = customer.metafields.auction.data.value.bid_list | size | divided_by: 10.0 | ceil %}
+
 <div class="section-{{ section.id }}-padding">
   {% if customer.metafields.auction.data.value.subscribed.size > 0 %}
     <div class="page-width">
@@ -38,7 +70,7 @@
             grid--{{ section.settings.columns_desktop }}-col-desktop
           "
         >
-          {% for handle in customer.metafields.auction.data.value.subscribed %}
+          {% for handle in customer.metafields.auction.data.value.subscribed offset: offset limit: limit %}
             {% assign product = all_products[handle] %}
             
             {% if product != blank %}
@@ -51,6 +83,8 @@
                 %}
               </li>
             {% endif %}
+
+            {% assign product = nil %}
           {% endfor %}
         </ul>
       </div>
@@ -73,7 +107,7 @@
             grid--{{ section.settings.columns_desktop }}-col-desktop
           "
         >
-          {% for handle in customer.metafields.auction.bids.value.bid_list %}
+          {% for handle in customer.metafields.auction.bids.value.bid_list offset: offset limit: limit %}
             {% assign product = all_products[handle] %}
             
             {% if product != blank %}
@@ -86,12 +120,27 @@
                 %}
               </li>
             {% endif %}
+
+            {% assign product = nil %}
           {% endfor %}
         </ul>
       </div>
     </div>
   {% endif %}
 </div>
+
+{% if customer.metafields.auction.data.value.subscribed.size >= limit or customer.metafields.auction.bids.value.bid_list >= limit  %}
+  <script defer="true" src="{{ 'watchlist-bids.js' | asset_url }}"></script>
+  {% if watchlist_pages > bidlist_pages %}
+      <script>
+        window.totalPages = {{ watchlist_pages }};
+      </script>
+  {% else %}
+    <script>
+      window.totalPages = {{ bidlist_pages }};
+    </script>
+  {% endif %}
+{% endif %}
 
 {% schema %}
 {
