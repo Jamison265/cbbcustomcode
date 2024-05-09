@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async function() {
       const content = await getSections(index);
       const html = new DOMParser().parseFromString(content, 'text/html');
       const newWatchListEl = html.getElementById('watchlist-product-grid');
-      const newBidListEl = document.getElementById('bidlist-product-grid');
+      const newBidListEl = html.getElementById('bidlist-product-grid');
       const watchChildren = newWatchListEl?.querySelectorAll("li");
       const bidChildren = newBidListEl?.querySelectorAll("li");
       
