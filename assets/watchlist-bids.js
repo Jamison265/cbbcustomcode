@@ -19,12 +19,12 @@ document.addEventListener("DOMContentLoaded", async function() {
   const bidListEl = document.getElementById('bidlist-product-grid');
 
   if (totalPages > 1) {
-    for (let index = 2; index < (totalPages + 1); index++) {
+    for (let index = 2; index <= totalPages; index++) {
       const content = await getSections(index);
       const html = new DOMParser().parseFromString(content, 'text/html');
       const newWatchListEl = html.getElementById('watchlist-product-grid');
       const newBidListEl = document.getElementById('bidlist-product-grid');
-      const watchChildren = newWatchListEl.querySelectorAll("li");
+      const watchChildren = newWatchListEl?.querySelectorAll("li");
       const bidChildren = newBidListEl?.querySelectorAll("li");
       
       addToWrapper(watchListEl, watchChildren);
