@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async function() {
       const newWatchListEl = html.getElementById('watchlist-product-grid');
       const newBidListEl = document.getElementById('bidlist-product-grid');
       const watchChildren = newWatchListEl.querySelectorAll("li");
-      const bidChildren = newBidListEl.querySelectorAll("li");
+      const bidChildren = newBidListEl?.querySelectorAll("li");
       
       addToWrapper(watchListEl, watchChildren);
       addToWrapper(bidListEl, bidChildren);
