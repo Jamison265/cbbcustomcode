@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async function() {
   const bidListEl = document.getElementById('bidlist-product-grid');
 
   if (totalPages > 1) {
-    for (let index = 2; index <= totalPages; index++) {
+    for (let index = 2; index < (totalPages + 1); index++) {
       const content = await getSections(index);
       const html = new DOMParser().parseFromString(content, 'text/html');
       const newWatchListEl = html.getElementById('watchlist-product-grid');
