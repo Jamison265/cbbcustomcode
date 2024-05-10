@@ -37,6 +37,7 @@
         "template--21571916759337__23bd9b2f-56d5-493d-8b4b-6ead38662900-text-1",
         "template--21571916759337__23bd9b2f-56d5-493d-8b4b-6ead38662900-buttons-1"
       ],
+      "disabled": true,
       "custom_css": [
         "@media screen and (max-width: 989px) {#Banner-template--21571916759337__23bd9b2f-56d5-493d-8b4b-6ead38662900 {margin-top: 16px; }}"
       ],
@@ -62,14 +63,15 @@
       }
     },
     "form": {
-        "type": "register-lacc",
-        "settings": {
-            "padding_top": 36,
-            "padding_bottom": 36
-        }
+      "type": "register-lacc",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "0df29f59-59c9-4bf4-94a8-685dbf3dfce9": {
       "type": "custom-liquid",
+      "disabled": true,
       "settings": {
         "custom_liquid": "<div class=\"page-width\">\n<p>If you would like to watch the live drawing follow us on instagram.<\/p>\n<p>SCAN & GO WITHOUT PURCHASE = 1 ENTRY <br\/>\nPURCHASE & GO= 3 Entries \n<\/p>\n<div class=\"grid grid--3-col\">\n<div class=\"grid__item\">\n<img width=\"100%\" loading=\"lazy\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0721\/5955\/9977\/files\/cbbauctions_com_1.png?v=1701401399\"\/>\n<\/div>\n\n<div class=\"grid__item\">\n<img width=\"100%\" loading=\"lazy\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0721\/5955\/9977\/files\/My_Instagram_QR_Code.png?v=1701401418\"\/>\n<\/div>\n\n<\/div>\n<\/div>",
         "color_scheme": "background-2",
