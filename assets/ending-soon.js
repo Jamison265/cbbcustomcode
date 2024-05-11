@@ -18,7 +18,7 @@ function addToWrapper(wrapper, children) {
 
 document.addEventListener("DOMContentLoaded", async function() {
     const content = await getSections();
-    const wrapper = document.getElementById('Slider-template--22516178321705__d2543e03-de3f-44ac-9b18-349e4b4e3117');
+    const wrapper = document.getElementById('Slider-template--18335070191913__d2543e03-de3f-44ac-9b18-349e4b4e3117');
     const html = new DOMParser().parseFromString(content, 'text/html');
     const children = html?.querySelectorAll("#product-grid li");
     const first10 = Array.from(children).slice(0, 10);
