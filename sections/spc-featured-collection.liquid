@@ -149,6 +149,13 @@
   </div>
 </div>
 
+{%- if section.settings.enable_ending_soon and section.settings.collection != blank -%}
+  <script defer="true" src="{{ 'ending-soon.js' | asset_url }}"></script>
+  <script>
+    window.ending_soon_url = '{{ section.settings.collection.url | sort_by: 'created-descending' }}'
+  </script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "CBB Featured Collection",
@@ -242,6 +249,21 @@
       "id": "enable_desktop_slider",
       "label": "t:sections.featured-collection.settings.enable_desktop_slider.label",
       "default": false
+    },
+    {
+      "type": "header",
+      "content": "Ending Soon"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_ending_soon",
+      "label": "t:child.sections.featured-collection.settings.enable_ending_soon.label",
+      "default": false
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.featured-collection.settings.collection.label"
     },
     {
       "type": "select",
