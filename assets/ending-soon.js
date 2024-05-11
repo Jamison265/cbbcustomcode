@@ -1,11 +1,11 @@
 async function getSections() {
     const sections = [
-        "template--22516178452777__product-grid",
+        "template--18335069962537__product-grid"
     ];
     const response = await fetch(`${window.ending_soon_url}&sections=${sections.join(",")}`);
     const content = await response.json();
 
-    return content["template--22516178452777__product-grid"];
+    return content["template--18335069962537__product-grid"];
 }
 
 function addToWrapper(wrapper, children) {
