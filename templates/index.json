@@ -14,7 +14,7 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-1": {
           "type": "text",
           "settings": {
-            "text": "<h2>Our largest auction ever has launched! Browse easily by your favorite titles on the menu. good luck to all bidders!<\/h2>",
+            "text": "<h2>New Auction launching Tuesday 5\/28!<\/h2>",
             "text_style": "h2"
           }
         },
@@ -78,6 +78,7 @@
     },
     "d2543e03-de3f-44ac-9b18-349e4b4e3117": {
       "type": "spc-featured-collection",
+      "disabled": true,
       "settings": {
         "title": "CURRENT HIGH BIDS",
         "heading_size": "h2",
@@ -102,6 +103,7 @@
     },
     "155d302f-28c8-4eb1-9df4-c501db6c5bcf": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "Featured Books",
         "heading_size": "h1",
@@ -129,6 +131,7 @@
     },
     "featured-collection-1": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "all auction books",
         "heading_size": "h1",
