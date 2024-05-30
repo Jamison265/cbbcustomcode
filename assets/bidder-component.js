@@ -240,6 +240,21 @@ class BidderComponent extends HTMLElement {
         this.#provider.mutate({ isSubscribed: true });
     }
 
+    onWatchRemoved(evt) {
+        const { productId, customerId } = evt.detail.watchItem;
+
+        if (this.productId !== Number(productId)) return false;
+        if (this.customerId !== Number(customerId)) return false;
+
+        this.showMessage({
+            type: "info",
+            message: "Subscription removed ✓",
+            removeMessage: true,
+        });
+
+        this.#provider.mutate({ isSubscribed: false });
+    }
+
     async mutate({ url, data, fetchConfig }) {
         const response = await fetch(url, { ...fetchConfig, body: data });
         const formattedData = await response.json();
