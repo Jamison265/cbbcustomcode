@@ -226,7 +226,9 @@ class BidderComponent extends HTMLElement {
     }
 
     onWatchCreated(evt) {
+        console.log("watch created");
         const { product_id, customer_id } = evt.detail.watchItem;
+        console.log(product_id, customer_id);
 
         if (this.productId !== Number(product_id)) return false;
         if (this.customerId !== Number(customer_id)) return false;
