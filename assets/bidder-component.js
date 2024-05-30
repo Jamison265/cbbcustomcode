@@ -16,6 +16,7 @@ class BidderComponent extends HTMLElement {
         this.main();
         document.addEventListener("bid:created", this.onBidCreated.bind(this));
         document.addEventListener("watch:created", this.onWatchCreated.bind(this));
+        document.addEventListener("watch:removed", this.onWatchRemoved.bind(this));
     }
 
     settings() {
