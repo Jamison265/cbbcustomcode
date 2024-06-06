@@ -5,6 +5,7 @@ window.Pusher = Pusher;
 
 window.Echo = new Echo({
     broadcaster: "pusher",
+    namespace: "App.Events.Shopify",
     key: import.meta.env.VITE_PUSHER_APP_KEY,
     wsHost: import.meta.env.VITE_PUSHER_HOST,
     wsPort: import.meta.env.VITE_PUSHER_PORT,
@@ -29,7 +30,33 @@ document.onreadystatechange = function() {
             );
         }
 
+        const onCustomerIsWatching = (e) => {
+            const { watchItem } = e;
+
+            return document.dispatchEvent(
+                new CustomEvent("watch:created", {
+                    detail: {
+                        watchItem,
+                    },
+                })
+            );
+        };
+
+        const onCustomerRemovedWatch = (e) => {
+            const { watchItem } = e;
+
+            return document.dispatchEvent(
+                new CustomEvent("watch:removed", {
+                    detail: {
+                        watchItem,
+                    },
+                })
+            );
+        }
+
         window.Echo.channel("bids").listen("BidCreated", bidCreated);
+        window.Echo.channel("watchlist").listen("CustomerIsWatching", onCustomerIsWatching);
+        window.Echo.channel("watchlist").listen("CustomerRemovedWatch", onCustomerRemovedWatch);
     }
 }
 

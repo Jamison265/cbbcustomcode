@@ -15,6 +15,8 @@ class BidderComponent extends HTMLElement {
         this.subscribeFormRef.addEventListener("submit", this.onSubscribe.bind(this));
         this.main();
         document.addEventListener("bid:created", this.onBidCreated.bind(this));
+        document.addEventListener("watch:created", this.onWatchCreated.bind(this));
+        document.addEventListener("watch:removed", this.onWatchRemoved.bind(this));
     }
 
     settings() {
@@ -193,12 +195,10 @@ class BidderComponent extends HTMLElement {
 
             if (!data.error) {
                 this.showMessage({
-                    type: "success",
-                    message: `${data.data.message} ✓`,
+                    type: "info",
+                    message: `${data.data.message}`,
                     removeMessage: true,
                 });
-
-                this.#provider.mutate({ isSubscribed: !isSubscribed });
             }
         }
     }
@@ -222,6 +222,36 @@ class BidderComponent extends HTMLElement {
             const element = button.children[index];
             element.classList.toggle('hidden');
         }
+    }
+
+    onWatchCreated(evt) {
+        const { productId, customerId } = evt.detail.watchItem;
+
+        if (this.productId !== Number(productId)) return false;
+        if (this.customerId !== Number(customerId)) return false;
+
+        this.showMessage({
+            type: "success",
+            message: "Successfully Subscribed ✓",
+            removeMessage: true,
+        });
+
+        this.#provider.mutate({ isSubscribed: true });
+    }
+
+    onWatchRemoved(evt) {
+        const { productId, customerId } = evt.detail.watchItem;
+
+        if (this.productId !== Number(productId)) return false;
+        if (this.customerId !== Number(customerId)) return false;
+
+        this.showMessage({
+            type: "info",
+            message: "Subscription removed ✓",
+            removeMessage: true,
+        });
+
+        this.#provider.mutate({ isSubscribed: false });
     }
 
     async mutate({ url, data, fetchConfig }) {
@@ -329,4 +359,3 @@ class BidderComponent extends HTMLElement {
 }
 
 customElements.define("bidder-component", BidderComponent);
-
