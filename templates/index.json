@@ -32,7 +32,6 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-2"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/507592149.jpg",
         "height": "medium",
         "desktop_image_width": "medium",
         "layout": "text_first",
@@ -87,7 +86,7 @@
         "section_width": "wide_width",
         "enable_desktop_slider": false,
         "enable_ending_soon": true,
-        "collection": "may-the-4th",
+        "collection": "men",
         "color_scheme": "background-1",
         "image_ratio": "square",
         "show_secondary_image": false,
@@ -108,7 +107,7 @@
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "featured",
+        "collection": "men",
         "products_to_show": 50,
         "columns_desktop": 4,
         "full_width": false,
