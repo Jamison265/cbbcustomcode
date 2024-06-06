@@ -152,7 +152,7 @@
 {%- if section.settings.enable_ending_soon and section.settings.collection != blank -%}
   <script defer="true" src="{{ 'ending-soon.js' | asset_url }}"></script>
   <script>
-    window.ending_soon_url = '{{ section.settings.collection.url | sort_by: 'created-descending' }}'
+    window.ending_soon_url = '{{ section.settings.collection.url | sort_by: 'created-ascending' }}'
   </script>
 {%- endif -%}
 
