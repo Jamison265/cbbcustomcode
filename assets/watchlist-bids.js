@@ -6,7 +6,8 @@ async function getSections(page) {
 }
 
 function addToWrapper(wrapper, children) {
-  for (let index = 0; index < children.length; index++) {
+  console.log(children);
+  for (let index = 0; index < children?.length; index++) {
     const item = children[index];
     
     wrapper.appendChild(item);
