@@ -420,6 +420,7 @@ a.product__text {
 
 .product__tax {
   margin-top: -1.4rem;
+  display: none;
 }
 
 .product--no-media noscript .product-form__input,
