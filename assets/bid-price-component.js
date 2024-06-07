@@ -6,12 +6,14 @@ class BidPriceComponent extends HTMLElement {
 
     connectedCallback() {
         //Setters
-        const parent = this.closest(".card__content") || this.closest(".product__info-container");
-        this.#provider = parent.querySelector("auction-provider");
-        this.#provider.addObserver(this);
-        this.priceLabelRef = this.querySelector("[data-price-label]");
-        this.priceRef = this.querySelector(".price-item");
-        this.main();
+        setTimeout(() => {
+            const parent = this.closest(".card__content") || this.closest(".product__info-container");
+            this.#provider = parent.querySelector("auction-provider");
+            this.#provider.addObserver(this);
+            this.priceLabelRef = this.querySelector("[data-price-label]");
+            this.priceRef = this.querySelector(".price-item");
+            this.main();
+        }, 300);
     }
 
     main() {
