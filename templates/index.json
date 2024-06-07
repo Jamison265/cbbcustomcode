@@ -109,7 +109,7 @@
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "men",
+        "collection": "massive",
         "products_to_show": 50,
         "columns_desktop": 4,
         "full_width": false,
