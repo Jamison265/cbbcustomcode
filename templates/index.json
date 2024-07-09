@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "30a3a7aa-f45d-4e61-b497-979ba929ed24": {
@@ -108,7 +117,7 @@
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "massive",
+        "collection": "independence-day",
         "products_to_show": 50,
         "columns_desktop": 4,
         "full_width": false,
