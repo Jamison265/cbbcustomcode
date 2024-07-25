@@ -190,7 +190,7 @@ class QuantityInput extends HTMLElement {
       const max = parseInt(this.input.max);
       const buttonPlus = this.querySelector(".quantity__button[name='plus']");
       buttonPlus.classList.toggle('disabled', value >= max);
-    } 
+    }
   }
 }
 
@@ -1051,3 +1051,47 @@ class ProductRecommendations extends HTMLElement {
 }
 
 customElements.define('product-recommendations', ProductRecommendations);
+
+class Fetcher {
+    constructor() {
+        this.isLoading = false;
+        this.hasError = false;
+        this.queue = [];
+        this.highPriorityQueue = [];
+    }
+
+    async fetchData(fetchFn, highPriority = false) {
+        try {
+            if (this.isLoading) {
+                highPriority ? this.highPriorityQueue.push(fetchFn) : this.queue.push(fetchFn);
+
+                return;
+            }
+
+            this.isLoading = true;
+            this.hasError = false;
+
+            const response = await fetchFn();
+            this.retryCount = 0;
+
+            return response;
+        } catch (error) {
+            this.hasError = true;
+
+            console.error(error);
+        } finally {
+            console.log("finally");
+            this.isLoading = false;
+
+            if (this.highPriorityQueue.length > 0) {
+                this.fetchData(this.highPriorityQueue.shift());
+            } else if (this.queue.length > 0) {
+                setTimeout(() => {
+                    this.fetchData(this.queue.shift());
+                }, 5000);
+            }
+        }
+    }
+}
+
+var fetcher = new Fetcher();
