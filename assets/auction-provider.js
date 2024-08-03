@@ -29,39 +29,6 @@ class AuctionProvider extends HTMLElement {
         data.min = this.nextBid(data.min);
         this.#state = data;
         document.addEventListener("bid:created", this.onBidCreated.bind(this));
-
-        if (this.#state.isCustomerLogged) {
-
-            // intersection observer to fetch the customer bid
-            const options = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 0.1,
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        fetcher.fetchData(() => {
-                            return this.#getCustomerBid()
-                                .then((response) => {
-                                    if (response?.data) {
-                                        this.mutate({ customerBid: response.data.maxBid });
-                                    }
-                                })
-                                .catch((error) => {
-                                    console.error(error);
-                                })
-                                .finally(() => {
-                                    observer.unobserve(this);
-                                });
-                        });
-                    }
-                });
-            }, options);
-
-            observer.observe(this);
-        }
     }
 
     onBidCreated(evt) {
@@ -108,29 +75,6 @@ class AuctionProvider extends HTMLElement {
             newEndDate.setSeconds(newEndDate.getSeconds() + 45);
             this.mutate({ endDate: newEndDate });
         }
-    }
-
-    async #getCustomerBid() {
-        const { auctionId, detailId } = this.getState();
-        const URL = `/apps/appuction/auction-details/${detailId}/bid`;
-
-        try {
-            const response = await fetch(URL, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error(response.statusText);
-            }
-
-            return await response.json();
-        } catch (error) {
-            return null;
-        }
-
     }
 
     #getData() {
