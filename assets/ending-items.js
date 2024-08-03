@@ -15,8 +15,8 @@ function template(item) {
     } = item;
 
     const { customerId, subscriptions, bids } = window.ending || { customerId: null, subscriptions: [], bids: [] };
-    const isSubscribed = subscriptions.find(subscription => subscription.includes(handle)) ? true : false;
-    const customerBid = bids.find((bid) => bid.handle == handle);
+    const isSubscribed = subscriptions?.find(subscription => subscription.includes(handle)) ? true : false;
+    const customerBid = bids?.find((bid) => bid.handle == handle);
 
     const dollarUS = Intl.NumberFormat("en-US", {
         style: "currency",
@@ -85,7 +85,7 @@ function template(item) {
                                     "timezone": "${timezone}",
                                     "active": ${active},
                                     "isCustomerLogged": ${customerId != null},
-                                    ${customerId != null ? `"customerBid": ${customerBid?.amount || 0},` : '0'}
+                                    ${customerId != null ? `"customerBid": ${customerBid?.amount || 0},` : ''}
                                     "min": ${currentBid ? currentBid.amount : min},
                                     "priceLabel": "Min price: ",
                                     "auctionId": ${auctionId},
