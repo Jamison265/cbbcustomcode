@@ -60,6 +60,21 @@
   </div>
 </div>
 
+<script>
+  {%- if customer != blank -%}
+    window.ending = {
+      customerId: {{ customer.id }},
+      subscriptions: {{ customer.metafields.auction.data.value.subscribed | json }},
+      bids: {{ customer.metafields.auction.bids.value.bid_list | json }}
+    };
+  {%-  else  -%}
+    windown.ending = {
+      customerId: null,
+      subscriptions: [],
+      bids: []
+    };
+  {%- endif -%}
+</script>
 <script src="{{ 'ending-items.js' | asset_url }}" defer="true"></script>
 
 {% schema %}
