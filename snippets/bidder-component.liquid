@@ -1,17 +1,17 @@
 <auction-provider>
   {% liquid
-    assign isSubscribed = false
-    assign customerBid = 0
+    assign is_subscribed = false
+    assign customer_bid = 0
 
     for handle in customer.metafields.auction.data.value.subscribed
       if handle == product.handle
-        assign isSubscribed = true
+        assign is_subscribed = true
       endif
     endfor
 
     for item in customer.metafields.auction.bids.value.bid_list
       if item.handle == product.handle
-        assign customerBid = item.amount
+        assign customer_bid = item.amount
       endif
     endfor
   %}
@@ -24,14 +24,14 @@
       "active": {{ product.metafields.auction.data.value.is_active }},
       "isCustomerLogged": {% if customer != blank %}true{% else %}false{% endif %},
       {% if customer != blank %}
-      "customerBid": {{  customerBid }},
+      "customerBid": {{  customer_bid | default: 0 }},
       {% endif %}
       "min": {% if product.metafields.auction.data.value.current_bid != blank %}{{ product.metafields.auction.data.value.current_bid }}{% else %}{{ product.metafields.auction.data.value.min_price }}{% endif %},
       "priceLabel": "{% if product.metafields.auction.data.value.current_bid != blank %}{{ 'child.products.auction.current_bid' | t }}{% else %}{{ 'child.products.auction.min_price' | t }}{% endif %}",
       "auctionId": {{ product.metafields.auction.data.value.auction_id }},
       "detailId": {% if product.metafields.auction.data.value.detail_id %} {{ product.metafields.auction.data.value.detail_id }} {% else %}null{% endif %},
       "amount": 0,
-      "isSubscribed": {{ isSubscribed }},
+      "isSubscribed": {{ is_subscribed }},
       "channel": null,
       "customerId": {% if customer != blank %}{{ customer.id }}{% else %}null{% endif %}
     }
@@ -99,7 +99,7 @@
       <input type="hidden" name="channel" value="sms and email">
       <div class="u-mt-1">
         <button
-          {% if isSubscribed %}
+          {% if is_subscribed %}
             aria-label="{{- 'child.products.auction.notification.unsubscribe' | t -}}"
             data-label-alternative="{{- 'child.products.auction.notification.subscribe' | t -}}"
           {% else %}
@@ -110,11 +110,11 @@
             disabled
           {% endunless %}
           type="submit"
-          class="button button--full-width {% if isSubscribed %} button--success {% else %}button--tertiary{% endif %}"
+          class="button button--full-width {% if is_subscribed %} button--success {% else %}button--tertiary{% endif %}"
         >
           {% render 'icon-bell' %}
           <span aria-hidden="true" class="u-ml-small">
-            {% if isSubscribed %}
+            {% if is_subscribed %}
               {{- 'child.products.auction.notification.unsubscribe' | t -}}
             {% else %}
               {{- 'child.products.auction.notification.subscribe' | t -}}
