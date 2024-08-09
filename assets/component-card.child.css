@@ -22,6 +22,14 @@
     animation: skeleton-loading 1s linear infinite alternate;
 }
 
+.card__heading,
+.card__heading.h4,
+bid-price-component .h5 {
+    font-family: var(--font-body-family);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
 .card--loading .card__heading {
     width: 100%;
     height: 2.7rem;

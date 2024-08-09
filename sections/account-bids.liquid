@@ -23,26 +23,21 @@
 {%- endstyle -%}
 
 {%- capture contentForQuerystring -%}{{ content_for_header }}{%- endcapture -%}
-  {%- assign pageUrl = contentForQuerystring
-    | split: '"pageurl":"'
-    | last
-    | split: '"'
-    | first
-    | split: '.myshopify.com'
-    | last
-    | replace: '\/', '/'
-    | replace: '%20', ' '
-    | replace: '\u0026', '&'
-  -%}
+{%- assign pageUrl = contentForQuerystring
+  | split: '"pageurl":"'
+  | last
+  | split: '"'
+  | first
+  | split: '.myshopify.com'
+  | last
+  | replace: '\/', '/'
+  | replace: '%20', ' '
+  | replace: '\u0026', '&'
+-%}
 {% capture finalurl %}https://{{ pageUrl }}{% endcapture %}
 
 {%- if finalurl contains '?page=' -%}
-  {%- assign pageParam = finalurl 
-    | split: '?' 
-    | last 
-    | split: '=' 
-    | last 
-  -%}
+  {%- assign pageParam = finalurl | split: '?' | last | split: '=' | last -%}
 {%- else -%}
   {%- assign pageParam = 1 -%}
 {%- endif -%}
@@ -59,7 +54,7 @@
     <div class="page-width">
       <h2>Watch List</h2>
     </div>
-  
+
     <div class="product-grid-container" id="WatchListProductGridContainer">
       <div class="collection page-width">
         <ul
@@ -72,7 +67,7 @@
         >
           {% for handle in customer.metafields.auction.data.value.subscribed offset: offset limit: limit %}
             {% assign product = all_products[handle] %}
-            
+
             {% if product != blank %}
               <li class="grid__item">
                 {% render 'card-product',
@@ -84,13 +79,13 @@
               </li>
             {% endif %}
 
-            {% assign product = nil %}
+            {% assign product = null %}
           {% endfor %}
         </ul>
       </div>
     </div>
   {% endif %}
-  
+
   {% if section.settings.heading != blank and customer.metafields.auction.bids.value.bid_list.size > 0 %}
     <div class="page-width">
       <h2>{{ section.settings.heading }}</h2>
@@ -107,9 +102,10 @@
             grid--{{ section.settings.columns_desktop }}-col-desktop
           "
         >
-          {% for handle in customer.metafields.auction.bids.value.bid_list offset: offset limit: limit %}
+          {% for item in customer.metafields.auction.bids.value.bid_list offset: offset limit: limit %}
+            {% assign handle = item.handle | default: item %}
             {% assign product = all_products[handle] %}
-            
+
             {% if product != blank %}
               <li class="grid__item">
                 {% render 'card-product',
@@ -121,7 +117,7 @@
               </li>
             {% endif %}
 
-            {% assign product = nil %}
+            {% assign product = null %}
           {% endfor %}
         </ul>
       </div>
@@ -129,12 +125,14 @@
   {% endif %}
 </div>
 
-{% if customer.metafields.auction.data.value.subscribed.size >= limit or customer.metafields.auction.bids.value.bid_list >= limit  %}
+{% if customer.metafields.auction.data.value.subscribed.size >= limit
+  or customer.metafields.auction.bids.value.bid_list >= limit
+%}
   <script defer="true" src="{{ 'watchlist-bids.js' | asset_url }}"></script>
   {% if watchlist_pages > bidlist_pages %}
-      <script>
-        window.totalPages = {{ watchlist_pages }};
-      </script>
+    <script>
+      window.totalPages = {{ watchlist_pages }};
+    </script>
   {% else %}
     <script>
       window.totalPages = {{ bidlist_pages }};

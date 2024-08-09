@@ -21,6 +21,7 @@ class BidPriceComponent extends HTMLElement {
             this.createNextMinBidUI();
         }
 
+        this.createCustomerBidUI(true);
         this.onAuctionEnded();
     }
 
@@ -107,7 +108,7 @@ class BidPriceComponent extends HTMLElement {
 
     update() {
         const { isMine } = this.#provider.getState();
-      
+
         this.onBidCreated();
         this.main();
         this.createCustomerBidUI(isMine);
