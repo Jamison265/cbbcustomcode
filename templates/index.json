@@ -16,14 +16,14 @@
           "type": "heading",
           "disabled": true,
           "settings": {
-            "heading": "FREE SHIPPING ON ALL ORDERS!!",
+            "heading": "FREE SHIPPING ON ALL FIRST TIME ORDERS!!",
             "heading_size": "h1"
           }
         },
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-1": {
           "type": "text",
           "settings": {
-            "text": "<h2>THE GOLDEN AGE AUCTION IS HERE! HAVE FUN BIDDING! <\/h2>",
+            "text": "<h2>MASSIVE COLLECTORS PARADISE AUCTION!!!<\/h2>",
             "text_style": "h2"
           }
         },
@@ -96,7 +96,7 @@
         "section_width": "wide_width",
         "enable_desktop_slider": false,
         "enable_ending_soon": false,
-        "collection": "independence-day",
+        "collection": "summer-time",
         "color_scheme": "background-1",
         "image_ratio": "square",
         "show_secondary_image": false,
@@ -117,7 +117,7 @@
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "independence-day",
+        "collection": "summer-time",
         "products_to_show": 50,
         "columns_desktop": 4,
         "full_width": false,
