@@ -198,7 +198,7 @@ function template(item) {
                                     <template class="modalTemplate">
                                         <h2>Bid Confirmation</h2>
                                         <div class="rte">
-                                            <p>By clicking the Confirm Bid button below you are confirming that you want to place a bid of <span class="price-item price-item--regular" id="bidAmount"></span> on this product and agree to our <a href="https://cbbauctions.com/pages/auction-rules">auction rules</a></p>
+                                            <p>By clicking the Confirm Bid button below you are confirming that you want to place a bid of <span class="price-item price-item--regular font-body-bold" id="bidAmount"></span> on this product and agree to our <a href="https://cbbauctions.com/pages/auction-rules">auction rules</a></p>
                                         </div>
                                         <br/>
                                         <div class="right">
