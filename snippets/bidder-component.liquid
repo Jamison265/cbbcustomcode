@@ -15,6 +15,10 @@
       endif
     endfor
   %}
+  <script>
+    console.log("{{ customer.metafields.auction.bids.value.bid_list | json }}")
+    
+  </script>
   <script data-bid="{{ customer_bid }}" type="application/json">
     {
       "startDate": "{{ product.metafields.auction.data.value.start }}",
