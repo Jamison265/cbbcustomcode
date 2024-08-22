@@ -18,7 +18,6 @@
     },
     "bids": {
       "type": "account-bids",
-      "disabled": true,
       "settings": {
         "heading": "Your Active Bids",
         "columns_desktop": 4,
