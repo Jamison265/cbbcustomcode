@@ -29,34 +29,6 @@ class AuctionProvider extends HTMLElement {
         data.min = this.nextBid(data.min);
         this.#state = data;
         document.addEventListener("bid:created", this.onBidCreated.bind(this));
-
-        if (this.#state.isCustomerLogged) {
-
-            // intersection observer to fetch the customer bid
-            const options = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 0.1,
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        this.#getCustomerBid()
-                            .then((response) => {
-                                if (response?.data) {
-                                    this.mutate({ customerBid: response.data.maxBid });
-                                }
-                            })
-                            .catch((error) => {
-                                console.error(error);
-                            })
-                    }
-                });
-            }, options);
-
-            observer.observe(this);
-        }
     }
 
     onBidCreated(evt) {
