@@ -13,6 +13,7 @@ class BidPriceComponent extends HTMLElement {
             this.priceLabelRef = this.querySelector("[data-price-label]");
             this.priceRef = this.querySelector(".price-item");
             this.main();
+            this.createCustomerBidUI(true);
         }, 300);
     }
 
@@ -21,7 +22,6 @@ class BidPriceComponent extends HTMLElement {
             this.createNextMinBidUI();
         }
 
-        this.createCustomerBidUI(true);
         this.onAuctionEnded();
     }
 
