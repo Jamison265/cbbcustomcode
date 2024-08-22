@@ -91,8 +91,8 @@ class BidderComponent extends HTMLElement {
             modalContent.classList.add("modal-video__content-info--confirm-bid");
 
             modalContent.innerHTML = template.innerHTML;
-            const spanAmount = modalContent.querySelector("#bidAmount");
-            spanAmount.innerHTML = "$" + this.formRef["amount"].value;
+            const spanAmount = modalContent.querySelectorAll("[data-bid-amount]");
+            spanAmount?.forEach(span => span.innerHTML = "$" + this.formRef["amount"].value);
             this.global.modal.show(this.buttonRef);
             this.#provider.mutate({ isModalOpen: true });
 

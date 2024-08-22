@@ -1,0 +1,118 @@
+{{ 'component-box-content.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.child.css' | asset_url | stylesheet_tag }}
+{{ 'component-countdown.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+<link rel="stylesheet" href="{{ 'quick-add.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'quick-add.child.css' | asset_url }}" media="print" onload="this.media='all'">
+<script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+<div class="color-background-1 isolate gradient section-{{ section.id }}-padding">
+  <div class="page-width {% if section.settings.page_width %}page-width--narrow {% endif %}">
+    <h1 class="main-page-title page-title h2 box-content title">
+      {{ page.title | escape }}
+    </h1>
+    <div class="rte">
+      {{ page.content }}
+    </div>
+  </div>
+  <div class="page-width page-wide-desktop">
+    <ul class="grid product-grid contains-card contains-card--product grid--3-col-desktop grid--5-col-desktop-lg grid--1-col grid--2-col-mobile-lg grid--3-col-tablet grid--peek">
+      {%- for i in (1..10) -%}
+        <li class="grid__item">
+          {% render 'card-product-skeleton', show_vendor: false, modifier: 'secondary' %}
+        </li>
+      {%- endfor -%}
+    </ul>
+    <div id="loadMore" style="padding-top: 3.2rem;" class="page-width center">
+      <span class="loading-overlay__spinner">
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="spinner"
+          viewBox="0 0 66 66"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+        </svg>
+      </span>
+    </div>
+  </div>
+</div>
+
+<script>
+  {%- if customer != blank -%}
+    window.ending = {
+      customerId: {{ customer.id }},
+      subscriptions: {{ customer.metafields.auction.data.value.subscribed | json }},
+      bids: {{ customer.metafields.auction.bids.value.bid_list | json }}
+    };
+  {%-  else  -%}
+    windown.ending = {
+      customerId: null,
+      subscriptions: [],
+      bids: []
+    };
+  {%- endif -%}
+</script>
+<script src="{{ 'ending-items.js' | asset_url }}" defer="true"></script>
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "page_width",
+      "label": "t:child.sections.main-page.settings.page_width.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}

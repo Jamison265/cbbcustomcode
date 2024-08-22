@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "30a3a7aa-f45d-4e61-b497-979ba929ed24": {
@@ -7,14 +16,14 @@
           "type": "heading",
           "disabled": true,
           "settings": {
-            "heading": "FREE SHIPPING ON ALL ORDERS!!",
+            "heading": "FREE SHIPPING ON ALL FIRST TIME ORDERS!!",
             "heading_size": "h1"
           }
         },
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-1": {
           "type": "text",
           "settings": {
-            "text": "<h2>New Auction launching Tuesday 5\/28!<\/h2>",
+            "text": "<h2>MASSIVE COLLECTORS PARADISE AUCTION!!!<\/h2>",
             "text_style": "h2"
           }
         },
@@ -32,6 +41,7 @@
         "template--18013224861993__30a3a7aa-f45d-4e61-b497-979ba929ed24-167786697002b50fa6-2"
       ],
       "settings": {
+        "image": "shopify:\/\/shop_images\/auction.jpg",
         "height": "medium",
         "desktop_image_width": "medium",
         "layout": "text_first",
@@ -77,7 +87,6 @@
     },
     "d2543e03-de3f-44ac-9b18-349e4b4e3117": {
       "type": "spc-featured-collection",
-      "disabled": true,
       "settings": {
         "title": "CURRENT HIGH BIDS",
         "heading_size": "h2",
@@ -87,7 +96,7 @@
         "section_width": "wide_width",
         "enable_desktop_slider": false,
         "enable_ending_soon": false,
-        "collection": "may-the-4th",
+        "collection": "summer-time",
         "color_scheme": "background-1",
         "image_ratio": "square",
         "show_secondary_image": false,
@@ -102,14 +111,13 @@
     },
     "155d302f-28c8-4eb1-9df4-c501db6c5bcf": {
       "type": "featured-collection",
-      "disabled": true,
       "settings": {
         "title": "Featured Books",
         "heading_size": "h1",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "men",
+        "collection": "summer-time",
         "products_to_show": 50,
         "columns_desktop": 4,
         "full_width": false,

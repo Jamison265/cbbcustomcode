@@ -343,6 +343,12 @@ a.product__text {
   margin-bottom: 1.5rem;
 }
 
+.product__title h1 {
+    font-family: var(--font-heading-body);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
 .product__title > * {
   margin: 0;
 }
@@ -420,6 +426,7 @@ a.product__text {
 
 .product__tax {
   margin-top: -1.4rem;
+  display: none;
 }
 
 .product--no-media noscript .product-form__input,

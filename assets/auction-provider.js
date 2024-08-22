@@ -39,14 +39,18 @@ class AuctionProvider extends HTMLElement {
                 threshold: 0.1,
             };
 
-            const observer = new IntersectionObserver((entries) => {
+            const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        this.#getCustomerBid().then((response) => {
-                            if (response.data) {
-                                this.mutate({ customerBid: response.data.maxBid });
-                            }
-                        });
+                        this.#getCustomerBid()
+                            .then((response) => {
+                                if (response?.data) {
+                                    this.mutate({ customerBid: response.data.maxBid });
+                                }
+                            })
+                            .catch((error) => {
+                                console.error(error);
+                            })
                     }
                 });
             }, options);
@@ -119,7 +123,7 @@ class AuctionProvider extends HTMLElement {
 
             return await response.json();
         } catch (error) {
-            console.error(error);
+            return null;
         }
 
     }

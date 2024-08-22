@@ -1,10 +1,17 @@
 <auction-provider>
   {% liquid
-    assign isSubscribed = false
+    assign is_subscribed = false
+    assign customer_bid = 0
 
     for handle in customer.metafields.auction.data.value.subscribed
       if handle == product.handle
-        assign isSubscribed = true
+        assign is_subscribed = true
+      endif
+    endfor
+
+    for item in customer.metafields.auction.bids.value.bid_list
+      if item.handle == product.handle
+        assign customer_bid = item.amount
       endif
     endfor
   %}
@@ -16,30 +23,25 @@
       "timezone": "{{ product.metafields.auction.data.value.timezone }}",
       "active": {{ product.metafields.auction.data.value.is_active }},
       "isCustomerLogged": {% if customer != blank %}true{% else %}false{% endif %},
+      {% if customer != blank %}
+      "customerBid": {{  customer_bid | default: 0 }},
+      {% endif %}
       "min": {% if product.metafields.auction.data.value.current_bid != blank %}{{ product.metafields.auction.data.value.current_bid }}{% else %}{{ product.metafields.auction.data.value.min_price }}{% endif %},
       "priceLabel": "{% if product.metafields.auction.data.value.current_bid != blank %}{{ 'child.products.auction.current_bid' | t }}{% else %}{{ 'child.products.auction.min_price' | t }}{% endif %}",
       "auctionId": {{ product.metafields.auction.data.value.auction_id }},
       "detailId": {% if product.metafields.auction.data.value.detail_id %} {{ product.metafields.auction.data.value.detail_id }} {% else %}null{% endif %},
       "amount": 0,
-      "isSubscribed": {{ isSubscribed }},
+      "isSubscribed": {{ is_subscribed }},
       "channel": null,
       "customerId": {% if customer != blank %}{{ customer.id }}{% else %}null{% endif %}
     }
   </script>
   {% if product.metafields.auction.data.value.is_active != blank %}
     <countdown-component class="countdown">
-      <div class="countdown__days">
-        00<span>Days</span>
-      </div>
-      <div class="countdown__hours">
-        00<span>Hours</span>
-      </div>
-      <div class="countdown__minutes">
-        00<span>Minutes</span>
-      </div>
-      <div class="countdown__seconds">
-        00<span>Seconds</span>
-      </div>
+      <div class="countdown__days">00<span>Days</span></div>
+      <div class="countdown__hours">00<span>Hours</span></div>
+      <div class="countdown__minutes">00<span>Minutes</span></div>
+      <div class="countdown__seconds">00<span>Seconds</span></div>
     </countdown-component>
   {% endif %}
 
@@ -49,18 +51,35 @@
     </div>
   {% endunless %}
 
-  <bidder-component data-product-id="{{ product.id }}" data-logged-in="{% if customer != blank %}true{% else %}false{% endif %}" data-min="{% if product.metafields.auction.data.value.current_bid != blank %}{{ product.metafields.auction.data.value.current_bid }}{% else %}{{ product.metafields.auction.data.value.min_price }}{% endif %}" data-price-label="{% if product.metafields.auction.data.value.current_bid != blank %}{{ 'child.products.auction.current_bid' | t }}{% else %}{{ 'child.products.auction.min_price' | t }}{% endif %}">
+  <bidder-component
+    data-product-id="{{ product.id }}"
+    data-logged-in="{% if customer != blank %}true{% else %}false{% endif %}"
+    data-min="{% if product.metafields.auction.data.value.current_bid != blank %}{{ product.metafields.auction.data.value.current_bid }}{% else %}{{ product.metafields.auction.data.value.min_price }}{% endif %}"
+    data-price-label="{% if product.metafields.auction.data.value.current_bid != blank %}{{ 'child.products.auction.current_bid' | t }}{% else %}{{ 'child.products.auction.min_price' | t }}{% endif %}"
+  >
     <form data-action="bid">
-      <input type="hidden" name="product_id" value="{{ product.id }}" />
-      <input type="hidden" name="auction_id" value="{{ product.metafields.auction.data.value.auction_id }}" />
+      <input type="hidden" name="product_id" value="{{ product.id }}">
+      <input type="hidden" name="auction_id" value="{{ product.metafields.auction.data.value.auction_id }}">
       <div class="field">
-        <input {% unless product.metafields.auction.data.value.is_active %}disabled {% endunless %} id="BidForm--{{ section.id }}" class="field__input" type="number" name="amount"/>
-        <label class="field__label" for="BidForm--{{ section.id }}">
-          Amount
-        </label>
+        <input
+          {% unless product.metafields.auction.data.value.is_active %}
+            disabled
+          {% endunless %}
+          id="BidForm--{{ section.id }}"
+          class="field__input"
+          type="number"
+          name="amount"
+        >
+        <label class="field__label" for="BidForm--{{ section.id }}"> Amount </label>
       </div>
       <div class="field u-mt-1">
-      <button {% unless product.metafields.auction.data.value.is_active %}disabled {% endunless %} type="submit" class="button button--secondary button--full-width">
+        <button
+          {% unless product.metafields.auction.data.value.is_active %}
+            disabled
+          {% endunless %}
+          type="submit"
+          class="button button--secondary button--full-width"
+        >
           <span>{{- 'child.products.product.place_bid' | t -}}</span>
           <div class="loading-overlay__spinner hidden">
             <svg
@@ -77,12 +96,25 @@
       </div>
     </form>
     <form data-action="subscribe">
-      <input type="hidden" name="channel" value="sms and email" />
+      <input type="hidden" name="channel" value="sms and email">
       <div class="u-mt-1">
-        <button {% if isSubscribed %}aria-label="{{- 'child.products.auction.notification.unsubscribe' | t -}}" data-label-alternative="{{- 'child.products.auction.notification.subscribe' | t -}}"{% else %}aria-label="{{- 'child.products.auction.notification.subscribe' | t -}}" data-label-alternative="{{- 'child.products.auction.notification.unsubscribe' | t -}}"{% endif %} {% unless product.metafields.auction.data.value.is_active %}disabled {% endunless %} type="submit" class="button button--full-width {% if isSubscribed %} button--success {% else %}button--tertiary{% endif %}">
+        <button
+          {% if is_subscribed %}
+            aria-label="{{- 'child.products.auction.notification.unsubscribe' | t -}}"
+            data-label-alternative="{{- 'child.products.auction.notification.subscribe' | t -}}"
+          {% else %}
+            aria-label="{{- 'child.products.auction.notification.subscribe' | t -}}"
+            data-label-alternative="{{- 'child.products.auction.notification.unsubscribe' | t -}}"
+          {% endif %}
+          {% unless product.metafields.auction.data.value.is_active %}
+            disabled
+          {% endunless %}
+          type="submit"
+          class="button button--full-width {% if is_subscribed %} button--success {% else %}button--tertiary{% endif %}"
+        >
           {% render 'icon-bell' %}
           <span aria-hidden="true" class="u-ml-small">
-            {% if isSubscribed %}
+            {% if is_subscribed %}
               {{- 'child.products.auction.notification.unsubscribe' | t -}}
             {% else %}
               {{- 'child.products.auction.notification.subscribe' | t -}}
@@ -107,20 +139,28 @@
         <h2 class="center">Login to your account</h2>
         <div class="rte center">
           <p>Hey! Before placing a bid please <a href="{{ routes.account_login_url }}">login</a> into your account.</p>
-          <p><span class="font-body-bold">Don't have an account?</span> don't worry you can create one by clicking <a href="{{ routes.account_register_url }}">here</a></p>
+          <p>
+            <span class="font-body-bold">Don't have an account?</span> don't worry you can create one by clicking
+            <a href="{{ routes.account_register_url }}">here</a>
+          </p>
         </div>
       </template>
     {% else %}
       <template class="modalTemplate">
         <h2>Bid Confirmation</h2>
         <div class="rte">
-          <p>By clicking the Confirm Bid button below you are confirming that you want to place a bid of <span class="price-item price-item--regular" id="bidAmount"></span> on this product and agree to our <a href="https://cbbauctions.com/pages/auction-rules">auction rules</a></p>
+          <p>
+            By clicking the Confirm Bid button below you are confirming that you want to place a bid of
+            <span class="price-item price-item--regular font-body-bold" data-bid-amount></span> on this product and
+            agree to our
+            <a href="https://cbbauctions.com/pages/auction-rules">auction rules</a>
+          </p>
         </div>
-        <br/>
+        <br>
         <div class="right">
           <button class="button button--primary" id="cancelBid">Cancel</button>
           <button class="button button--secondary" id="confirmBid">
-            <span>Confirm Bid</span>
+            <span>Confirm <span class="price-item price-item--regular" data-bid-amount></span> Bid</span>
             <div class="loading-overlay__spinner hidden">
               <svg
                 aria-hidden="true"
