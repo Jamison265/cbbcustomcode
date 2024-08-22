@@ -151,7 +151,8 @@
         <div class="rte">
           <p>
             By clicking the Confirm Bid button below you are confirming that you want to place a bid of
-            <span class="price-item price-item--regular font-body-bold" id="bidAmount"></span> on this product and agree to our
+            <span class="price-item price-item--regular font-body-bold" data-bid-amount></span> on this product and
+            agree to our
             <a href="https://cbbauctions.com/pages/auction-rules">auction rules</a>
           </p>
         </div>
@@ -159,7 +160,7 @@
         <div class="right">
           <button class="button button--primary" id="cancelBid">Cancel</button>
           <button class="button button--secondary" id="confirmBid">
-            <span>Confirm Bid</span>
+            <span>Confirm <span class="price-item price-item--regular" data-bid-amount></span> Bid</span>
             <div class="loading-overlay__spinner hidden">
               <svg
                 aria-hidden="true"
