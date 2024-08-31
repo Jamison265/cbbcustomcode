@@ -87,7 +87,6 @@
     },
     "d2543e03-de3f-44ac-9b18-349e4b4e3117": {
       "type": "spc-featured-collection",
-      "disabled": true,
       "settings": {
         "title": "CURRENT HIGH BIDS",
         "heading_size": "h2",
@@ -97,7 +96,7 @@
         "section_width": "wide_width",
         "enable_desktop_slider": false,
         "enable_ending_soon": false,
-        "collection": "summer-time",
+        "collection": "hot-comics",
         "color_scheme": "background-1",
         "image_ratio": "square",
         "show_secondary_image": false,
