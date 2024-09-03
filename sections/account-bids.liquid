@@ -103,18 +103,20 @@
           "
         >
           {% for item in customer.metafields.auction.bids.value.bid_list offset: offset limit: limit %}
-            {% assign handle = item.handle | default: item %}
-            {% assign product = all_products[handle] %}
-
-            {% if product != blank %}
-              <li class="grid__item">
-                {% render 'card-product',
-                  card_product: product,
-                  show_secondary_image: true,
-                  show_quick_add: true,
-                  section_id: section.id
-                %}
-              </li>
+            {% if item.handle != blank %}
+              {% assign handle = item.handle | default: item %}
+              {% assign product = all_products[handle] %}
+  
+              {% if product != blank %}
+                <li class="grid__item">
+                  {% render 'card-product',
+                    card_product: product,
+                    show_secondary_image: true,
+                    show_quick_add: true,
+                    section_id: section.id
+                  %}
+                </li>
+              {% endif %}
             {% endif %}
 
             {% assign product = null %}
